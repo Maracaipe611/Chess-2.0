@@ -1,0 +1,112 @@
+export enum Colors { White = "White", Black = "Black" };
+
+export enum Types {
+    Pawn = "Pawn",
+    Tower = "Tower",
+    Horse = "Horse",
+    Bishop = "Bishop",
+    Queen = "Queen",
+    King = "King",
+};
+
+export type IndexPositions = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+export enum AlphPositions {
+    "A" = 1,
+    "B" = 2,
+    "C" = 3,
+    "D" = 4,
+    "E" = 5,
+    "F" = 6,
+    "G" = 7,
+    "H" = 8,
+};
+
+export type Coordinate = {
+    alpha: AlphPositions,
+    index: IndexPositions,
+}
+
+export class Piece {
+    type: Types;
+    coordinate: Coordinate;
+    initialPosition: string;
+    color: Colors;
+    ableToChange: boolean;
+
+    constructor(type: Types, coordinate: Coordinate, initialPosition: string, color: Colors, ableToChange: boolean) {
+        this.type = type;
+        this.coordinate = coordinate;
+        this.initialPosition = initialPosition;
+        this.color = color;
+        this.ableToChange = ableToChange;
+    };
+};
+
+const BuildPieces = (type: Types, color: Colors): any => {
+    const { A, B, C, D, E, F, G, H } = AlphPositions;
+    
+    const communPiecesIndex = Colors.Black ? 8 : 1;
+    const pawnIndex = Colors.Black ? 7 : 2;
+    
+    const pawnsAlphs = [A, B, C, D, E, F, G, H];
+    const towerAlphs = [A, H];
+    const horseAlphs = [B, G];
+    const bishopAlphs = [C, F];
+    const queenAlph = color === Colors.Black ? [D] : [E];
+    const kingAlph = color === Colors.Black ? [E] : [D];
+    
+    let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
+    const currentIndex = type === Types.Pawn ? pawnIndex : communPiecesIndex;
+    const ableToChange = type === Types.Pawn;
+
+    switch (type) {
+        case Types.Pawn:
+            currentPieceAlphs = pawnsAlphs;
+            break;
+        case Types.Tower:
+            currentPieceAlphs = towerAlphs;
+            break;
+        case Types.Horse:
+            currentPieceAlphs = horseAlphs;
+            break;
+        case Types.Bishop:
+            currentPieceAlphs = bishopAlphs;
+            break;
+        case Types.Queen:
+            currentPieceAlphs = queenAlph;
+            break;
+        case Types.King:
+            currentPieceAlphs = kingAlph;
+            break;
+    }
+
+    return currentPieceAlphs.map((alph) => {
+        return new Piece(
+            type,
+            {
+                alpha: alph,
+                index: currentIndex,
+            },
+            alph + currentIndex.toString(),
+            color,
+            ableToChange
+        );
+    });
+}
+
+const PiecesByColor = (color: Colors) => {
+    const king = BuildPieces(Types.King, color);
+    const queen = BuildPieces(Types.Queen, color);
+    const bishop = BuildPieces(Types.Bishop, color);
+    const horse = BuildPieces(Types.Horse, color);
+    const towers = BuildPieces(Types.Tower, color);
+    const pawns = BuildPieces(Types.Pawn, color);
+
+    return { king, queen, bishop, horse, towers, pawns };
+}
+
+const WhitePieces = PiecesByColor(Colors.White);
+const BlackPieces = PiecesByColor(Colors.Black);
+
+export const AllPieces = { WhitePieces, BlackPieces };
