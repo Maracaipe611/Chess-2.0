@@ -1,8 +1,11 @@
 import React from 'react';
+import { BoardPage } from './Components/Board';
 
 const App: React.FC = () => {
   return (
-    <div></div>
+    <div>
+      <BoardPage/>
+    </div>
   );
 }
 

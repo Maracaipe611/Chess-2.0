@@ -30,14 +30,12 @@ export type Coordinate = {
 export class Piece {
     type: Types;
     coordinate: Coordinate;
-    initialPosition: string;
     color: Colors;
     ableToChange: boolean;
 
-    constructor(type: Types, coordinate: Coordinate, initialPosition: string, color: Colors, ableToChange: boolean) {
+    constructor(type: Types, coordinate: Coordinate, color: Colors, ableToChange: boolean) {
         this.type = type;
         this.coordinate = coordinate;
-        this.initialPosition = initialPosition;
         this.color = color;
         this.ableToChange = ableToChange;
     };
@@ -88,7 +86,6 @@ const BuildPieces = (type: Types, color: Colors): any => {
                 alpha: alph,
                 index: currentIndex,
             },
-            alph + currentIndex.toString(),
             color,
             ableToChange
         );
@@ -96,14 +93,14 @@ const BuildPieces = (type: Types, color: Colors): any => {
 }
 
 const PiecesByColor = (color: Colors) => {
-    const king = BuildPieces(Types.King, color);
-    const queen = BuildPieces(Types.Queen, color);
-    const bishop = BuildPieces(Types.Bishop, color);
-    const horse = BuildPieces(Types.Horse, color);
-    const towers = BuildPieces(Types.Tower, color);
-    const pawns = BuildPieces(Types.Pawn, color);
+    const king: Piece = BuildPieces(Types.King, color);
+    const queen: Piece = BuildPieces(Types.Queen, color);
+    const bishop: Piece = BuildPieces(Types.Bishop, color);
+    const horse: Piece = BuildPieces(Types.Horse, color);
+    const towers: Piece = BuildPieces(Types.Tower, color);
+    const pawns: Piece = BuildPieces(Types.Pawn, color);
 
-    return { king, queen, bishop, horse, towers, pawns };
+    return [king, queen, bishop, horse, towers, pawns].flatMap(pieces => pieces);
 }
 
 const WhitePieces = PiecesByColor(Colors.White);
