@@ -17,7 +17,7 @@ export default class House {
 
 
 
-const buildSingleHouse = (alpha: number, index: IndexPositions) => {
+const buildSingleHouse = (alpha: number, index: IndexPositions):House => {
     const { BlackPieces, WhitePieces } = AllPieces;
 
     const piceInThisHouse: Piece | undefined =
@@ -37,11 +37,15 @@ const buildSingleHouse = (alpha: number, index: IndexPositions) => {
 
 const buildAllHouses = (): Array<House> => {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
-    const alphs = [A, B, C, D, E, F, G, H];
+    const alphs: Array<AlphPositions> = [A, B, C, D, E, F, G, H];
     const indexesPosition: Array<IndexPositions> = [1, 2, 3, 4, 5, 6, 7, 8];
-    return alphs.map((alph, index) => {
-        return buildSingleHouse(alph, indexesPosition[index]);
+    const allHouses: Array<House> = alphs.flatMap(alph => {
+        return indexesPosition.map(index => {
+            return buildSingleHouse(alph, index);
+        });
     });
+    
+    return allHouses;
 }
 
 export const AllHouses = buildAllHouses();

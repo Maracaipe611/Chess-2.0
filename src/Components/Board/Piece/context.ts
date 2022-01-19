@@ -41,7 +41,7 @@ export class Piece {
     };
 };
 
-const BuildPieces = (type: Types, color: Colors): any => {
+const BuildPieces = (type: Types, color: Colors): Array<Piece> => {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
     
     const communPiecesIndex = Colors.Black ? 8 : 1;
@@ -93,17 +93,17 @@ const BuildPieces = (type: Types, color: Colors): any => {
 }
 
 const PiecesByColor = (color: Colors) => {
-    const king: Piece = BuildPieces(Types.King, color);
-    const queen: Piece = BuildPieces(Types.Queen, color);
-    const bishop: Piece = BuildPieces(Types.Bishop, color);
-    const horse: Piece = BuildPieces(Types.Horse, color);
-    const towers: Piece = BuildPieces(Types.Tower, color);
-    const pawns: Piece = BuildPieces(Types.Pawn, color);
+    const king: Array<Piece> = BuildPieces(Types.King, color);
+    const queen: Array<Piece> = BuildPieces(Types.Queen, color);
+    const bishop: Array<Piece> = BuildPieces(Types.Bishop, color);
+    const horse: Array<Piece> = BuildPieces(Types.Horse, color);
+    const towers: Array<Piece> = BuildPieces(Types.Tower, color);
+    const pawns: Array<Piece> = BuildPieces(Types.Pawn, color);
 
     return [king, queen, bishop, horse, towers, pawns].flatMap(pieces => pieces);
 }
 
-const WhitePieces = PiecesByColor(Colors.White);
-const BlackPieces = PiecesByColor(Colors.Black);
+const WhitePieces: Array<Piece> = PiecesByColor(Colors.White);
+const BlackPieces: Array<Piece> = PiecesByColor(Colors.Black);
 
 export const AllPieces = { WhitePieces, BlackPieces };
