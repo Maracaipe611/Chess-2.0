@@ -32,20 +32,22 @@ export class Piece {
     coordinate: Coordinate;
     color: Colors;
     ableToChange: boolean;
+    src: string;
 
-    constructor(type: Types, coordinate: Coordinate, color: Colors, ableToChange: boolean) {
+    constructor(type: Types, coordinate: Coordinate, color: Colors, ableToChange: boolean, src: string) {
         this.type = type;
         this.coordinate = coordinate;
         this.color = color;
         this.ableToChange = ableToChange;
+        this.src = src;
     };
 };
 
 const BuildPieces = (type: Types, color: Colors): Array<Piece> => {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
     
-    const communPiecesIndex = Colors.Black ? 8 : 1;
-    const pawnIndex = Colors.Black ? 7 : 2;
+    const communPiecesIndex = color === Colors.Black ? 8 : 1;
+    const pawnIndex = color === Colors.Black ? 7 : 2;
     
     const pawnsAlphs = [A, B, C, D, E, F, G, H];
     const towerAlphs = [A, H];
@@ -53,6 +55,10 @@ const BuildPieces = (type: Types, color: Colors): Array<Piece> => {
     const bishopAlphs = [C, F];
     const queenAlph = color === Colors.Black ? [D] : [E];
     const kingAlph = color === Colors.Black ? [E] : [D];
+    
+    const srcPrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
+    const srcSufix: string = ".png";
+    const src = srcPrefix + type + srcSufix;
     
     let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
     const currentIndex = type === Types.Pawn ? pawnIndex : communPiecesIndex;
@@ -87,7 +93,8 @@ const BuildPieces = (type: Types, color: Colors): Array<Piece> => {
                 index: currentIndex,
             },
             color,
-            ableToChange
+            ableToChange,
+            src
         );
     });
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { BoardPage } from './Components/Board';
+import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div style={{backgroundColor: "black", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
       <BoardPage/>
     </div>
   );
