@@ -26,7 +26,7 @@ const buildSingleHouse = (alpha: number, index: IndexPositions):House => {
     const blackPieceOnThisHouse: Piece | undefined = BlackPieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index)
     const pieceOnThisHouse = !!blackPieceOnThisHouse ? blackPieceOnThisHouse : whitePieceOnThisHouse;
 
-    const color = (alpha + index) % 2 === 0 ? Colors.White : Colors.Black;
+    const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
     const srcPrefix = "./Images/";
     const srcSufix = ".jpg";
     const src = srcPrefix + (color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + srcSufix;
