@@ -1,19 +1,15 @@
-import React from "react";
-import { AllHouses } from "./House/context";
+import React, { useContext } from "react";
+import { HousesContext } from "./House/context";
 import { House } from "./House";
 
-type Player = {
-    color: string,
-    tableDeg: string,
-    pieceDeg: string,
-};
+const Board: React.FC = () => {
+    
+    const AllHouses = useContext(HousesContext);
 
-const jogadorDefault: Player = { color: "White", tableDeg: "270", pieceDeg: "90" };
-const Board:React.FC  = ()=> {
     return (
-        <div style={{ width: 480, minWidth: 480, display: "inline-flex", justifyContent: "center", flexWrap: "wrap", rotate: `${jogadorDefault.tableDeg}deg` }} >
+        <div style={{ width: 480, minWidth: 480, display: "inline-flex", justifyContent: "center", flexWrap: "wrap" }} >
             {
-                AllHouses.map(house => <House house={house} player={jogadorDefault} key={house.coordinate.alpha + house.coordinate.index.toString()} />)
+                AllHouses.map(house => <House house={house} key={house.getCurrentPosition()} />)
             }
         </div>
     )

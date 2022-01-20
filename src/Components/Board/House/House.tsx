@@ -1,25 +1,18 @@
-import House from "../House/context";
+import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
-
-type Player = {
-    color: string,
-    tableDeg: string,
-    pieceDeg: string,
-};
 
 type HouseComponentProps = {
     house: House,
-    player: Player,
 }
 
-const HouseComponent = ({house, player}: HouseComponentProps) => {
+const HouseComponent = ({ house }: HouseComponentProps) => {
     return (
-        <div style={{ backgroundImage: `url(${house.src})`, width: 60, height: 60, display: "inline-block"}}
-        id={house.coordinate.alpha + house.coordinate.index.toString()}
+        <div style={{ backgroundImage: `url(${house.src})`, width: 60, height: 60, display: "inline-block" }}
+            id={house.getCurrentPosition()}
         >
             {
                 !!house.piece ?
-                    <PieceComponent piece={house.piece} player={player}/>
+                    <PieceComponent piece={house.piece} />
                     :
                     null
             }

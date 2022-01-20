@@ -1,12 +1,15 @@
 import React from 'react';
 import { BoardPage } from './Components/Board';
+import { HousesContextProvider } from './Components/Board/House/context';
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div style={{backgroundColor: "black", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
-      <BoardPage/>
-    </div>
+    <HousesContextProvider>
+        <div style={{ backgroundColor: "black", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <BoardPage />
+        </div>
+    </HousesContextProvider>
   );
 }
 

@@ -1,23 +1,16 @@
-import React from "react";
-import { Piece } from "./context";
-
-type Player = {
-    color: string,
-    tableDeg: string,
-    pieceDeg: string,
-};
+import { Piece } from "./types";
 
 type PieceComponentProps = {
     piece: Piece,
-    player: Player,
 }
 
-const PieceComponent = ({piece, player}: PieceComponentProps) => {
+const PieceComponent = ({piece}: PieceComponentProps) => {
     return (
-        <img style={{ width: "max-content", height: "max-content", display: "block", rotate: `${player.pieceDeg}deg` }}
+        <img style={{ width: "max-content", height: "max-content", display: "block" }}
             src={piece.src}
             alt={piece.type}
-            key={piece.coordinate.alpha + piece.coordinate.index.toString()} />
+            id={piece.type + piece.getCurrentPosition()}
+            key={piece.getCurrentPosition()} />
     )
 };
 
