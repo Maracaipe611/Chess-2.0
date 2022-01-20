@@ -7,8 +7,15 @@ type HouseComponentProps = {
 
 const HouseComponent = ({ house }: HouseComponentProps) => {
     return (
-        <div style={{ backgroundImage: `url(${house.src})`, width: 60, height: 60, display: "inline-block" }}
+        <div style={{
+            backgroundImage: `url(${house.src})`,
+            width: 60,
+            height: 60,
+            display: "inline-block",
+            cursor: house.piece ? "pointer" : "unset",
+        }}
             id={house.getCurrentPosition()}
+            onClick={() => console.log(house.piece)}
         >
             {
                 !!house.piece ?

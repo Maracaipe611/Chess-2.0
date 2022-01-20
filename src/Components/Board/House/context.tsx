@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react";
+import { createContext } from "react";
 import { BuildAllPieces } from "../Piece/context";
 import { AlphPositions, IndexPositions, Piece } from "../Piece/types";
 import { AllPiecesType, Colors, Coordinate } from "../types";
@@ -8,7 +8,7 @@ type HousesContextProviderProps = {
     children: React.ReactNode,
 };
 
-const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate):House => {
+const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate): House => {
     const { BlackPieces, WhitePieces } = allPieces;
     const { alpha, index } = coordinate;
 
@@ -33,10 +33,12 @@ const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate):Hous
 };
 const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
-    const alphs: Array<AlphPositions> = [A, B, C, D, E, F, G, H];
+    //inverter letras para trocar o lado do tabuleiro
+    const alphs: Array<AlphPositions> = [H, G, F, E, D, C, B, A];
+    // const alphs: Array<AlphPositions> = [A, B, C, D, E, F, G, H];
     const indexesPosition: Array<IndexPositions> = [1, 2, 3, 4, 5, 6, 7, 8];
-    
-    const allHouses: Array<House> = alphs.flatMap(index => { 
+
+    const allHouses: Array<House> = alphs.flatMap(index => {
         return indexesPosition.map(alph => {
             const coordinate: Coordinate = {
                 alpha: alph,
