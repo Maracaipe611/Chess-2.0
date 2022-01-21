@@ -22,6 +22,7 @@
         "array-bracket-spacing": [2, "never"],
         "computed-property-spacing": [2, "never"],
         "object-curly-spacing": [2, "always"],
+        "space-before-blocks": ["error", "always"],
         "indent": ["error", 4],
         "linebreak-style": ["error", "windows"],
         "quotes": ["error", "double"],

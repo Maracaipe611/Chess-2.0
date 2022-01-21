@@ -39,7 +39,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     useCallback(() => {
         const allLivePieces:Array<Piece> = new Array<Piece>();
         boardHouses.forEach(house => {
-            if(house.piece){
+            if(house.piece) {
                 allLivePieces.push(house.piece);
             }
         });
