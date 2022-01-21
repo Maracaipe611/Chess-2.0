@@ -100,7 +100,6 @@ const CommonMoves: {
     },
 };
 
-
 export type PieceMoves = [
     front?: Move,
     down?: Move,

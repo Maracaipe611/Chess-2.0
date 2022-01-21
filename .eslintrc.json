@@ -23,6 +23,7 @@
         "computed-property-spacing": [2, "never"],
         "object-curly-spacing": [2, "always"],
         "space-before-blocks": ["error", "always"],
+        "no-multiple-empty-lines": [2, {"max": 1, "maxBOF": 0}],
         "indent": ["error", 4],
         "linebreak-style": ["error", "windows"],
         "quotes": ["error", "double"],

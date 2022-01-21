@@ -4,7 +4,6 @@ import { Piece, Types } from "../Piece/types";
 import { Colors } from "../types";
 import { useGameContext } from "./context";
 
-
 export const useGameLogic = () => {
     const { boardHouses, boardPieces, setDangerousHouses, player, setSelectedPiece } = useGameContext();
 
