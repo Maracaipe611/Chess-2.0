@@ -13,9 +13,9 @@ const HouseComponent = ({ house }: HouseComponentProps) => {
             height: 60,
             display: "inline-block",
             cursor: house.piece ? "pointer" : "unset",
+            // backgroundColor: house.isAbleToReceivePieces ? "green" : undefined, 
         }}
             id={house.getCurrentPosition()}
-            onClick={() => console.log(house.piece)}
         >
             {
                 !!house.piece ?

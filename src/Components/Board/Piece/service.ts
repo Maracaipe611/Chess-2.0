@@ -61,7 +61,6 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
                 index: currentIndex,
             },
             color,
-            ableToChange,
             src,
             moves,
         );

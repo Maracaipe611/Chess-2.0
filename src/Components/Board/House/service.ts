@@ -1,12 +1,7 @@
-import { createContext } from "react";
-import { BuildAllPieces } from "../Piece/context";
+import { BuildAllPieces } from "../Piece/service";
 import { AlphPositions, IndexPositions, Piece } from "../Piece/types";
 import { AllPiecesType, Colors, Coordinate } from "../types";
 import House from "./types";
-
-type HousesContextProviderProps = {
-    children: React.ReactNode,
-};
 
 const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate): House => {
     const { BlackPieces, WhitePieces } = allPieces;
@@ -51,14 +46,4 @@ const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {
     return allHouses;
 }
 
-export const HousesContext = createContext(buildAllHouses(BuildAllPieces()));
-
-export const HousesContextProvider = ({
-    children
-}: HousesContextProviderProps) => {
-    return (
-        <HousesContext.Provider value={buildAllHouses(BuildAllPieces())}>
-            {children}
-        </HousesContext.Provider>
-    );
-};
+export const AllHouses = buildAllHouses(BuildAllPieces());

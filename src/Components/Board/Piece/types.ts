@@ -22,7 +22,14 @@ export enum AlphPositions {
     "H" = 8,
 };
 
-const CommunMoves = {
+type Move = {
+    x: number,
+    y: number
+};
+
+const CommonMoves: {
+    [moveName: string]: Move,
+} = {
     front: {
         x: 0,
         y: 1,
@@ -93,10 +100,6 @@ const CommunMoves = {
     },
 };
 
-type Move = {
-    x: number,
-    y: number
-};
 
 export type PieceMoves = {
     front?: Move,
@@ -113,53 +116,53 @@ export type PieceMoves = {
 export const Moves = () => {
 
     const Pawn: PieceMoves = {
-        front: CommunMoves.front,
-        doubleFront: CommunMoves.doubleFront,
-        frontsideLeft: CommunMoves.frontsideLeft,
-        frontsideRight: CommunMoves.frontsideRight,
+        front: CommonMoves.front,
+        doubleFront: CommonMoves.doubleFront,
+        frontsideLeft: CommonMoves.frontsideLeft,
+        frontsideRight: CommonMoves.frontsideRight,
     };
 
     const Tower: PieceMoves = {
-        front: CommunMoves.fullFrontside,
-        down: CommunMoves.fullDownside,
-        left: CommunMoves.fullLeftside,
-        right: CommunMoves.fullRightside,
+        front: CommonMoves.fullFrontside,
+        down: CommonMoves.fullDownside,
+        left: CommonMoves.fullLeftside,
+        right: CommonMoves.fullRightside,
     };
 
     const Horse: PieceMoves = {
-        frontsideRight: CommunMoves.frontsideRight,
-        frontsideLeft: CommunMoves.frontsideLeft,
-        downsideRight: CommunMoves.downsideRight,
-        downsideLeft: CommunMoves.downsideLeft,
+        frontsideRight: CommonMoves.frontsideRight,
+        frontsideLeft: CommonMoves.frontsideLeft,
+        downsideRight: CommonMoves.downsideRight,
+        downsideLeft: CommonMoves.downsideLeft,
     };
 
     const Bishop: PieceMoves = {
-        frontsideRight: CommunMoves.fullFrontsideRight,
-        frontsideLeft: CommunMoves.fullFrontsideLeft,
-        downsideRight: CommunMoves.fullDownsideRight,
-        downsideLeft: CommunMoves.fullDownsideLeft,
+        frontsideRight: CommonMoves.fullFrontsideRight,
+        frontsideLeft: CommonMoves.fullFrontsideLeft,
+        downsideRight: CommonMoves.fullDownsideRight,
+        downsideLeft: CommonMoves.fullDownsideLeft,
     };
 
     const Queen: PieceMoves = {
-        front: CommunMoves.fullFrontside,
-        down: CommunMoves.fullDownside,
-        left: CommunMoves.fullLeftside,
-        right: CommunMoves.fullRightside,
-        frontsideRight: CommunMoves.fullFrontsideRight,
-        frontsideLeft: CommunMoves.fullFrontsideLeft,
-        downsideRight: CommunMoves.fullDownsideRight,
-        downsideLeft: CommunMoves.fullDownsideLeft,
+        front: CommonMoves.fullFrontside,
+        down: CommonMoves.fullDownside,
+        left: CommonMoves.fullLeftside,
+        right: CommonMoves.fullRightside,
+        frontsideRight: CommonMoves.fullFrontsideRight,
+        frontsideLeft: CommonMoves.fullFrontsideLeft,
+        downsideRight: CommonMoves.fullDownsideRight,
+        downsideLeft: CommonMoves.fullDownsideLeft,
     };
 
     const King: PieceMoves = {
-        front: CommunMoves.front,
-        down: CommunMoves.down,
-        left: CommunMoves.left,
-        right: CommunMoves.right,
-        frontsideRight: CommunMoves.frontsideRight,
-        frontsideLeft: CommunMoves.frontsideLeft,
-        downsideRight: CommunMoves.downsideRight,
-        downsideLeft: CommunMoves.downsideLeft,
+        front: CommonMoves.front,
+        down: CommonMoves.down,
+        left: CommonMoves.left,
+        right: CommonMoves.right,
+        frontsideRight: CommonMoves.frontsideRight,
+        frontsideLeft: CommonMoves.frontsideLeft,
+        downsideRight: CommonMoves.downsideRight,
+        downsideLeft: CommonMoves.downsideLeft,
     };
 
     return {
@@ -176,20 +179,22 @@ export class Piece {
     type: Types;
     coordinate: Coordinate;
     color: Colors;
-    ableToChange: boolean;
     src: string;
     moves: PieceMoves;
 
-    constructor(type: Types, coordinate: Coordinate, color: Colors, ableToChange: boolean, src: string, moves: PieceMoves,) {
+    constructor(type: Types, coordinate: Coordinate, color: Colors, src: string, moves: PieceMoves,) {
         this.type = type;
         this.coordinate = coordinate;
         this.color = color;
-        this.ableToChange = ableToChange;
         this.src = src;
         this.moves = moves;
     };
 
+    isAbleToChange(): boolean {
+        return this.type === Types.Pawn;
+    };
+
     getCurrentPosition(): string {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
-    }
+    };
 };

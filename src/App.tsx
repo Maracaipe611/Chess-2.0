@@ -1,15 +1,15 @@
 import React from 'react';
 import { BoardPage } from './Components/Board';
-import { HousesContextProvider } from './Components/Board/House/context';
+import { GameContextProvider } from './Components/Board/GameLogic/context';
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <HousesContextProvider>
+    <GameContextProvider>
         <div style={{ backgroundColor: "black", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <BoardPage />
         </div>
-    </HousesContextProvider>
+    </GameContextProvider>
   );
 }
 
