@@ -4,7 +4,7 @@ import { Colors } from "../types";
 
 function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
-    const [ Pawn, Tower, Horse, Bishop, Queen, King ] = Moves();
+    const [Pawn, Tower, Horse, Bishop, Queen, King] = Moves();
 
     const communPiecesIndex = color === Colors.Black ? 8 : 1;
     const pawnIndex = color === Colors.Black ? 7 : 2;

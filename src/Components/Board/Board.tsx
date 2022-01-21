@@ -5,7 +5,7 @@ import { Colors } from "./types";
 
 const Board: React.FC = () => {
     
-    const {boardHouses, setPlayer} = useGameContext();
+    const { boardHouses, setPlayer } = useGameContext();
 
     useEffect(() => {
         setPlayer({

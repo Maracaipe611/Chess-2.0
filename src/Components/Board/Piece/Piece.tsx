@@ -4,7 +4,7 @@ type PieceComponentProps = {
     piece: Piece,
 }
 
-const PieceComponent = ({piece}: PieceComponentProps) => {
+const PieceComponent = ({ piece }: PieceComponentProps) => {
     return (
         <img style={{ width: "max-content", height: "max-content", display: "block" }}
             src={piece.src}

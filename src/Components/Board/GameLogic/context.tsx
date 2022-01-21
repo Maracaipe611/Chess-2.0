@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { createContext, useState } from "react";
 import { Player } from "../../Player/types";
 import { AllHouses } from "../House/service";
@@ -16,8 +16,8 @@ type GameContextProps = {
     setSelectedPiece: React.Dispatch<React.SetStateAction<Piece | undefined>>;
     boardHouses: Array<House>;
     setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
-    boardPieces: Array<Piece>;
-    setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece>>>;
+    boardPieces: Array<Piece> | undefined;
+    setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece> | undefined>>;
     movementHistory: Array<Piece>;
     setMovementHistory: React.Dispatch<React.SetStateAction<Array<Piece>>>;
     dangerousHouses: Array<House>;
@@ -32,11 +32,19 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     const [player, setPlayer] = useState<Player>();
     const [selectedPiece, setSelectedPiece] = useState<Piece>();
     const [boardHouses, setBoardHouses] = useState<Array<House>>(AllHouses);
-    const [boardPieces, setBoardPieces] = useState<Array<Piece>>(
-        boardHouses.filter((house) => house.piece).map((house) => house.piece!)
-    );
+    const [boardPieces, setBoardPieces] = useState<Array<Piece>>();
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
+
+    useCallback(() => {
+        const allLivePieces:Array<Piece> = new Array<Piece>();
+        boardHouses.forEach(house => {
+            if(house.piece){
+                allLivePieces.push(house.piece);
+            }
+        });
+        setBoardPieces(allLivePieces);
+    }, [boardHouses]);
 
     const providerValue = (): GameContextProps => {
         return {

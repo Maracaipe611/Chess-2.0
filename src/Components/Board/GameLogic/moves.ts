@@ -67,7 +67,8 @@ export const useGameLogic = () => {
 
     //setar casas perigosas para que o rei não possa se mover pra elas
     useCallback(() => {
-    //supondo que o jogador esteja com as brancas
+        if (!boardPieces) return;
+        //supondo que o jogador esteja com as brancas
         const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === Colors.Black);
         const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => ableHousesToMove(enemyPiece));
         setDangerousHouses(allPossibleMoves);
