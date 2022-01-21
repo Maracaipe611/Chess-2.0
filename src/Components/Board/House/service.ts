@@ -1,5 +1,5 @@
 import { BuildAllPieces } from "../Piece/service";
-import { AlphPositions, IndexPositions, Piece } from "../Piece/types";
+import { AlphPositions, Piece } from "../Piece/types";
 import { AllPiecesType, Colors, Coordinate } from "../types";
 import House from "./types";
 
@@ -31,7 +31,7 @@ const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {
     //inverter letras para trocar o lado do tabuleiro
     const alphs: Array<AlphPositions> = [H, G, F, E, D, C, B, A];
     // const alphs: Array<AlphPositions> = [A, B, C, D, E, F, G, H];
-    const indexesPosition: Array<IndexPositions> = [1, 2, 3, 4, 5, 6, 7, 8];
+    const indexesPosition: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
 
     const allHouses: Array<House> = alphs.flatMap(index => {
         return indexesPosition.map(alph => {

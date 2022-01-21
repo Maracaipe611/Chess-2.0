@@ -9,8 +9,6 @@ export enum Types {
     King = "King",
 }
 
-export type IndexPositions = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
 export enum AlphPositions {
     "A" = 1,
     "B" = 2,

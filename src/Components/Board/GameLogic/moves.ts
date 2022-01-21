@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import House from "../House/types";
 import { Piece, Types } from "../Piece/types";
-import { Colors } from "../types";
+import { Colors, Coordinate } from "../types";
 import { useGameContext } from "./context";
 
 export const useGameLogic = () => {
-    const { boardHouses, boardPieces, setDangerousHouses, player, setSelectedPiece } = useGameContext();
+    const { boardHouses, boardPieces, setDangerousHouses, player, setSelectedPiece, movementHistory } = useGameContext();
 
     const validatePossibleHouses = useCallback((piece: Piece): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
@@ -24,15 +24,52 @@ export const useGameLogic = () => {
         return possibleHousesToMove;
     }, [boardHouses]);
 
+    const findHouseByPieceId = (piece: Piece):House | undefined => {
+        return boardHouses.find(house => house.piece?.id === piece.id);
+    };
+
+    const findHouseByCoordinates = (coordinate: Coordinate): House | undefined => {
+        return boardHouses.find(house => house.coordinate === coordinate);
+    };
+
     const ableHousesToMove = useCallback((piece: Piece): Array<House> => {
         const currentPosition = piece.coordinate;
+        const allPossibilitiesToMove:Array<House> = validatePossibleHouses(piece);
+
         switch (piece.type) {
         case Types.Pawn: {
-            const allPossibilitiesToMove:Array<House> = validatePossibleHouses(piece);
+            const hasMovedBefore = piece.getHasMoved(movementHistory);
             const diagonallyPos = allPossibilitiesToMove.filter(house => house.coordinate.alpha !== currentPosition.alpha);
-            const possibleHouseToMove = allPossibilitiesToMove.filter(house => house.piece === undefined && house.coordinate.alpha === currentPosition.alpha);
+            const possibleHousesToMove = allPossibilitiesToMove.filter(house => house.piece === undefined && house.coordinate.alpha === currentPosition.alpha);
+            
+            if(hasMovedBefore) {
+                possibleHousesToMove.filter(house => house.coordinate.index === currentPosition.index + 2);
+            }
+
             const possibleHousesToEat = diagonallyPos.filter(house => house.piece);
-            const finalPossibilities = possibleHouseToMove.concat(possibleHousesToEat);
+            
+            //El passant
+            const lastEnemyMove = movementHistory[movementHistory.length - 1];
+            const isFirstMoveOfPiece = movementHistory.filter(piece => piece.id === lastEnemyMove.id).length === 0;
+            const pawnsIsAlignedInFifthRank = piece.coordinate.index === 5 && lastEnemyMove.coordinate.index === 5;
+            if(lastEnemyMove.type === Types.Pawn && isFirstMoveOfPiece && pawnsIsAlignedInFifthRank) {
+                if (lastEnemyMove.coordinate.alpha === piece.coordinate.alpha - 1) {
+                    const coordinateHouseElPassant = findHouseByCoordinates({
+                        alpha: piece.coordinate.alpha - 1,
+                        index: piece.coordinate.index + 1
+                    });
+                    if (coordinateHouseElPassant) possibleHousesToEat.push(coordinateHouseElPassant);
+                }else
+                if (lastEnemyMove.coordinate.alpha === piece.coordinate.alpha + 1) {
+                    const coordinateHouseElPassant = findHouseByCoordinates({
+                        alpha: piece.coordinate.alpha + 1,
+                        index: piece.coordinate.index + 1
+                    });
+                    if (coordinateHouseElPassant) possibleHousesToEat.push(coordinateHouseElPassant);
+                }
+            }
+
+            const finalPossibilities = possibleHousesToMove.concat(possibleHousesToEat);
             console.log(finalPossibilities);
             setDangerousHouses(finalPossibilities);
             break;
@@ -58,7 +95,7 @@ export const useGameLogic = () => {
     }, [validatePossibleHouses, setDangerousHouses]);
 
     const houseHandler = (house: House): void => {
-        if (!!house.piece && house.piece.color === player?.color) {
+        if (house.piece && house.piece.color === player?.color) {
             setSelectedPiece(house.piece);
             ableHousesToMove(house.piece);
         }
