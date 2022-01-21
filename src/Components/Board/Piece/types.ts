@@ -22,7 +22,7 @@ export enum AlphPositions {
     "H" = 8,
 };
 
-type Move = {
+export type Move = {
     x: number,
     y: number
 };
@@ -101,7 +101,7 @@ const CommonMoves: {
 };
 
 
-export type PieceMoves = {
+export type PieceMoves = [
     front?: Move,
     down?: Move,
     right?: Move,
@@ -111,78 +111,80 @@ export type PieceMoves = {
     frontsideRight?: Move,
     downsideLeft?: Move,
     downsideRight?: Move,
-};
+];
 
-export const Moves = () => {
+export const Moves = ():Array<PieceMoves> => {
 
-    const Pawn: PieceMoves = {
-        front: CommonMoves.front,
-        doubleFront: CommonMoves.doubleFront,
-        frontsideLeft: CommonMoves.frontsideLeft,
-        frontsideRight: CommonMoves.frontsideRight,
-    };
+    const Pawn: PieceMoves = [
+        CommonMoves.front,
+        CommonMoves.doubleFront,
+        CommonMoves.frontsideLeft,
+        CommonMoves.frontsideRight,
+    ];
 
-    const Tower: PieceMoves = {
-        front: CommonMoves.fullFrontside,
-        down: CommonMoves.fullDownside,
-        left: CommonMoves.fullLeftside,
-        right: CommonMoves.fullRightside,
-    };
+    const Tower: PieceMoves = [
+        CommonMoves.fullFrontside,
+        CommonMoves.fullDownside,
+        CommonMoves.fullLeftside,
+        CommonMoves.fullRightside,
+    ];
 
-    const Horse: PieceMoves = {
-        frontsideRight: CommonMoves.frontsideRight,
-        frontsideLeft: CommonMoves.frontsideLeft,
-        downsideRight: CommonMoves.downsideRight,
-        downsideLeft: CommonMoves.downsideLeft,
-    };
+    const Horse: PieceMoves = [
+        CommonMoves.frontsideRight,
+        CommonMoves.frontsideLeft,
+        CommonMoves.downsideRight,
+        CommonMoves.downsideLeft,
+    ];
 
-    const Bishop: PieceMoves = {
-        frontsideRight: CommonMoves.fullFrontsideRight,
-        frontsideLeft: CommonMoves.fullFrontsideLeft,
-        downsideRight: CommonMoves.fullDownsideRight,
-        downsideLeft: CommonMoves.fullDownsideLeft,
-    };
+    const Bishop: PieceMoves = [
+        CommonMoves.fullFrontsideRight,
+        CommonMoves.fullFrontsideLeft,
+        CommonMoves.fullDownsideRight,
+        CommonMoves.fullDownsideLeft,
+    ];
 
-    const Queen: PieceMoves = {
-        front: CommonMoves.fullFrontside,
-        down: CommonMoves.fullDownside,
-        left: CommonMoves.fullLeftside,
-        right: CommonMoves.fullRightside,
-        frontsideRight: CommonMoves.fullFrontsideRight,
-        frontsideLeft: CommonMoves.fullFrontsideLeft,
-        downsideRight: CommonMoves.fullDownsideRight,
-        downsideLeft: CommonMoves.fullDownsideLeft,
-    };
+    const Queen: PieceMoves = [
+        CommonMoves.fullFrontside,
+        CommonMoves.fullDownside,
+        CommonMoves.fullLeftside,
+        CommonMoves.fullRightside,
+        CommonMoves.fullFrontsideRight,
+        CommonMoves.fullFrontsideLeft,
+        CommonMoves.fullDownsideRight,
+        CommonMoves.fullDownsideLeft,
+    ];
 
-    const King: PieceMoves = {
-        front: CommonMoves.front,
-        down: CommonMoves.down,
-        left: CommonMoves.left,
-        right: CommonMoves.right,
-        frontsideRight: CommonMoves.frontsideRight,
-        frontsideLeft: CommonMoves.frontsideLeft,
-        downsideRight: CommonMoves.downsideRight,
-        downsideLeft: CommonMoves.downsideLeft,
-    };
+    const King: PieceMoves = [
+        CommonMoves.front,
+        CommonMoves.down,
+        CommonMoves.left,
+        CommonMoves.right,
+        CommonMoves.frontsideRight,
+        CommonMoves.frontsideLeft,
+        CommonMoves.downsideRight,
+        CommonMoves.downsideLeft,
+    ];
 
-    return {
+    return [
         Pawn,
         Tower,
         Horse,
         Bishop,
         Queen,
         King,
-    }
+    ]
 }
 
 export class Piece {
+    id: string;
     type: Types;
     coordinate: Coordinate;
     color: Colors;
     src: string;
     moves: PieceMoves;
 
-    constructor(type: Types, coordinate: Coordinate, color: Colors, src: string, moves: PieceMoves,) {
+    constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, src: string, moves: PieceMoves,) {
+        this.id = id;
         this.type = type;
         this.coordinate = coordinate;
         this.color = color;
@@ -197,4 +199,8 @@ export class Piece {
     getCurrentPosition(): string {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
     };
+
+    getHasMoved(movementHistory: Array<Piece>): boolean {
+        return !!movementHistory.find(piece => piece.id === this.id);
+    }
 };
