@@ -1,1 +1,1 @@
-export { default as Piece } from "./Piece";
+export { default as PiecePage } from "./Piece";

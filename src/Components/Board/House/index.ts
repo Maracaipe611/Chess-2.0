@@ -1,1 +1,1 @@
-export { default as House } from "./House";
+export { default as HouseComponent } from "./House";

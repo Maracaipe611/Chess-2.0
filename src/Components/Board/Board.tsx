@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { HousesContext } from "./House/context";
-import { House } from "./House";
+import { HouseComponent } from "./House/index";
 
 const Board: React.FC = () => {
     
@@ -9,7 +9,7 @@ const Board: React.FC = () => {
     return (
         <div style={{ width: 480, minWidth: 480, display: "inline-flex", justifyContent: "center", flexWrap: "wrap" }} >
             {
-                AllHouses.map(house => <House house={house} key={house.getCurrentPosition()} />)
+                AllHouses.map(house => <HouseComponent house={house} key={house.getCurrentPosition()} />)
             }
         </div>
     )
