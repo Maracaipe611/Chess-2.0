@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGameContext } from "./GameLogic/context"
+import { useGameContext } from "./GameLogic/context";
 import { HouseComponent } from "./House/index";
 import { Colors } from "./types";
 
@@ -11,8 +11,8 @@ const Board: React.FC = () => {
         setPlayer({
             name: "lucas",
             color: Colors.White
-        })
-    }, [setPlayer])
+        });
+    }, [setPlayer]);
 
     return (
         <div style={{ width: 480, minWidth: 480, display: "inline-flex", justifyContent: "center", flexWrap: "wrap" }} >
@@ -20,7 +20,7 @@ const Board: React.FC = () => {
                 boardHouses.map(house => <HouseComponent house={house} key={house.getCurrentPosition()} />)
             }
         </div>
-    )
-}
+    );
+};
 
 export default Board;

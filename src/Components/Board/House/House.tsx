@@ -19,17 +19,17 @@ const HouseComponent = ({ house }: HouseComponentProps) => {
             cursor: house.piece ? "pointer" : "unset",
             backgroundColor: house.isAbleToReceivePieces(dangerousHouses) ? "green" : undefined, 
         }}
-            id={house.getCurrentPosition()}
-            onClick={(e) => house.piece !== undefined ? houseHandler(house) : null}
+        id={house.getCurrentPosition()}
+        onClick={() => house.piece !== undefined ? houseHandler(house) : null}
         >
             {
-                !!house.piece ?
+                house.piece ?
                     <PieceComponent piece={house.piece} />
                     :
                     null
             }
         </div>
-    )
+    );
 };
 
 export default HouseComponent;

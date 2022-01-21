@@ -9,7 +9,7 @@ const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate): Hou
 
     const whitePieceOnThisHouse: Piece | undefined = WhitePieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
     const blackPieceOnThisHouse: Piece | undefined = BlackPieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
-    const pieceOnThisHouse = !!blackPieceOnThisHouse ? blackPieceOnThisHouse : whitePieceOnThisHouse;
+    const pieceOnThisHouse = blackPieceOnThisHouse ? blackPieceOnThisHouse : whitePieceOnThisHouse;
 
     const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
     const srcPrefix = "./Images/";
@@ -38,12 +38,12 @@ const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {
             const coordinate: Coordinate = {
                 alpha: alph,
                 index
-            }
+            };
             return buildSingleHouse(allPieces, coordinate);
         });
     });
 
     return allHouses;
-}
+};
 
 export const AllHouses = buildAllHouses(BuildAllPieces());

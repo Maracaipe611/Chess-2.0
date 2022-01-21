@@ -11,7 +11,7 @@ const PieceComponent = ({piece}: PieceComponentProps) => {
             alt={piece.type}
             id={piece.type + piece.getCurrentPosition()}
             key={piece.getCurrentPosition()} />
-    )
+    );
 };
 
 export default PieceComponent;

@@ -7,7 +7,7 @@ export enum Types {
     Bishop = "Bishop",
     Queen = "Queen",
     King = "King",
-};
+}
 
 export type IndexPositions = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
@@ -20,7 +20,7 @@ export enum AlphPositions {
     "F" = 6,
     "G" = 7,
     "H" = 8,
-};
+}
 
 export type Move = {
     x: number,
@@ -172,8 +172,8 @@ export const Moves = ():Array<PieceMoves> => {
         Bishop,
         Queen,
         King,
-    ]
-}
+    ];
+};
 
 export class Piece {
     id: string;
@@ -190,17 +190,17 @@ export class Piece {
         this.color = color;
         this.src = src;
         this.moves = moves;
-    };
+    }
 
     isAbleToChange(): boolean {
         return this.type === Types.Pawn;
-    };
+    }
 
     getCurrentPosition(): string {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
-    };
+    }
 
     getHasMoved(movementHistory: Array<Piece>): boolean {
         return !!movementHistory.find(piece => piece.id === this.id);
     }
-};
+}

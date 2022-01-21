@@ -17,7 +17,7 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const kingAlph = color === Colors.Black ? [E] : [D];
 
     const srcPrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
-    const srcSufix: string = ".png";
+    const srcSufix = ".png";
     const src = srcPrefix + type + srcSufix;
 
     let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
@@ -26,31 +26,31 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     let moves: PieceMoves;
 
     switch (type) {
-        case Types.Pawn:
-            currentPieceAlphs = pawnsAlphs;
-            moves = Pawn;
-            break;
-        case Types.Tower:
-            currentPieceAlphs = towerAlphs;
-            moves = Tower;
-            break;
-        case Types.Horse:
-            currentPieceAlphs = horseAlphs;
-            moves = Horse;
-            break;
-        case Types.Bishop:
-            currentPieceAlphs = bishopAlphs;
-            moves = Bishop;
-            break;
-        case Types.Queen:
-            currentPieceAlphs = queenAlph;
-            moves = Queen;
-            break;
-        case Types.King:
-            currentPieceAlphs = kingAlph;
-            moves = King;
-            break;
-    };
+    case Types.Pawn:
+        currentPieceAlphs = pawnsAlphs;
+        moves = Pawn;
+        break;
+    case Types.Tower:
+        currentPieceAlphs = towerAlphs;
+        moves = Tower;
+        break;
+    case Types.Horse:
+        currentPieceAlphs = horseAlphs;
+        moves = Horse;
+        break;
+    case Types.Bishop:
+        currentPieceAlphs = bishopAlphs;
+        moves = Bishop;
+        break;
+    case Types.Queen:
+        currentPieceAlphs = queenAlph;
+        moves = Queen;
+        break;
+    case Types.King:
+        currentPieceAlphs = kingAlph;
+        moves = King;
+        break;
+    }
 
     return currentPieceAlphs.map((alph) => {
         return new Piece(
@@ -65,7 +65,7 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
             moves,
         );
     });
-};
+}
 
 function PiecesByColor(color: Colors) {
     const king: Array<Piece> = BuildSinglePiece(Types.King, color);
@@ -76,9 +76,9 @@ function PiecesByColor(color: Colors) {
     const pawns: Array<Piece> = BuildSinglePiece(Types.Pawn, color);
 
     return [king, queen, bishop, horse, towers, pawns].flatMap(pieces => pieces);
-};
+}
 
-export function BuildAllPieces(): any {
+export function BuildAllPieces() {
 
     const WhitePieces: Array<Piece> = PiecesByColor(Colors.White);
     const BlackPieces: Array<Piece> = PiecesByColor(Colors.Black);
