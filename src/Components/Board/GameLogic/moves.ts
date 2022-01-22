@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import House from "../House/types";
 import { Piece, Types } from "../Piece/types";
 import { Colors, Coordinate } from "../types";
@@ -7,13 +7,13 @@ import { useGameContext } from "./context";
 export const useGameLogic = () => {
     const { boardHouses, boardPieces, setDangerousHouses, player, setSelectedHouse, movementHistory, ableHousesToMove, setHousesAbleToMove } = useGameContext();
 
-    const validatePossibleHouses = useCallback((piece: Piece): Array<House> => {
+    const validatePossibleHouses = (piece: Piece, direction:number): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
                 if (movement) {
-                    if (house.coordinate.alpha === piece.coordinate.alpha + movement.x &&
-                        house.coordinate.index === piece.coordinate.index + movement.y) {
+                    if (house.coordinate.alpha === piece.coordinate.alpha + (movement.x * direction) &&
+                        house.coordinate.index === piece.coordinate.index + (movement.y  * direction)) {
                         return house;
                     }
                 }
@@ -22,7 +22,7 @@ export const useGameLogic = () => {
         });
 
         return possibleHousesToMove;
-    }, [boardHouses]);
+    };
 
     const findHouseByPieceId = (piece: Piece):House | undefined => {
         return boardHouses.find(house => house.piece?.id === piece.id);
@@ -32,16 +32,18 @@ export const useGameLogic = () => {
         return boardHouses.find(house => house.coordinate === coordinate);
     };
 
-    const handleHousesToMove = useCallback((piece: Piece): Array<House> => {
+    const handleHousesToMove = useCallback((piece: Piece, myPieces:boolean): Array<House> => {
+        const direction: number = myPieces ? 1 : -1;
         const currentPosition = piece.coordinate;
-        const allPossibilitiesToMove:Array<House> = validatePossibleHouses(piece);
+        const allPossibilitiesToMove:Array<House> = validatePossibleHouses(piece, direction);
+        let possibleHousesToEat:Array<House> = new Array<House>();
 
         switch (piece.type) {
         case Types.Pawn: {
             const hasMovedBefore = piece.getHasMoved(movementHistory);
             const diagonallyPos = allPossibilitiesToMove.filter(house => house.coordinate.alpha !== currentPosition.alpha);
             const possibleHousesToMove = allPossibilitiesToMove.filter(house => house.piece === undefined && house.coordinate.alpha === currentPosition.alpha);
-            const possibleHousesToEat = diagonallyPos.filter(house => house.piece);
+            possibleHousesToEat = direction === 1 ? diagonallyPos.filter(house => house.piece) : diagonallyPos;
             
             if(hasMovedBefore) {
                 possibleHousesToMove.filter(house => house.coordinate.index === currentPosition.index + 2);
@@ -70,7 +72,8 @@ export const useGameLogic = () => {
             }
 
             const finalPossibilities = possibleHousesToMove.concat(possibleHousesToEat);
-            setHousesAbleToMove(finalPossibilities);
+            //ver todas as possibilidades = setHousesAbleToMove(...housesAbleToMove, finalPossibilities)
+            if (piece.color === player?.color) setHousesAbleToMove(finalPossibilities);
             break;
         }
         case Types.Tower: 
@@ -84,32 +87,32 @@ export const useGameLogic = () => {
         case Types.Queen:
             break;
         case Types.King:
-            //cant move if he will die
+            //cant move to dangerous houses
             break;
         default:
             break;
         }
 
-        return new Array<House>();
-    }, [validatePossibleHouses, setDangerousHouses]);
+        return possibleHousesToEat;
+    }, [ableHousesToMove, movementHistory, boardPieces]);
 
     const houseHandler = (house: House): void => {
         setSelectedHouse(house);
         if (house.piece && house.piece.color === player?.color) {
-            handleHousesToMove(house.piece);
+            handleHousesToMove(house.piece, true);
         }else {
             setHousesAbleToMove([]);
         }
     };
 
     //setar casas perigosas para que o rei não possa se mover pra elas
-    useCallback(() => {
-        if (!boardPieces) return;
+    useEffect(() => {
+        if (!boardPieces?.length) return;
         //supondo que o jogador esteja com as brancas
         const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === Colors.Black);
-        const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => handleHousesToMove(enemyPiece));
+        const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => handleHousesToMove(enemyPiece, false));
         setDangerousHouses(allPossibleMoves);
-    }, [boardPieces, ableHousesToMove, setDangerousHouses]);
+    }, [boardPieces]);
 
     return { houseHandler };
 };

@@ -18,6 +18,9 @@ const HouseComponent = ({ house }: HouseComponentProps) => {
         const thePieceHereIsInDangerous = "prey";
         const otherPieceWantsToGetHere = "ableToReceive";
 
+        // condicional para exibir casas inimigas onde o inimigo pode comer
+        // if(house.checkIfHouseIsOnThisArray(dangerousHouses)) return thePieceHereIsInDangerous
+
         if(!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) {
             return otherPieceWantsToGetHere;
         } 

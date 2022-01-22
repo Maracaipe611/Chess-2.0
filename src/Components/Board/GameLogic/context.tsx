@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { createContext, useState } from "react";
 import { Player } from "../../Player/types";
 import { AllHouses } from "../House/service";
@@ -39,7 +39,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
     const [ableHousesToMove, setHousesAbleToMove] = useState<Array<House>>([]);
 
-    useCallback(() => {
+    useEffect(() => {
         const allLivePieces:Array<Piece> = new Array<Piece>();
         boardHouses.forEach(house => {
             if(house.piece) {
