@@ -2,32 +2,46 @@ import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
 import { useGameLogic } from "../GameLogic/moves";
 import { useGameContext } from "../GameLogic/context";
+import "./House.css";
 
 type HouseComponentProps = {
-    house: House,
-}
+    house: House;
+};
 
 const HouseComponent = ({ house }: HouseComponentProps) => {
-    const { dangerousHouses } = useGameContext();
+    const { ableHousesToMove, selectedHouse, dangerousHouses } = useGameContext();
     const { houseHandler } = useGameLogic();
+
+    const houseStyle = (): string => {
+        const normal = "";
+        const selected = "selectedHouse";
+        const thePieceHereIsInDangerous = "prey";
+        const otherPieceWantsToGetHere = "ableToReceive";
+
+        if(!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) {
+            return otherPieceWantsToGetHere;
+        } 
+        if (house.piece && house.checkIfHouseIsOnThisArray(dangerousHouses)) {
+            return thePieceHereIsInDangerous;
+        }
+        if (house === selectedHouse) {
+            return selected;
+        }
+        
+        return normal;
+    };
+
     return (
-        <div style={{
-            backgroundImage: `url(${house.src})`,
-            width: 60,
-            height: 60,
-            display: "inline-block",
-            cursor: house.piece ? "pointer" : "unset",
-            backgroundColor: house.isAbleToReceivePieces(dangerousHouses) ? "green" : undefined, 
-        }}
-        id={house.getCurrentPosition()}
-        onClick={() => house.piece !== undefined ? houseHandler(house) : null}
+        <div
+            className={"house " + houseStyle()}
+            style={{
+                backgroundImage: `url(${house.src})`,
+                cursor: house.piece ? "pointer" : "unset",
+            }}
+            id={house.getCurrentPosition()}
+            onClick={() => houseHandler(house)}
         >
-            {
-                house.piece ?
-                    <PieceComponent piece={house.piece} />
-                    :
-                    null
-            }
+            {house.piece ? <PieceComponent piece={house.piece} /> : null}
         </div>
     );
 };

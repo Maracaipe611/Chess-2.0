@@ -20,7 +20,7 @@ export default class House {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
     }
 
-    isAbleToReceivePieces(dangerouHouses: Array<House>): boolean {
+    checkIfHouseIsOnThisArray(dangerouHouses: Array<House>): boolean {
         return !!dangerouHouses.find(house => this.getCurrentPosition() === house.getCurrentPosition());
     }
 }

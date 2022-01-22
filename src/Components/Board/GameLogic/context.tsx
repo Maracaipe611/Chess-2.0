@@ -12,16 +12,18 @@ type GameContextProviderProps = {
 type GameContextProps = {
     player: Player | undefined;
     setPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
-    selectedPiece: Piece | undefined;
-    setSelectedPiece: React.Dispatch<React.SetStateAction<Piece | undefined>>;
+    selectedHouse: House | undefined;
+    setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
     boardHouses: Array<House>;
     setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
-    boardPieces: Array<Piece> | undefined;
-    setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece> | undefined>>;
+    boardPieces: Array<Piece>;
+    setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece>>>;
     movementHistory: Array<Piece>;
     setMovementHistory: React.Dispatch<React.SetStateAction<Array<Piece>>>;
     dangerousHouses: Array<House>;
     setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
+    ableHousesToMove: Array<House>;
+    setHousesAbleToMove: React.Dispatch<React.SetStateAction<Array<House>>>;
 };
 
 export const GameContext = createContext<GameContextProps | undefined>(
@@ -30,11 +32,12 @@ export const GameContext = createContext<GameContextProps | undefined>(
 
 export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     const [player, setPlayer] = useState<Player>();
-    const [selectedPiece, setSelectedPiece] = useState<Piece>();
+    const [selectedHouse, setSelectedHouse] = useState<House>();
     const [boardHouses, setBoardHouses] = useState<Array<House>>(AllHouses);
-    const [boardPieces, setBoardPieces] = useState<Array<Piece>>();
+    const [boardPieces, setBoardPieces] = useState<Array<Piece>>([]);
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
+    const [ableHousesToMove, setHousesAbleToMove] = useState<Array<House>>([]);
 
     useCallback(() => {
         const allLivePieces:Array<Piece> = new Array<Piece>();
@@ -50,8 +53,8 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
         return {
             player,
             setPlayer,
-            selectedPiece,
-            setSelectedPiece,
+            selectedHouse,
+            setSelectedHouse,
             boardHouses,
             setBoardHouses,
             boardPieces,
@@ -60,6 +63,8 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
             setMovementHistory,
             dangerousHouses,
             setDangerousHouses,
+            ableHousesToMove,
+            setHousesAbleToMove,
         };
     };
 
