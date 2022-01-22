@@ -33,7 +33,7 @@ export const GameContext = createContext<GameContextProps | undefined>(
 export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     const [player, setPlayer] = useState<Player>();
     const [selectedHouse, setSelectedHouse] = useState<House>();
-    const [boardHouses, setBoardHouses] = useState<Array<House>>(AllHouses);
+    const [boardHouses, setBoardHouses] = useState<Array<House>>(AllHouses(undefined));
     const [boardPieces, setBoardPieces] = useState<Array<Piece>>([]);
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
@@ -48,6 +48,11 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
         });
         setBoardPieces(allLivePieces);
     }, [boardHouses]);
+
+    useEffect(() => {
+        if (!player) return;
+        setBoardHouses(AllHouses(player));
+    }, [player]);
 
     const providerValue = (): GameContextProps => {
         return {
