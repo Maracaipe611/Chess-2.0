@@ -1,3 +1,4 @@
+import House from "../House/types";
 import { Alphabet, Colors, Coordinate } from "../types";
 
 export enum Types {
@@ -177,15 +178,15 @@ export class Piece {
     type: Types;
     coordinate: Coordinate;
     color: Colors;
-    src: string;
+    imageSource: string;
     moves: PieceMoves;
 
-    constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, src: string, moves: PieceMoves,) {
+    constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, imageSource: string, moves: PieceMoves,) {
         this.id = id;
         this.type = type;
         this.coordinate = coordinate;
         this.color = color;
-        this.src = src;
+        this.imageSource = imageSource;
         this.moves = moves;
     }
 
@@ -193,11 +194,15 @@ export class Piece {
         return this.type === Types.Pawn;
     }
 
-    getCurrentPosition(): string {
+    currentPosition(): string {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
     }
 
-    getHasMoved(movementHistory: Array<Piece>): boolean {
+    hasMoved(movementHistory: Array<Piece>): boolean {
         return !!movementHistory.find(piece => piece.id === this.id);
     }
+
+    findHouse = (boardHouses: Array<House>): House | undefined => {
+        return boardHouses.find(house => house.piece?.id === this.id);
+    };
 }

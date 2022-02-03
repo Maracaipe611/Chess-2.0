@@ -16,9 +16,9 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const queenAlph = color === Colors.Black ? [D] : [E];
     const kingAlph = color === Colors.Black ? [E] : [D];
 
-    const srcPrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
-    const srcSufix = ".png";
-    const src = srcPrefix + type + srcSufix;
+    const imageSourcePrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
+    const imageSourceSufix = ".png";
+    const imageSource = imageSourcePrefix + type + imageSourceSufix;
 
     let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
     const currentIndex = type === Types.Pawn ? pawnIndex : communPiecesIndex;
@@ -61,7 +61,7 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
                 index: currentIndex,
             },
             color,
-            src,
+            imageSource,
             moves,
         );
     });

@@ -15,9 +15,9 @@ export const AllHouses = (player: Player | undefined) => {
         const pieceOnThisHouse = blackPieceOnThisHouse ? blackPieceOnThisHouse : whitePieceOnThisHouse;
 
         const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
-        const srcPrefix = "./Images/";
-        const srcSufix = ".jpg";
-        const src = srcPrefix + (color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + srcSufix;
+        const imageSourcePrefix = "./Images/";
+        const imageSourceSufix = ".jpg";
+        const imageSource = imageSourcePrefix + (color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + imageSourceSufix;
         return new House(
             {
                 alpha: alpha,
@@ -26,7 +26,7 @@ export const AllHouses = (player: Player | undefined) => {
             !!pieceOnThisHouse,
             color,
             pieceOnThisHouse,
-            src,
+            imageSource,
         );
     };
     const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {

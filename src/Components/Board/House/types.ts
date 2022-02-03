@@ -6,21 +6,21 @@ export default class House {
     busy: boolean;
     color: Colors;
     piece?: Piece | undefined;
-    src: string;
+    imageSource: string;
 
-    constructor(coordinate: Coordinate, busy: boolean, color: Colors, piece: Piece | undefined, src:string) {
+    constructor(coordinate: Coordinate, busy: boolean, color: Colors, piece: Piece | undefined, imageSource:string) {
         this.coordinate = coordinate;
         this.busy = busy;
         this.color = color;
         this.piece = piece;
-        this.src = src;
+        this.imageSource = imageSource;
     }
 
-    getCurrentPosition(): string {
+    currentPosition(): string {
         return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
     }
 
-    checkIfHouseIsOnThisArray(dangerouHouses: Array<House>): boolean {
-        return !!dangerouHouses.find(house => this.getCurrentPosition() === house.getCurrentPosition());
+    checkIfHouseIsOnThisArray(sampleArray: Array<House>): boolean {
+        return !!sampleArray.find(house => this.currentPosition() === house.currentPosition());
     }
 }

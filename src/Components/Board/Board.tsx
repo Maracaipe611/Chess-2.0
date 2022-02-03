@@ -31,7 +31,7 @@ const Board: React.FC = () => {
                 {boardHouses.map((house) => (
                     <HouseComponent
                         house={house}
-                        key={house.getCurrentPosition()}
+                        key={house.currentPosition()}
                     />
                 ))}
             </div>

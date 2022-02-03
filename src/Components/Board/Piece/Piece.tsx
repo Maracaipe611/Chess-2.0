@@ -1,16 +1,17 @@
+import React from "react";
 import { Piece } from "./types";
 
-type PieceComponentProps = {
+interface PieceComponentProps {
     piece: Piece,
 }
 
-const PieceComponent = ({ piece }: PieceComponentProps) => {
+const PieceComponent:React.FC<PieceComponentProps> = ({ piece }) => {
     return (
         <img style={{ width: "max-content", height: "max-content", display: "block" }}
-            src={piece.src}
+            src={piece.imageSource}
             alt={piece.type}
-            id={piece.type + piece.getCurrentPosition()}
-            key={piece.getCurrentPosition()} />
+            id={piece.type + piece.currentPosition()}
+            key={piece.currentPosition()} />
     );
 };
 
