@@ -10,7 +10,7 @@ interface HouseComponentProps {
 }
 
 const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
-    const { ableHousesToMove, selectedHouse, dangerousHouses, movementHistory, player } = useGameContext();
+    const { ableHousesToMove, selectedHouse, dangerousHouses, player } = useGameContext();
     const { houseHandler } = useGameLogic();
 
     const houseStyle = (): string => {
@@ -23,7 +23,8 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
         // if (house.checkIfHouseIsOnThisArray(dangerousHouses)) classNames = classNames + thePieceHereIsInDangerous; //temporario
         if (house === selectedHouse) return selected;
         if ((!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  otherPieceWantsToGetHere;
-        if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  thePieceHereIsInDangerous;
+        if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) 
+        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  thePieceHereIsInDangerous;
 
         return classNames;
     };

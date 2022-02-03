@@ -23,7 +23,6 @@ export const AllHouses = (player: Player | undefined) => {
                 alpha: alpha,
                 index: index,
             },
-            !!pieceOnThisHouse,
             color,
             pieceOnThisHouse,
             imageSource,
