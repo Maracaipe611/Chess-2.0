@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import House from "../House/types";
 import { Piece, Types } from "../Piece/types";
-import { Colors, Coordinate } from "../types";
+import { Coordinate } from "../types";
 import { useGameContext } from "./context";
 
 export const useGameLogic = () => {
@@ -30,11 +30,12 @@ export const useGameLogic = () => {
 
     const handleHousesToMove = useCallback((piece: Piece, myPieces: boolean): Array<House> => {
         let possibleHousesToEat: Array<House> = new Array<House>();
-        if (piece.color !== player?.color) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
+        if(!player) return possibleHousesToEat;
+        // if (!player?.friendlyPiece(piece)) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
 
-        const direction: number = myPieces ? (player?.color === Colors.White ? 1 : -1) : (player?.color === Colors.White ? -1 : 1);
+        const pieceDirection = player.direction(myPieces);
         const currentPosition = piece.coordinate;
-        const allPossibilitiesToMove: Array<House> = validatePossibleHouses(piece, direction);
+        const allPossibilitiesToMove: Array<House> = validatePossibleHouses(piece, pieceDirection);
 
         switch (piece.type) {
         case Types.Pawn: {
@@ -42,14 +43,7 @@ export const useGameLogic = () => {
             const diagonallyPos = allPossibilitiesToMove.filter(house => house.coordinate.alpha !== currentPosition.alpha);
             const possibleHousesToMove = allPossibilitiesToMove.filter(house => house.piece === undefined && house.coordinate.alpha === currentPosition.alpha);
 
-            //definir qual a direção que a peça segue baseada na cor da peça e cor do jogador
-            //só aplica ao peão pois ele não pode andar pra trás
-            if (direction === 1 && player?.color === Colors.White ||
-                    direction === -1 && player?.color === Colors.Black) {
-                possibleHousesToEat = diagonallyPos.filter(house => house.piece);
-            } else {
-                possibleHousesToEat = diagonallyPos;
-            }
+            possibleHousesToEat = getPossibleHousesToPawnEat(myPieces, possibleHousesToEat, diagonallyPos);
 
             //se o peão já tiver se movimentado anteriormente, ele não tem direito a andar 2 casas de uma vez
             if (hasMovedBefore) {
@@ -59,7 +53,8 @@ export const useGameLogic = () => {
             elPassant(movementHistory, piece, findHouseByCoordinates, possibleHousesToEat);
 
             const finalPossibilities = possibleHousesToMove.concat(possibleHousesToEat);
-            //ver todas as possibilidades = setHousesAbleToMove(...housesAbleToMove, finalPossibilities)
+            //estacar as possibilidades = 
+            //setHousesAbleToMove(ableHousesToMove.concat(finalPossibilities));
             setHousesAbleToMove(finalPossibilities);
             break;
         }
@@ -86,7 +81,7 @@ export const useGameLogic = () => {
     const houseHandler = (house: House): void => {
         setSelectedHouse(house);
         setHousesAbleToMove([]);
-        if (house.piece && house.piece.color === player?.color) {
+        if (house.piece && player?.friendlyPiece(house?.piece)) {
             handleHousesToMove(house.piece, true);
         } else {
             setHousesAbleToMove([]);
@@ -96,7 +91,7 @@ export const useGameLogic = () => {
     //setar casas perigosas para que o rei não possa se mover pra elas
     useEffect(() => {
         if (!boardPieces?.length) return;
-        const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color !== player?.color);
+        const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === player?.enemyColor());
         const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => handleHousesToMove(enemyPiece, false));
         setDangerousHouses(allPossibleMoves);
         setHousesAbleToMove([]);
@@ -130,3 +125,15 @@ const elPassant = (movementHistory: Piece[], piece: Piece, findHouseByCoordinate
         }
     }
 };
+
+const getPossibleHousesToPawnEat = (myPieces: boolean, possibleHousesToEat: House[], diagonallyPos: House[]) => {
+    if (myPieces) {
+        possibleHousesToEat = diagonallyPos.filter(house => house.piece);
+    } else {
+        //o rei não pode se movimentar para qualquer casa
+        //por isso é necessário saber quais casas o inimigo pode se deslocar pra comer
+        possibleHousesToEat = diagonallyPos;
+    }
+    return possibleHousesToEat;
+};
+

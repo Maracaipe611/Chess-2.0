@@ -2,7 +2,7 @@ import React from "react";
 import "./House.css";
 import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
-import { useGameLogic } from "../GameLogic/moves";
+import { useGameLogic } from "../GameLogic/useGameLogic";
 import { useGameContext } from "../GameLogic/context";
 
 interface HouseComponentProps {

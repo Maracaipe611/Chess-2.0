@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { createContext, useState } from "react";
-import { Player } from "../../Player/types";
+import Player from "../../Player/types";
 import { AllHouses } from "../House/service";
 import House from "../House/types";
 import { Piece } from "../Piece/types";

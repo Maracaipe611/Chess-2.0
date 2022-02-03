@@ -1,4 +1,4 @@
-import { Player } from "../../Player/types";
+import Player from "../../Player/types";
 import { BuildAllPieces } from "../Piece/service";
 import { AlphPositions, Piece } from "../Piece/types";
 import { AllPiecesType, Colors, Coordinate } from "../types";
@@ -12,7 +12,7 @@ export const AllHouses = (player: Player | undefined) => {
 
         const whitePieceOnThisHouse: Piece | undefined = WhitePieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
         const blackPieceOnThisHouse: Piece | undefined = BlackPieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
-        const pieceOnThisHouse = blackPieceOnThisHouse ? blackPieceOnThisHouse : whitePieceOnThisHouse;
+        const pieceOnThisHouse = blackPieceOnThisHouse ?? whitePieceOnThisHouse;
 
         const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
         const imageSourcePrefix = "./Images/";
