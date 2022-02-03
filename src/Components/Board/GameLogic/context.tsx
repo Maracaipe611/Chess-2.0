@@ -51,7 +51,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
 
     useEffect(() => {
         if (!player) return;
-        setBoardHouses(AllHouses(player));
+        if (!boardHouses) setBoardHouses(AllHouses(player));
     }, [player]);
 
     const providerValue = (): GameContextProps => {

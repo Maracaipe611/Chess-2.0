@@ -202,6 +202,10 @@ export class Piece {
         return !!movementHistory.find(piece => piece.id === this.id);
     }
 
+    howManyTimesMoved(movementHistory: Array<Piece>): number {
+        return movementHistory.filter(piece => piece.id === this.id).length;
+    }
+
     findHouse = (boardHouses: Array<House>): House | undefined => {
         return boardHouses.find(house => house.piece?.id === this.id);
     };

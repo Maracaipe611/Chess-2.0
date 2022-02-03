@@ -10,34 +10,27 @@ interface HouseComponentProps {
 }
 
 const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
-    const { ableHousesToMove, selectedHouse, dangerousHouses } = useGameContext();
+    const { ableHousesToMove, selectedHouse, dangerousHouses, movementHistory, player } = useGameContext();
     const { houseHandler } = useGameLogic();
 
     const houseStyle = (): string => {
-        const normal = "";
-        const selected = "selectedHouse";
-        const thePieceHereIsInDangerous = "prey";
-        const otherPieceWantsToGetHere = "ableToReceive";
+        const selected = " selectedHouse";
+        const thePieceHereIsInDangerous = " prey";
+        const otherPieceWantsToGetHere = " ableToReceive";
+        let classNames = "";
 
-        // condicional para exibir casas inimigas onde o inimigo pode comer
-        if(house.checkIfHouseIsOnThisArray(dangerousHouses)) return thePieceHereIsInDangerous;
+        // condicional para exibir EM VERMELHO casas inimigas onde o inimigo pode comer
+        // if (house.checkIfHouseIsOnThisArray(dangerousHouses)) classNames = classNames + thePieceHereIsInDangerous; //temporario
+        if (house === selectedHouse) return selected;
+        if ((!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  otherPieceWantsToGetHere;
+        if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  thePieceHereIsInDangerous;
 
-        if(!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) {
-            return otherPieceWantsToGetHere;
-        } 
-        if (house.piece && house.checkIfHouseIsOnThisArray(dangerousHouses)) {
-            return thePieceHereIsInDangerous;
-        }
-        if (house === selectedHouse) {
-            return selected;
-        }
-        
-        return normal;
+        return classNames;
     };
 
     return (
         <div
-            className={"house " + houseStyle()}
+            className={"house" + houseStyle()}
             style={{
                 backgroundImage: `url(${house.imageSource})`,
                 cursor: house.piece ? "pointer" : "unset",
@@ -45,7 +38,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
             id={house.currentPosition()}
             onClick={() => houseHandler(house)}
         >
-            {house.piece ? <PieceComponent piece={house.piece} /> : null}
+            { house.piece ? <PieceComponent piece={house.piece} /> : null }
         </div>
     );
 };
