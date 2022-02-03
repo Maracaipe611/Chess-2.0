@@ -20,7 +20,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
         let classNames = "";
 
         // condicional para exibir EM VERMELHO casas inimigas onde o inimigo pode comer
-        // if (house.checkIfHouseIsOnThisArray(dangerousHouses)) classNames = classNames + thePieceHereIsInDangerous; //temporario
+        if (house.checkIfHouseIsOnThisArray(dangerousHouses)) classNames = classNames + thePieceHereIsInDangerous; //temporario
         if (house === selectedHouse) return selected;
         if ((!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  otherPieceWantsToGetHere;
         if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) 

@@ -1,27 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Player from "../Player/types";
 import { useGameContext } from "./GameLogic/context";
 import { HouseComponent } from "./House/index";
-import { Colors } from "./types";
 
 const Board: React.FC = () => {
     const { boardHouses, setPlayer, player } = useGameContext();
 
-    const whitePlayer:Player = new Player(
-        "Lucas",
-        Colors.White,
-    );
+    const changeView = ():Player => {
+        return new Player(
+            player.name,
+            player.color,
+            !player.canViewPossibleEnemyMoves
+        );
+    };
 
-    const blackPlayer:Player = new Player(
-        "Lucas",
-        Colors.Black,
-    );
-
-    const players = [blackPlayer, whitePlayer];
-
-    useEffect(() => {
-        setPlayer(whitePlayer);
-    }, [setPlayer]);
+    const changeColor = ():Player => {
+        return new Player(
+            player.name,
+            player.enemyColor(),
+            player.canViewPossibleEnemyMoves,
+        );
+    };
 
     return (
         <div style={{ display: "grid" }}>
@@ -42,7 +41,8 @@ const Board: React.FC = () => {
                     />
                 ))}
             </div>
-            <button onClick={() => setPlayer(players.find(p => player?.color !== p.color))}>Mudar de cor</button>
+            <button onClick={() => setPlayer(changeColor())}>Mudar de cor</button>
+            <button onClick={() => setPlayer(changeView())}>Visualizar movimentos inimigos{player.canViewPossibleEnemyMoves ? "✅" : ""}</button>
         </div>
     );
 };

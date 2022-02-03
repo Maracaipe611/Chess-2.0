@@ -72,7 +72,7 @@ export const useGameLogic = () => {
     const handleHousesToMove = useCallback((piece: Piece, myPieces: boolean): Array<House> => {
         let possibleHousesToEat: Array<House> = new Array<House>();
         if (!player) return possibleHousesToEat;
-        // if (!player?.friendlyPiece(piece)) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
+        if (!player?.friendlyPiece(piece) && !player.canViewPossibleEnemyMoves) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
 
         const pieceDirection = player.direction(myPieces);
         const currentPosition = piece.coordinate;

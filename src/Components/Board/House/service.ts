@@ -4,7 +4,7 @@ import { AlphPositions, Piece } from "../Piece/types";
 import { AllPiecesType, Colors, Coordinate } from "../types";
 import House from "./types";
 
-export const AllHouses = (player: Player | undefined) => {
+export const AllHouses = (player: Player | undefined, samePieces?:any) => {
 
     const buildSingleHouse = (allPieces: AllPiecesType, coordinate: Coordinate): House => {
         const { BlackPieces, WhitePieces } = allPieces;
@@ -29,8 +29,8 @@ export const AllHouses = (player: Player | undefined) => {
         );
     };
     const buildAllHouses = (allPieces: AllPiecesType): Array<House> => {
-        const { A, B, C, D, E, F, G, H } = AlphPositions;
-        const alphs: Array<AlphPositions> = player?.color === Colors.Black ?  [A, B, C, D, E, F, G, H] : [H, G, F, E, D, C, B, A];
+        if(!player) return new Array<House>();
+        const alphs: Array<AlphPositions> = player?.houseOrder();
         const indexesPosition: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
 
         const allHouses: Array<House> = alphs.flatMap(index => {
@@ -45,5 +45,5 @@ export const AllHouses = (player: Player | undefined) => {
 
         return allHouses;
     };
-    return buildAllHouses(BuildAllPieces());
+    return samePieces ? buildAllHouses(samePieces) : buildAllHouses(BuildAllPieces());
 };
