@@ -22,18 +22,16 @@ export const useGameLogic = () => {
         setAbleHousesToMove([]);
     }, [boardPieces, player]);
     
-    const houseHandler = (house: House): void => {
-        if (ableHousesToMove.includes(house)) {
-            movePiece(selectedHouse, house);
-        } else {
-            setSelectedHouse(house);
+    const houseHandler = (house: House) => {
+        const playerIsTryingToMove = ableHousesToMove.includes(house); //implementar redux para as possíveis ações com a casa
 
-            if (house.piece && player?.friendlyPiece(house?.piece)) {
-                handleHousesToMove(house.piece, true);
-            } else {
-                setAbleHousesToMove([]);
-            }
-        }
+        if (playerIsTryingToMove) return movePiece(selectedHouse, house);
+        setSelectedHouse(house);
+
+        if(!house.piece) return;
+        const pickedPiece = house.piece;
+        const playerInPickingHisOwnPiece =  player.friendlyPiece(pickedPiece);
+        if (playerInPickingHisOwnPiece) return handleHousesToMove(pickedPiece, true);
     };
 
     const handleResetWhenMove = () => {
