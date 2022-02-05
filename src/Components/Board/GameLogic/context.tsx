@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { createContext, useState } from "react";
 import Player from "../../Player/types";
-import { AllHouses } from "../House/service";
+import { BoardBuilder } from "../House/service";
 import House from "../House/types";
 import { Piece } from "../Piece/types";
-import { Colors, AllPiecesType } from "../types";
+import { Colors } from "../types";
 
 type GameContextProviderProps = {
     children: React.ReactNode;
@@ -24,7 +24,7 @@ type GameContextProps = {
     dangerousHouses: Array<House>;
     setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
     ableHousesToMove: Array<House>;
-    setHousesAbleToMove: React.Dispatch<React.SetStateAction<Array<House>>>;
+    setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>;
 };
 
 export const GameContext = createContext<GameContextProps | undefined>(
@@ -37,25 +37,18 @@ const whitePlayer:Player = new Player(
     false,
 );
 
-export const GameContextProvider = ({ children }: GameContextProviderProps) => {
+export const GameContextProvider:React.FC<GameContextProviderProps> = ({ children }) => {
     const [player, setPlayer] = useState<Player>(whitePlayer);
     const [selectedHouse, setSelectedHouse] = useState<House>();
-    const [boardHouses, setBoardHouses] = useState<Array<House>>(AllHouses(player));
+    const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));
     const [boardPieces, setBoardPieces] = useState<Array<Piece>>([]);
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
-    const [ableHousesToMove, setHousesAbleToMove] = useState<Array<House>>([]);
+    const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]);
 
     useEffect(() => {
-        if (boardPieces.length === 0) {
-            setBoardHouses(AllHouses(player));
-        } else {
-            const piecesAlreadyPlaced:AllPiecesType =  {
-                WhitePieces: boardPieces.filter(x => x.color === Colors.White),
-                BlackPieces: boardPieces.filter(x => x.color === Colors.Black)
-            };
-            setBoardHouses(AllHouses(player,piecesAlreadyPlaced));
-        }
+        if (!boardPieces.length) return;
+        setBoardHouses(BoardBuilder(player, boardPieces)); //se caso mude o jogador, a perspectiva do jogo deve mudar. Porém as peças não.
     }, [player]);
     
     useEffect(() => {
@@ -68,7 +61,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
         setBoardPieces(allLivePieces);
     }, [boardHouses]);
 
-    const providerValue = (): GameContextProps => {
+    const providerValue = useCallback((): GameContextProps => {
         return {
             player,
             setPlayer,
@@ -83,9 +76,10 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
             dangerousHouses,
             setDangerousHouses,
             ableHousesToMove,
-            setHousesAbleToMove,
+            setAbleHousesToMove,
         };
-    };
+    }, [player, setPlayer, selectedHouse, setSelectedHouse, boardHouses, setBoardHouses, boardPieces, setBoardPieces,
+        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove]);
 
     return (
         <GameContext.Provider value={providerValue()}>

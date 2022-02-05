@@ -83,5 +83,5 @@ export function BuildAllPieces() {
     const WhitePieces: Array<Piece> = PiecesByColor(Colors.White);
     const BlackPieces: Array<Piece> = PiecesByColor(Colors.Black);
 
-    return { WhitePieces, BlackPieces };
+    return [WhitePieces, BlackPieces].flatMap(allPieces => allPieces);
 }

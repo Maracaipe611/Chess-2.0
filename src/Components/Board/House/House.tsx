@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./House.css";
 import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
@@ -13,7 +13,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
     const { ableHousesToMove, selectedHouse, dangerousHouses, player } = useGameContext();
     const { houseHandler } = useGameLogic();
 
-    const houseStyle = (): string => {
+    const houseStyle = useCallback((): string => {
         const selected = " selectedHouse";
         const thePieceHereIsInDangerous = " prey";
         const otherPieceWantsToGetHere = " ableToReceive";
@@ -27,7 +27,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
         || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  thePieceHereIsInDangerous;
 
         return classNames;
-    };
+    }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);
 
     return (
         <div

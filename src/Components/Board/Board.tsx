@@ -41,8 +41,8 @@ const Board: React.FC = () => {
                     />
                 ))}
             </div>
-            <button onClick={() => setPlayer(changeColor())}>Mudar de cor</button>
-            <button onClick={() => setPlayer(changeView())}>Visualizar movimentos inimigos{player.canViewPossibleEnemyMoves ? "✅" : ""}</button>
+            <button style={{ height: "30px", fontWeight: "bold" }} onClick={() => setPlayer(changeColor())}>Mudar de cor</button>
+            <button style={{ height: "30px", fontWeight: "bold" }} onClick={() => setPlayer(changeView())}>Visualizar possíveis movimentos perigosos do inimigo{player.canViewPossibleEnemyMoves ? " ✅" : ""}</button>
         </div>
     );
 };
