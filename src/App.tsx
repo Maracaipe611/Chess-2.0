@@ -1,6 +1,6 @@
 import React from "react";
 import { BoardPage } from "./Components/Board";
-import { GameContextProvider } from "./Components/Board/GameLogic/context";
+import { GameContextProvider } from "./Components/GameLogic/context";
 import "./App.css";
 
 const App: React.FC = () => {

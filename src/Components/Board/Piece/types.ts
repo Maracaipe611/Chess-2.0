@@ -1,6 +1,6 @@
 import House from "../House/types";
 import { Alphabet, Colors, Coordinate } from "../types";
-import { Move } from "../GameLogic/Moves/moves";
+import { Move } from "../../GameLogic/Moves/moves";
 
 export enum Types {
     Pawn = "Pawn",

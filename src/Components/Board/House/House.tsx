@@ -2,8 +2,8 @@ import React, { useCallback } from "react";
 import "./House.css";
 import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
-import { useGameLogic } from "../GameLogic/useGameLogic";
-import { useGameContext } from "../GameLogic/context";
+import { useGameLogic } from "../../GameLogic/useGameLogic";
+import { useGameContext } from "../../GameLogic/context";
 
 interface HouseComponentProps {
     house: House;

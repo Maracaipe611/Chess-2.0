@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
-import Player from "../../Player/types";
-import House from "../House/types";
-import { Piece, Types } from "../Piece/types";
-import { Coordinate } from "../types";
+import Player from "../../Components/Player/types";
+import House from "../../Components/Board/House/types";
+import { Piece, Types } from "../../Components/Board/Piece/types";
+import { Coordinate } from "../Board/types";
 import { useGameContext } from "./context";
 
 export const useGameLogic = () => {

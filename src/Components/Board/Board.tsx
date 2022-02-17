@@ -1,6 +1,6 @@
 import React from "react";
 import Player from "../Player/types";
-import { useGameContext } from "./GameLogic/context";
+import { useGameContext } from "../GameLogic/context";
 import { HouseComponent } from "./House/index";
 
 const Board: React.FC = () => {

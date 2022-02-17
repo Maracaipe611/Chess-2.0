@@ -1,5 +1,5 @@
 import { AlphPositions, Piece, Types } from "./types";
-import { Move, PieceMoves } from "../GameLogic/Moves/moves";
+import { Move, PieceMoves } from "../../GameLogic/Moves/moves";
 import { Colors } from "../types";
 
 function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
