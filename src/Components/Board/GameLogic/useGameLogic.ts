@@ -178,7 +178,6 @@ export const useGameLogic = () => {
                 handleResetWhenMove();
                 setBoardHouses(newBoard);
                 return setMovementHistory(movementHistory.concat(actuallyPiece));
-
             }
 
             const actuallyPiece = lastHouseSelected.piece;

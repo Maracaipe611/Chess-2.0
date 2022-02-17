@@ -1,10 +1,10 @@
 import { AlphPositions, Piece, Types } from "./types";
-import { Moves, PieceMoves } from "./types";
+import { Move, PieceMoves } from "../GameLogic/Moves/moves";
 import { Colors } from "../types";
 
 function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
-    const [Pawn, Tower, Horse, Bishop, Queen, King] = Moves();
+    const [Pawn, Tower, Horse, Bishop, Queen, King] = PieceMoves();
 
     const communPiecesIndex = color === Colors.Black ? 8 : 1;
     const pawnIndex = color === Colors.Black ? 7 : 2;
@@ -23,7 +23,7 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
     const currentIndex = type === Types.Pawn ? pawnIndex : communPiecesIndex;
 
-    let moves: PieceMoves;
+    let moves: Array<Move>;
 
     switch (type) {
     case Types.Pawn:
