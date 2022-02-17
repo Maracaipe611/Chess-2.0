@@ -22,80 +22,80 @@ export enum AlphPositions {
 }
 
 export type Move = {
-    x: number,
-    y: number
+    alpha: number,
+    index: number
 };
 
 const CommonMoves: {
     [moveName: string]: Move,
 } = {
     front: {
-        x: 0,
-        y: 1,
+        alpha: 0,
+        index: 1,
     },
     down: {
-        x: 0,
-        y: -1,
+        alpha: 0,
+        index: -1,
     },
     left: {
-        x: -1,
-        y: 0,
+        alpha: -1,
+        index: 0,
     },
     right: {
-        x: 1,
-        y: 0,
+        alpha: 1,
+        index: 0,
     },
     doubleFront: {
-        x: 0,
-        y: 2,
+        alpha: 0,
+        index: 2,
     },
     frontsideRight: {
-        x: 1,
-        y: 1,
+        alpha: 1,
+        index: 1,
     },
     frontsideLeft: {
-        x: -1,
-        y: 1,
+        alpha: -1,
+        index: 1,
     },
     downsideRight: {
-        x: 1,
-        y: -1,
+        alpha: 1,
+        index: -1,
     },
     downsideLeft: {
-        x: -1,
-        y: -1,
+        alpha: -1,
+        index: -1,
     },
     fullFrontside: {
-        x: 0,
-        y: 7,
+        alpha: 0,
+        index: 7,
     },
     fullDownside: {
-        x: 0,
-        y: -7,
+        alpha: 0,
+        index: -7,
     },
     fullLeftside: {
-        x: -7,
-        y: 0,
+        alpha: -7,
+        index: 0,
     },
     fullRightside: {
-        x: 7,
-        y: 0,
+        alpha: 7,
+        index: 0,
     },
     fullFrontsideRight: {
-        x: 7,
-        y: 7,
+        alpha: 7,
+        index: 7,
     },
     fullFrontsideLeft: {
-        x: -7,
-        y: 7,
+        alpha: -7,
+        index: 7,
     },
     fullDownsideRight: {
-        x: 7,
-        y: -7,
+        alpha: 7,
+        index: -7,
     },
     fullDownsideLeft: {
-        x: -7,
-        y: -7,
+        alpha: -7,
+        index: -7,
     },
 };
 

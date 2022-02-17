@@ -14,24 +14,27 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
     const { houseHandler } = useGameLogic();
 
     const houseStyle = useCallback((): string => {
-        const selected = " selectedHouse";
-        const thePieceHereIsInDangerous = " prey";
-        const otherPieceWantsToGetHere = " ableToReceive";
-        let classNames = "";
+        const classNames:Array<string> = ["house"];
+        const selected = "selectedHouse";
+        const thePieceHereIsInDangerous = "prey";
+        const otherPieceWantsToGetHere = "ableToReceive";
 
         // condicional para exibir EM VERMELHO casas inimigas onde o inimigo pode comer
-        if (house.checkIfHouseIsOnThisArray(dangerousHouses)) classNames = classNames + thePieceHereIsInDangerous; //temporario
-        if (house === selectedHouse) return selected;
-        if ((!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  otherPieceWantsToGetHere;
+        if (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves) classNames.push(thePieceHereIsInDangerous); //temporario
+        if (house === selectedHouse) {
+            classNames.push(selected);
+            return classNames.join(" ");
+        } 
+        if (!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(otherPieceWantsToGetHere);
         if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) 
-        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames = classNames +  thePieceHereIsInDangerous;
+        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous);
 
-        return classNames;
+        return classNames.join(" ");
     }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);
 
     return (
         <div
-            className={"house" + houseStyle()}
+            className={ houseStyle() }
             style={{
                 backgroundImage: `url(${house.imageSource})`,
                 cursor: house.piece ? "pointer" : "unset",
