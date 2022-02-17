@@ -46,7 +46,7 @@ const buildMove = (direction: Move):Array<Move> => {
     const moves = new Array<Move>();
     switch (direction) {
     case CommonMoves.front:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: 0,
                 index: index
@@ -54,7 +54,7 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.down:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: 0,
                 index: -index
@@ -62,7 +62,7 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.right:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: index,
                 index: 0,
@@ -70,15 +70,15 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.left:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: -index,
-                index: 0,
+                index: 1,
             });
         }
         break;
     case CommonMoves.frontsideRight:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: index,
                 index: index,
@@ -86,7 +86,7 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.frontsideLeft:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: -index,
                 index: index,
@@ -94,7 +94,7 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.downsideRight:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: index,
                 index: -index,
@@ -102,7 +102,7 @@ const buildMove = (direction: Move):Array<Move> => {
         }
         break;
     case CommonMoves.downsideLeft:
-        for (let index = 0; index <= 7; index++) {
+        for (let index = 1; index <= 7; index++) {
             moves.push({
                 alpha: -index,
                 index: -index,

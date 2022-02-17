@@ -25,13 +25,20 @@ export const useGameLogic = () => {
     const houseHandler = (house: House) => {
         const playerIsTryingToMove = ableHousesToMove.includes(house); //implementar redux para as possíveis ações com a casa
 
-        if (playerIsTryingToMove) return movePiece(selectedHouse, house);
+        if (playerIsTryingToMove) {
+            return movePiece(selectedHouse, house);
+        }
         setSelectedHouse(house);
-
-        if(!house.piece) return setAbleHousesToMove([]);
-        const pickedPiece = house.piece;
-        const playerInPickingHisOwnPiece =  player.friendlyPiece(pickedPiece);
-        if (playerInPickingHisOwnPiece) return handleHousesToMove(pickedPiece, true);
+        if(!house.piece) {
+            setAbleHousesToMove([]);
+        }else {
+            const pickedPiece = house.piece;
+            if(pickedPiece)
+            {
+                const playerInPickingHisOwnPiece =  player.friendlyPiece(pickedPiece);
+                if (playerInPickingHisOwnPiece) return handleHousesToMove(pickedPiece, true);
+            }
+        }
     };
 
     const handleResetWhenMove = () => {
@@ -45,16 +52,15 @@ export const useGameLogic = () => {
         
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
-                if (movement) {
-                    const futureHouse:Coordinate = {
-                        alpha: piece.coordinate.alpha + (movement.alpha * direction),
-                        index: piece.coordinate.index + (movement.index * direction)
-                    };
-                    if (house.coordinate.alpha === futureHouse.alpha &&
+                const futureHouse:Coordinate = {
+                    alpha: piece.coordinate.alpha + (movement.alpha * direction),
+                    index: piece.coordinate.index + (movement.index * direction)
+                };
+                if (house.coordinate.alpha === futureHouse.alpha &&
                         house.coordinate.index === futureHouse.index) {
-                        return house;
-                    }
+                    return house;
                 }
+                
             });
             if (tempPossibilities) possibleHousesToMove.push(tempPossibilities);
         });
@@ -114,19 +120,60 @@ export const useGameLogic = () => {
             setAbleHousesToMove(finalPossibilities);
             break;
         }
-        case Types.Tower:
+        case Types.Tower: {
+            const housesAbleToMoveProcessed = new Array<House>();
+            allPossibilitiesToMove.forEach(house => {
+                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+            });
             //Rock
+
+            setAbleHousesToMove(housesAbleToMoveProcessed);
             break;
-        case Types.Horse:
+        }
+        case Types.Horse:{
             //can jump
+            const housesAbleToMoveProcessed = new Array<House>();
+            allPossibilitiesToMove.forEach(house => {
+                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+            });
+            //Rock
+
+            setAbleHousesToMove(housesAbleToMoveProcessed);
             break;
-        case Types.Bishop:
+        }
+        case Types.Bishop:{
+            const housesAbleToMoveProcessed = new Array<House>();
+            allPossibilitiesToMove.forEach(house => {
+                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+            });
+            //Rock
+
+            setAbleHousesToMove(housesAbleToMoveProcessed);
             break;
-        case Types.Queen:
+        }
+        case Types.Queen:{
+            const housesAbleToMoveProcessed = new Array<House>();
+            allPossibilitiesToMove.forEach(house => {
+                if ((house.piece?.color !== player.color) || !house.piece) {
+                    housesAbleToMoveProcessed.push(house);
+                }
+            });
+            //Rock
+
+            setAbleHousesToMove(housesAbleToMoveProcessed);
             break;
-        case Types.King:
+        }
+        case Types.King:{
+            const housesAbleToMoveProcessed = new Array<House>();
+            allPossibilitiesToMove.forEach(house => {
+                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+            });
+            //Rock
+
+            setAbleHousesToMove(housesAbleToMoveProcessed);
             //cant move to dangerous houses
             break;
+        }
         default:
             break;
         }
@@ -155,7 +202,7 @@ export const useGameLogic = () => {
     };
 
     const movePiece = (lastHouseSelected: House | undefined, actuallyHouse: House) => {
-        if (!actuallyHouse || !lastHouseSelected) return;
+        if (!actuallyHouse || !lastHouseSelected || actuallyHouse.piece?.color === player.color) return setSelectedHouse(actuallyHouse);
         if (actuallyHouse.piece && lastHouseSelected.piece) {
             const actuallyPiece = lastHouseSelected.piece;
             const newBoard = handleEat(lastHouseSelected, actuallyHouse);
