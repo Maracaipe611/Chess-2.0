@@ -49,7 +49,7 @@ export const useGameLogic = () => {
 
     const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
-        
+        const canJump = Types.Horse === piece.type;
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
                 const futureHouse:Coordinate = {
@@ -208,10 +208,10 @@ export const useGameLogic = () => {
             const newBoard = handleEat(lastHouseSelected, actuallyHouse);
             handleResetWhenMove();
             setBoardHouses(newBoard);
-            setMovementHistory(movementHistory.concat(actuallyPiece));
-        } else if (lastHouseSelected.piece && lastHouseSelected.piece.type === Types.Pawn) {
+            return setMovementHistory(movementHistory.concat(actuallyPiece));
+        } else if (lastHouseSelected.piece) {
             const enPassantPiece = actuallyHouse.pseudoPawn(movementHistory, player);
-            if (enPassantPiece) {
+            if (enPassantPiece  && lastHouseSelected.piece.type === Types.Pawn) {
                 const actuallyPiece = lastHouseSelected.piece;
                 const enPassantHouse = findHouseByCoordinates({
                     index: enPassantPiece.coordinate.index - player.direction(player.color === enPassantPiece.color),
