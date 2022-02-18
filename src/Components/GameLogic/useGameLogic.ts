@@ -50,14 +50,18 @@ export const useGameLogic = () => {
     const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
         const canJump = Types.Horse === piece.type;
+        const blockedDirections = new Array<string>();
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
-                const futureHouse:Coordinate = {
+                const futureHouseCoord:Coordinate = {
                     alpha: piece.coordinate.alpha + (movement.alpha * direction),
                     index: piece.coordinate.index + (movement.index * direction)
                 };
-                if (house.coordinate.alpha === futureHouse.alpha &&
-                        house.coordinate.index === futureHouse.index) {
+                if (house.coordinate.alpha === futureHouseCoord.alpha &&
+                    house.coordinate.index === futureHouseCoord.index) {
+                    if(!movement.direction || !blockedDirections.includes(movement.direction) || canJump) return house;
+                    const futureHouse = findHouseByCoordinates(futureHouseCoord);
+                    if(futureHouse?.piece) return blockedDirections.push(movement.direction);
                     return house;
                 }
                 

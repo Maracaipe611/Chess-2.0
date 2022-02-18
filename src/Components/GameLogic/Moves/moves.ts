@@ -2,7 +2,8 @@ import { Types } from "../../Board/Piece/types";
 
 export type Move = {
     alpha: number,
-    index: number
+    index: number,
+    direction?: string,
 };
 
 export const CommonMoves: { [moveName: string]: Move } = {
@@ -34,32 +35,28 @@ export const CommonMoves: { [moveName: string]: Move } = {
         alpha: -1,
         index: 1,
     },
-    downsideRight: {
-        alpha: 1,
-        index: -1,
-    },
-    downsideLeft: {
-        alpha: -1,
-        index: -1,
-    },
 };
 
 export const MovesDirectionsHorizontalVertical = ():Array<Move> => {
     const front = {
         alpha: 0,
         index: 1,
+        direction: "front",
     };
     const down = {
         alpha: 0,
         index: -1,
+        direction: "down",
     };
     const left = {
         alpha: -1,
         index: 0,
+        direction: "left",
     };
     const right = {
         alpha: 1,
         index: 0,
+        direction: "right",
     };
     return [front, down, left, right];
 };
@@ -68,18 +65,22 @@ export const MovesDirectionsDiagonal = ():Array<Move> => {
     const frontsideRight = {
         alpha: 1,
         index: 1,
+        direction: "frontsideRight",
     };
     const frontsideLeft = {
         alpha: -1,
         index: 1,
+        direction: "frontsideLeft",
     };
     const downsideRight = {
         alpha: 1,
         index: -1,
+        direction: "downsideRight",
     };
     const downsideLeft = {
         alpha: -1,
         index: -1,
+        direction: "downsideLeft",
     };
     return [frontsideRight, frontsideLeft, downsideLeft, downsideRight];
 };
@@ -89,36 +90,40 @@ const buildMove = (pieceType: Types):Array<Move> => {
     switch (pieceType) {
     case Types.Bishop:
         for (let i = 1; i <= 7; i++) {
-            MovesDirectionsDiagonal().forEach(direction => {
+            MovesDirectionsDiagonal().forEach(move => {
                 moves.push({
-                    alpha: i * direction.alpha,
-                    index: i * direction.index,
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
                 });
             });
         }
         break;
     case Types.Tower:
         for (let i = 1; i <= 7; i++) {
-            MovesDirectionsHorizontalVertical().forEach(direction => {
+            MovesDirectionsHorizontalVertical().forEach(move => {
                 moves.push({
-                    alpha: i * direction.alpha,
-                    index: i * direction.index,
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
                 });
             });
         }
         break;
     case Types.Queen:
         for (let i = 1; i <= 7; i++) {
-            MovesDirectionsHorizontalVertical().forEach(direction => {
+            MovesDirectionsHorizontalVertical().forEach(move => {
                 moves.push({
-                    alpha: i * direction.alpha,
-                    index: i * direction.index,
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
                 });
             });
-            MovesDirectionsDiagonal().forEach(direction => {
+            MovesDirectionsDiagonal().forEach(move => {
                 moves.push({
-                    alpha: i * direction.alpha,
-                    index: i * direction.index,
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
                 });
             });
         }
@@ -127,20 +132,22 @@ const buildMove = (pieceType: Types):Array<Move> => {
         let stepIndex = 2;
         let stepAlpha = 1;
         
-        MovesDirectionsDiagonal().forEach(direction => {
+        MovesDirectionsDiagonal().forEach(move => {
             moves.push({
-                alpha: stepAlpha * direction.alpha,
-                index: stepIndex * direction.index,
+                alpha: stepAlpha * move.alpha,
+                index: stepIndex * move.index,
+                direction: move.direction,
             });
         });
 
         stepIndex = 1;
         stepAlpha = 2;
 
-        MovesDirectionsDiagonal().forEach(direction => {
+        MovesDirectionsDiagonal().forEach(move => {
             moves.push({
-                alpha: stepAlpha * direction.alpha,
-                index: stepIndex * direction.index,
+                alpha: stepAlpha * move.alpha,
+                index: stepIndex * move.index,
+                direction: move.direction,
             });
         });
         break;
