@@ -1,39 +1,57 @@
 import { Types } from "../../Board/Piece/types";
 
+export enum MoveDirections {
+    "Front",
+    "Down",
+    "Left",
+    "Right",
+    "FrontsideLeft",
+    "FrontsideRight",
+    "DownsideLeft",
+    "DownsideRight",
+}
+
 export type Move = {
     alpha: number,
     index: number,
-    direction?: string,
+    direction: MoveDirections,
 };
 
 export const CommonMoves: { [moveName: string]: Move } = {
     front: {
         alpha: 0,
         index: 1,
+        direction: MoveDirections.Front,
     },
     down: {
         alpha: 0,
         index: -1,
+        direction: MoveDirections.Down,
     },
     left: {
         alpha: -1,
         index: 0,
+        direction: MoveDirections.Left,
     },
     right: {
         alpha: 1,
         index: 0,
+        direction: MoveDirections.Right,
     },
     doubleFront: {
         alpha: 0,
         index: 2,
+        direction: MoveDirections.Front,
     },
     frontsideRight: {
         alpha: 1,
         index: 1,
+        direction: MoveDirections.DownsideRight,
     },
     frontsideLeft: {
         alpha: -1,
         index: 1,
+        direction: MoveDirections.FrontsideLeft,
     },
 };
 
@@ -41,22 +59,22 @@ export const MovesDirectionsHorizontalVertical = ():Array<Move> => {
     const front = {
         alpha: 0,
         index: 1,
-        direction: "front",
+        direction: MoveDirections.Front,
     };
     const down = {
         alpha: 0,
         index: -1,
-        direction: "down",
+        direction: MoveDirections.Down,
     };
     const left = {
         alpha: -1,
         index: 0,
-        direction: "left",
+        direction: MoveDirections.Left,
     };
     const right = {
         alpha: 1,
         index: 0,
-        direction: "right",
+        direction: MoveDirections.Right,
     };
     return [front, down, left, right];
 };
@@ -65,22 +83,22 @@ export const MovesDirectionsDiagonal = ():Array<Move> => {
     const frontsideRight = {
         alpha: 1,
         index: 1,
-        direction: "frontsideRight",
+        direction: MoveDirections.FrontsideRight,
     };
     const frontsideLeft = {
         alpha: -1,
         index: 1,
-        direction: "frontsideLeft",
+        direction: MoveDirections.FrontsideLeft,
     };
     const downsideRight = {
         alpha: 1,
         index: -1,
-        direction: "downsideRight",
+        direction: MoveDirections.DownsideRight,
     };
     const downsideLeft = {
         alpha: -1,
         index: -1,
-        direction: "downsideLeft",
+        direction: MoveDirections.DownsideLeft,
     };
     return [frontsideRight, frontsideLeft, downsideLeft, downsideRight];
 };

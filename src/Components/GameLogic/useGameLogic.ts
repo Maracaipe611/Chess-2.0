@@ -4,6 +4,7 @@ import House from "../../Components/Board/House/types";
 import { Piece, Types } from "../../Components/Board/Piece/types";
 import { Coordinate } from "../Board/types";
 import { useGameContext } from "./context";
+import { MoveDirections } from "./Moves/moves";
 
 export const useGameLogic = () => {
     const { setBoardHouses, boardHouses,
@@ -50,7 +51,7 @@ export const useGameLogic = () => {
     const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
         const canJump = Types.Horse === piece.type;
-        const blockedDirections = new Array<string>();
+        const blockedDirections = new Array<MoveDirections>();
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
                 const futureHouseCoord:Coordinate = {
@@ -59,7 +60,7 @@ export const useGameLogic = () => {
                 };
                 if (house.coordinate.alpha === futureHouseCoord.alpha &&
                     house.coordinate.index === futureHouseCoord.index) {
-                    if(!movement.direction || !blockedDirections.includes(movement.direction) || canJump) return house;
+                    if(!blockedDirections.includes(movement.direction) || canJump) return house;
                     const futureHouse = findHouseByCoordinates(futureHouseCoord);
                     if(futureHouse?.piece) return blockedDirections.push(movement.direction);
                     return house;
