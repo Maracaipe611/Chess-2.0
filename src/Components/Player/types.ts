@@ -6,6 +6,14 @@ export enum direction {
     backward = -1
 }
 
+export enum Actions {
+    "NoPiece",
+    "FriendlyPiece",
+    "EnemyPiece",
+    "EnemyPieceAndEat",
+    "NoPieceAndMove",
+}
+
 export default class Player {
     name: string;
     color: Colors;

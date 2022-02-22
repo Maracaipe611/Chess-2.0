@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import "./House.css";
 import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
 import { useGameLogic } from "../../GameLogic/useGameLogic";
 import { useGameContext } from "../../GameLogic/context";
+import { Actions } from "../../Player/types";
 
 interface HouseComponentProps {
     house: House;
@@ -26,10 +27,27 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
             return classNames.join(" ");
         } 
         if (!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(otherPieceWantsToGetHere);
-        if ((house.piece && house.piece.color === player.enemyColor()) && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(thePieceHereIsInDangerous);
+        if ((house.piece && house.piece.color === player.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves
+        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous);
 
         return classNames.join(" ");
     }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);
+
+    const action = () => {
+        let userAction;
+        if(!house.piece) {
+            house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
+                userAction = Actions.NoPieceAndMove :
+                userAction = Actions.NoPiece;
+        }else {
+            player.friendlyPiece(house.piece) ?
+                userAction = Actions.FriendlyPiece :
+                house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
+                    userAction = Actions.EnemyPieceAndEat :
+                    userAction = Actions.EnemyPiece;
+        }
+        return userAction;
+    };
 
     return (
         <div
@@ -39,7 +57,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
                 cursor: house.piece ? "pointer" : "unset",
             }}
             id={house.currentPosition()}
-            onClick={() => houseHandler(house)}
+            onClick={() => houseHandler(house, action())}
         >
             { house.piece ? <PieceComponent piece={house.piece} /> : null }
         </div>
