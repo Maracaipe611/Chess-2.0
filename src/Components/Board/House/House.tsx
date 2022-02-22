@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import "./House.css";
 import House from "../House/types";
 import PieceComponent from "../Piece/Piece";
@@ -35,13 +35,13 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
 
     const action = (): Actions => {
         let userAction;
-        if(selectedHouse === house) return userAction = Actions.Unselect;
+        if(selectedHouse === house) return userAction = !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
         if(!house.piece) {
             house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
                 userAction = Actions.NoPieceAndMove :
                 userAction = Actions.NoPiece;
         }else {
-            if(player.friendlyPiece(house.piece)) {
+            if(house.piece.isFriend(player)) {
                 selectedHouse === house ?
                     userAction = Actions.Unselect :
                     userAction = Actions.FriendlyPiece;

@@ -34,13 +34,13 @@ export const useGameLogic = () => {
         case Actions.FriendlyPiece:
             if(!house.piece) return;
             setSelectedHouse(house);
-            handleHousesToMove(house.piece, player.friendlyPiece(house.piece));
+            handleHousesToMove(house.piece, house.piece.isFriend(player));
             break;
         case Actions.EnemyPiece:
             if(!house.piece) return;
             setSelectedHouse(house);
             setAbleHousesToMove([]);
-            handleHousesToMove(house.piece, player.friendlyPiece(house.piece));
+            handleHousesToMove(house.piece, house.piece.isFriend(player));
             break;
         case Actions.EnemyPieceAndEat:
             movePiece(selectedHouse, house);
@@ -54,10 +54,11 @@ export const useGameLogic = () => {
             setSelectedHouse(house);
             break;
         case Actions.Unselect:
-            handleReset();
+            setAbleHousesToMove([]);
+            setSelectedHouse(undefined);
             break;
-        default:
-            handleReset();
+        case Actions.UnselectEnemy:
+            setSelectedHouse(undefined);
             break;
         }
     };
@@ -120,7 +121,7 @@ export const useGameLogic = () => {
         let possibleHousesToEat: Array<House> = new Array<House>();
 
         //temporário -> Visualizar possíveis movimentos inimigos só deve ser possível localmente
-        if (player.friendlyPiece(piece) && player.canViewPossibleEnemyMoves) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
+        if (piece.isFriend(player) && player.canViewPossibleEnemyMoves) return possibleHousesToEat; //não permitir que o jogador visualize o movimento inimigo
 
         let housesAbleToMoveProcessed = new Array<House>();
         const pieceDirection = player.direction(myPieces);
@@ -140,13 +141,13 @@ export const useGameLogic = () => {
             if (hasMovedBefore) { //se o peão já tiver se movimentado anteriormente, ele não tem direito a andar 2 casas de uma vez
                 possibleHousesToMove = possibleHousesToMove.filter(house => house.coordinate.index !== currentPosition.index + (2 * player.direction(player.color === piece.color)));
             }
-            possibleHousesToMove.concat(possibleHousesToEat);
+            possibleHousesToMove.push(...possibleHousesToEat);
             housesAbleToMoveProcessed = possibleHousesToMove;
             break;
         }
         case Types.Tower: {
             allPossibilitiesToMove.forEach(house => {
-                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+                if ((!house.piece?.isFriend(player)) || !house.piece) housesAbleToMoveProcessed.push(house);
             });
             possibleHousesToEat = allPossibilitiesToMove;
             break;
@@ -154,21 +155,21 @@ export const useGameLogic = () => {
         case Types.Horse:{
             //can jump
             allPossibilitiesToMove.forEach(house => {
-                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+                if ((!house.piece?.isFriend(player)) || !house.piece) housesAbleToMoveProcessed.push(house);
             });
             possibleHousesToEat = allPossibilitiesToMove;
             break;
         }
         case Types.Bishop:{
             allPossibilitiesToMove.forEach(house => {
-                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+                if ((!house.piece?.isFriend(player))  || !house.piece) housesAbleToMoveProcessed.push(house);
             });
             possibleHousesToEat = allPossibilitiesToMove;
             break;
         }
         case Types.Queen:{
             allPossibilitiesToMove.forEach(house => {
-                if ((house.piece?.color !== player.color) || !house.piece) {
+                if ((!house.piece?.isFriend(player)) || !house.piece) {
                     housesAbleToMoveProcessed.push(house);
                 }
             });
@@ -177,7 +178,7 @@ export const useGameLogic = () => {
         }
         case Types.King:{
             allPossibilitiesToMove.forEach(house => {
-                if (house.piece?.color !== player.color && !house.checkIfHouseIsOnThisArray(dangerousHouses))
+                if ((!house.piece?.isFriend(player)  || !house.piece) && !house.checkIfHouseIsOnThisArray(dangerousHouses))
                     housesAbleToMoveProcessed.push(house);
             });
             possibleHousesToEat = allPossibilitiesToMove;
@@ -188,7 +189,7 @@ export const useGameLogic = () => {
             break;
         }
 
-        myPieces ? setAbleHousesToMove(housesAbleToMoveProcessed) : setDangerousHouses(housesAbleToMoveProcessed);
+        if(myPieces) setAbleHousesToMove(housesAbleToMoveProcessed);
         return possibleHousesToEat;
     }, [ableHousesToMove, movementHistory, boardPieces, player]);
 
