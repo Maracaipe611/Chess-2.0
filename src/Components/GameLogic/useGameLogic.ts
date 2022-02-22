@@ -16,7 +16,7 @@ export const useGameLogic = () => {
 
     useEffect(() => { //toda vez q uma peça tem alguma ação...
         if (!boardPieces?.length) return;
-        const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === player?.enemyColor());
+        const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === player.enemyColor());
         const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => handleHousesToMove(enemyPiece, false));
         setDangerousHouses(allPossibleMoves);
         setAbleHousesToMove([]);
@@ -90,7 +90,7 @@ export const useGameLogic = () => {
         if (myPieces && enPassant) {
             possibleHousesToEat = possibleHousesToEat.concat(diagonallyPos.filter(h => possibleHousesToEat.find(x => x.coordinate === h.coordinate)));
         } else if (myPieces) {
-            possibleHousesToEat = diagonallyPos.filter(house => house.piece && house.piece.color === player?.enemyColor());
+            possibleHousesToEat = diagonallyPos.filter(house => house.piece && house.piece.color === player.enemyColor());
         } else {
             possibleHousesToEat = diagonallyPos;
         }

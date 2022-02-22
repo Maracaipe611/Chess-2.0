@@ -26,8 +26,7 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
             return classNames.join(" ");
         } 
         if (!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(otherPieceWantsToGetHere);
-        if ((house.piece && house.piece.color === player?.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) 
-        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous);
+        if ((house.piece && house.piece.color === player.enemyColor()) && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(thePieceHereIsInDangerous);
 
         return classNames.join(" ");
     }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);

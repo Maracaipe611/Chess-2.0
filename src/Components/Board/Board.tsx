@@ -24,7 +24,7 @@ const Board: React.FC = () => {
 
     return (
         <div style={{ display: "grid" }}>
-            <span style={{ color: "white" }}>Jogador: {player?.name} | Cor:{player?.color}</span>
+            <span style={{ color: "white" }}>Jogador: {player.name} | Cor:{player.color}</span>
             <div
                 style={{
                     width: 480,
