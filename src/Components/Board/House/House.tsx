@@ -33,8 +33,9 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
         return classNames.join(" ");
     }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);
 
-    const action = () => {
+    const action = (): Actions => {
         let userAction;
+        if(selectedHouse === house) return userAction = Actions.Unselect;
         if(!house.piece) {
             house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
                 userAction = Actions.NoPieceAndMove :
@@ -45,11 +46,9 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
                     userAction = Actions.Unselect :
                     userAction = Actions.FriendlyPiece;
             } else {
-                selectedHouse === house ?
-                    userAction = Actions.Unselect :
-                    house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
-                        userAction = Actions.EnemyPieceAndEat :
-                        userAction = Actions.EnemyPiece;
+                house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
+                    userAction = Actions.EnemyPieceAndEat :
+                    userAction = Actions.EnemyPiece;
             }
         }
         return userAction;
