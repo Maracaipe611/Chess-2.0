@@ -12,6 +12,7 @@ export enum Actions {
     "EnemyPiece",
     "EnemyPieceAndEat",
     "NoPieceAndMove",
+    "Unselect",
 }
 
 export default class Player {

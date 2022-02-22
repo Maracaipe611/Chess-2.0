@@ -40,11 +40,15 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
                 userAction = Actions.NoPieceAndMove :
                 userAction = Actions.NoPiece;
         }else {
-            player.friendlyPiece(house.piece) ?
-                userAction = Actions.FriendlyPiece :
+            if(player.friendlyPiece(house.piece)) {
+                selectedHouse === house ?
+                    userAction = Actions.Unselect :
+                    userAction = Actions.FriendlyPiece;
+            } else {
                 house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
                     userAction = Actions.EnemyPieceAndEat :
                     userAction = Actions.EnemyPiece;
+            }
         }
         return userAction;
     };
