@@ -170,6 +170,16 @@ const buildMove = (pieceType: Types):Array<Move> => {
         });
         break;
     }
+    case Types.King:
+        MovesDirectionsDiagonal().forEach(move => {
+            moves.push({
+                alpha: move.alpha,
+                index: move.index,
+                direction: move.direction,
+            });
+        });
+        
+        break;
     default:
         break;
     }
@@ -193,7 +203,8 @@ export const PieceMoves = () => {
         CommonMoves.down,
         CommonMoves.left,
         CommonMoves.right,
-    ];
+        buildMove(Types.King),
+    ].flatMap(x => x);
 
     return [
         Pawn,

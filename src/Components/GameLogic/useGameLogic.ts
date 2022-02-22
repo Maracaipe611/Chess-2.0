@@ -10,7 +10,7 @@ export const useGameLogic = () => {
     const { setBoardHouses, boardHouses,
         boardPieces,
         player,
-        setDangerousHouses,
+        setDangerousHouses, dangerousHouses,
         setSelectedHouse, selectedHouse,
         setMovementHistory, movementHistory,
         setAbleHousesToMove, ableHousesToMove, } = useGameContext();
@@ -39,6 +39,7 @@ export const useGameLogic = () => {
         case Actions.EnemyPiece:
             if(!house.piece) return;
             setSelectedHouse(house);
+            setAbleHousesToMove([]);
             handleHousesToMove(house.piece, player.friendlyPiece(house.piece));
             break;
         case Actions.EnemyPieceAndEat:
@@ -71,12 +72,16 @@ export const useGameLogic = () => {
                     alpha: piece.coordinate.alpha + (movement.alpha * direction),
                     index: piece.coordinate.index + (movement.index * direction)
                 };
-                if (house.coordinate.alpha === futureHouseCoord.alpha &&
-                    house.coordinate.index === futureHouseCoord.index) {
-                    if(!blockedDirections.includes(movement.direction) || canJump) return house;
-                    const futureHouse = findHouseByCoordinates(futureHouseCoord);
-                    if(futureHouse?.piece) return blockedDirections.push(movement.direction);
-                    return house;
+                const futureHouse = findHouseByCoordinates(futureHouseCoord);
+
+                if (house.coordinate === futureHouse?.coordinate) {
+                    if(canJump) return house;
+                    if(futureHouse?.piece && !blockedDirections.includes(movement.direction)) {
+                        blockedDirections.push(movement.direction);
+                        return house;
+                    }else if(!blockedDirections.includes(movement.direction)) {
+                        return house;
+                    }
                 }
                 
             });
@@ -172,7 +177,8 @@ export const useGameLogic = () => {
         }
         case Types.King:{
             allPossibilitiesToMove.forEach(house => {
-                if (house.piece?.color !== player.color) housesAbleToMoveProcessed.push(house);
+                if (house.piece?.color !== player.color && !house.checkIfHouseIsOnThisArray(dangerousHouses))
+                    housesAbleToMoveProcessed.push(house);
             });
             possibleHousesToEat = allPossibilitiesToMove;
             //cant move to dangerous houses
