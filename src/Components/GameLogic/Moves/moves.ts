@@ -1,4 +1,5 @@
 import { Types } from "../../Board/Piece/types";
+import { Coordinate } from "../../Board/types";
 
 export enum MoveDirections {
     "Front",
@@ -11,11 +12,9 @@ export enum MoveDirections {
     "DownsideRight",
 }
 
-export type Move = {
-    alpha: number,
-    index: number,
+export interface Move extends Coordinate{
     direction: MoveDirections,
-};
+}
 
 export const CommonMoves: { [moveName: string]: Move } = {
     front: {
