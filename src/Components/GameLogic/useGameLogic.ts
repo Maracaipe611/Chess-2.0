@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import Player from "../../Components/Player/types";
+import Player, { Actions } from "../../Components/Player/types";
 import House from "../../Components/Board/House/types";
 import { Piece, Types } from "../../Components/Board/Piece/types";
 import { Coordinate } from "../Board/types";
@@ -22,30 +22,42 @@ export const useGameLogic = () => {
         setDangerousHouses(allPossibleMoves);
         setAbleHousesToMove([]);
     }, [boardPieces, player]);
-    
-    const houseHandler = (house: House) => {
-        const playerIsTryingToMove = ableHousesToMove.includes(house); //implementar redux para as possíveis ações com a casa
 
-        if (playerIsTryingToMove) {
-            return movePiece(selectedHouse, house);
-        }
-        setSelectedHouse(house);
-        if(!house.piece) {
-            setAbleHousesToMove([]);
-        }else {
-            const pickedPiece = house.piece;
-            if(pickedPiece)
-            {
-                const playerInPickingHisOwnPiece =  player.friendlyPiece(pickedPiece);
-                if (playerInPickingHisOwnPiece) return handleHousesToMove(pickedPiece, true);
-            }
-        }
-    };
-
-    const handleResetWhenMove = () => {
+    const handleReset = () => {
         setAbleHousesToMove([]);
         setSelectedHouse(undefined);
         setDangerousHouses([]);
+    };
+    
+    const houseHandler = (house: House, action: Actions) => {
+        const playerIsTryingToMove = ableHousesToMove.includes(house); //implementar redux para as possíveis ações com a casa
+
+        switch (action) {
+        case Actions.FriendlyPiece:
+            if(!house.piece) return;
+            setSelectedHouse(house);
+            handleHousesToMove(house.piece, player.friendlyPiece(house.piece));
+            break;
+        case Actions.EnemyPiece:
+            if(!house.piece) return;
+            setSelectedHouse(house);
+            handleHousesToMove(house.piece, player.friendlyPiece(house.piece));
+            break;
+        case Actions.EnemyPieceAndEat:
+            movePiece(selectedHouse, house);
+            break;
+        case Actions.NoPieceAndMove:
+            setAbleHousesToMove([]);
+            movePiece(selectedHouse, house);
+            break;
+        case Actions.NoPiece:
+            setAbleHousesToMove([]);
+            setSelectedHouse(house);
+            break;
+        default:
+            handleReset();
+            break;
+        }
     };
 
     const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
@@ -122,7 +134,7 @@ export const useGameLogic = () => {
                 possibleHousesToMove = possibleHousesToMove.filter(house => house.coordinate.index !== currentPosition.index + (2 * player.direction(player.color === piece.color)));
             }
             const finalPossibilities = possibleHousesToMove.concat(possibleHousesToEat);
-            setAbleHousesToMove(finalPossibilities);
+            myPieces ? setAbleHousesToMove(finalPossibilities) : setDangerousHouses(finalPossibilities);
             break;
         }
         case Types.Tower: {
@@ -211,7 +223,7 @@ export const useGameLogic = () => {
         if (actuallyHouse.piece && lastHouseSelected.piece) {
             const actuallyPiece = lastHouseSelected.piece;
             const newBoard = handleEat(lastHouseSelected, actuallyHouse);
-            handleResetWhenMove();
+            handleReset();
             setBoardHouses(newBoard);
             return setMovementHistory(movementHistory.concat(actuallyPiece));
         } else if (lastHouseSelected.piece) {
@@ -227,14 +239,14 @@ export const useGameLogic = () => {
                 let newBoard = handleEat(lastHouseSelected, enPassantHouse);
                 houseWithEnPassantPiece.piece = undefined;
                 newBoard = replaceHouseInBoard(houseWithEnPassantPiece, newBoard);
-                handleResetWhenMove();
+                handleReset();
                 setBoardHouses(newBoard);
                 return setMovementHistory(movementHistory.concat(actuallyPiece));
             }
 
             const actuallyPiece = lastHouseSelected.piece;
             const newBoard = handleEat(lastHouseSelected, actuallyHouse);
-            handleResetWhenMove();
+            handleReset();
             setBoardHouses(newBoard);
             setMovementHistory(movementHistory.concat(actuallyPiece));
         }
