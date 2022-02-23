@@ -26,7 +26,6 @@ const Board: React.FC = () => {
     return (
         <div style={{ display: "grid" }}>
             <span style={{ color: "white" }}>Jogador: {player.name} | Cor:{player.color}</span>
-            <span style={{ color: "white" }}>{dangerousHouses.find(house => house.piece?.type === Types.King && house.piece.isFriend(player)) ? "Check" : ""}</span>
             <div
                 style={{
                     width: 480,
