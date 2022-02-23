@@ -7,15 +7,9 @@ import House from "./types";
 export const BoardBuilder = (player: Player, boardPieces?:Array<Piece>) => {
 
     const houseBuilder = (coordinate: Coordinate): House => {
-        if (!boardPieces) boardPieces = BuildAllPieces();
-        const WhitePieces = boardPieces.filter(piece => piece.color === Colors.White);
-        const BlackPieces = boardPieces.filter(piece => piece.color === Colors.Black);
-            
+        if (!boardPieces) boardPieces = BuildAllPieces();            
         const { alpha, index } = coordinate;
-
-        const whitePieceOnThisHouse: Piece | undefined = WhitePieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
-        const blackPieceOnThisHouse: Piece | undefined = BlackPieces.find(piece => piece.coordinate.alpha === alpha && piece.coordinate.index === index);
-        const pieceOnThisHouse = blackPieceOnThisHouse ?? whitePieceOnThisHouse;
+        const pieceOnThisHouse = boardPieces.find(piece => piece.coordinate.alpha == alpha && piece.coordinate.index == index);
 
         const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
         const imageSourcePrefix = "./Images/";
