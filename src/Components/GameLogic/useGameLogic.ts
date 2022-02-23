@@ -67,6 +67,12 @@ export const useGameLogic = () => {
         const possibleHousesToMove: Array<House> = new Array<House>();
         const canJump = Types.Horse === piece.type;
         const blockedDirections = new Array<MoveDirections>();
+
+        if (piece.type === Types.King) {
+            if(!kingCanRock(piece)) {
+                //filtro de movimentos
+            }
+        } 
         piece.moves.forEach(movement => {
             const tempPossibilities = boardHouses.find(house => {
                 const futureHouseCoord:Coordinate = {
@@ -115,6 +121,11 @@ export const useGameLogic = () => {
             possibleHousesToEat = diagonallyPos;
         }
         return possibleHousesToEat;
+    };
+
+    const kingCanRock = (piece : Piece) => {
+
+        return true;
     };
 
     const handleHousesToMove = useCallback((piece: Piece, myPieces: boolean): Array<House> => {

@@ -42,6 +42,16 @@ export const CommonMoves: { [moveName: string]: Move } = {
         index: 2,
         direction: MoveDirections.Front,
     },
+    doubleLeft: {
+        alpha: -2,
+        index: 0,
+        direction: MoveDirections.Left,
+    },
+    doubleRight: {
+        alpha: 2,
+        index: 0,
+        direction: MoveDirections.Right,
+    },
     frontsideRight: {
         alpha: 1,
         index: 1,
@@ -103,39 +113,16 @@ export const MovesDirectionsDiagonal = ():Array<Move> => {
 };
 
 const buildMove = (pieceType: Types):Array<Move> => {
-    const moves = new Array<Move>();
+    let moves = new Array<Move>();
     switch (pieceType) {
+    case Types.Pawn:
+        moves = [CommonMoves.front,
+            CommonMoves.doubleFront,
+            CommonMoves.frontsideLeft,
+            CommonMoves.frontsideRight];
+        break;
     case Types.Bishop:
         for (let i = 1; i <= 7; i++) {
-            MovesDirectionsDiagonal().forEach(move => {
-                moves.push({
-                    alpha: i * move.alpha,
-                    index: i * move.index,
-                    direction: move.direction,
-                });
-            });
-        }
-        break;
-    case Types.Tower:
-        for (let i = 1; i <= 7; i++) {
-            MovesDirectionsHorizontalVertical().forEach(move => {
-                moves.push({
-                    alpha: i * move.alpha,
-                    index: i * move.index,
-                    direction: move.direction,
-                });
-            });
-        }
-        break;
-    case Types.Queen:
-        for (let i = 1; i <= 7; i++) {
-            MovesDirectionsHorizontalVertical().forEach(move => {
-                moves.push({
-                    alpha: i * move.alpha,
-                    index: i * move.index,
-                    direction: move.direction,
-                });
-            });
             MovesDirectionsDiagonal().forEach(move => {
                 moves.push({
                     alpha: i * move.alpha,
@@ -169,6 +156,35 @@ const buildMove = (pieceType: Types):Array<Move> => {
         });
         break;
     }
+    case Types.Tower:
+        for (let i = 1; i <= 7; i++) {
+            MovesDirectionsHorizontalVertical().forEach(move => {
+                moves.push({
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
+                });
+            });
+        }
+        break;
+    case Types.Queen:
+        for (let i = 1; i <= 7; i++) {
+            MovesDirectionsHorizontalVertical().forEach(move => {
+                moves.push({
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
+                });
+            });
+            MovesDirectionsDiagonal().forEach(move => {
+                moves.push({
+                    alpha: i * move.alpha,
+                    index: i * move.index,
+                    direction: move.direction,
+                });
+            });
+        }
+        break;
     case Types.King:
         MovesDirectionsDiagonal().forEach(move => {
             moves.push({
@@ -177,6 +193,12 @@ const buildMove = (pieceType: Types):Array<Move> => {
                 direction: move.direction,
             });
         });
+        moves = moves.concat(CommonMoves.front,
+            CommonMoves.down,
+            CommonMoves.left,
+            CommonMoves.right,
+            CommonMoves.doubleLeft,
+            CommonMoves.doubleRight);
         
         break;
     default:
@@ -186,24 +208,13 @@ const buildMove = (pieceType: Types):Array<Move> => {
 };
 
 export const PieceMoves = () => {
-    const Pawn = [
-        CommonMoves.front,
-        CommonMoves.doubleFront,
-        CommonMoves.frontsideLeft,
-        CommonMoves.frontsideRight,
-    ];
-
+    
+    const Pawn = buildMove(Types.Pawn);
     const Horse = buildMove(Types.Horse);
     const Tower = buildMove(Types.Tower);
     const Bishop = buildMove(Types.Bishop);
     const Queen = buildMove(Types.Queen);
-    const King = [
-        CommonMoves.front,
-        CommonMoves.down,
-        CommonMoves.left,
-        CommonMoves.right,
-        buildMove(Types.King),
-    ].flatMap(x => x);
+    const King = buildMove(Types.King);
 
     return [
         Pawn,
