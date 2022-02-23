@@ -1,6 +1,7 @@
 import House from "../House/types";
 import { Alphabet, Colors, Coordinate } from "../types";
 import { Move } from "../../GameLogic/Moves/moves";
+import Player from "../../Player/types";
 
 export enum Types {
     Pawn = "Pawn",
@@ -57,5 +58,9 @@ export class Piece {
 
     findHouse = (boardHouses: Array<House>): House | undefined => {
         return boardHouses.find(house => house.piece?.id === this.id);
+    };
+
+    isFriend = (player: Player):boolean => {
+        return player.color === this.color;
     };
 }

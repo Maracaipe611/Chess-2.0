@@ -2,9 +2,10 @@ import React from "react";
 import Player from "../Player/types";
 import { useGameContext } from "../GameLogic/context";
 import { HouseComponent } from "./House/index";
+import { Types } from "./Piece/types";
 
 const Board: React.FC = () => {
-    const { boardHouses, setPlayer, player } = useGameContext();
+    const { boardHouses, setPlayer, player, dangerousHouses } = useGameContext();
 
     const changeView = ():Player => {
         return new Player(
@@ -24,7 +25,8 @@ const Board: React.FC = () => {
 
     return (
         <div style={{ display: "grid" }}>
-            <span style={{ color: "white" }}>Jogador: {player?.name} | Cor:{player?.color}</span>
+            <span style={{ color: "white" }}>Jogador: {player.name} | Cor:{player.color}</span>
+            <span style={{ color: "white" }}>{dangerousHouses.find(house => house.piece?.type === Types.King && house.piece.isFriend(player)) ? "Check" : ""}</span>
             <div
                 style={{
                     width: 480,

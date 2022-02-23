@@ -13,8 +13,8 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const towerAlphs = [A, H];
     const horseAlphs = [B, G];
     const bishopAlphs = [C, F];
-    const queenAlph = color === Colors.Black ? [D] : [E];
-    const kingAlph = color === Colors.Black ? [E] : [D];
+    const queenAlph = [D];
+    const kingAlph = [E];
 
     const imageSourcePrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
     const imageSourceSufix = ".png";

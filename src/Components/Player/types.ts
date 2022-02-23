@@ -1,9 +1,19 @@
-import { AlphPositions, Piece } from "../Board/Piece/types";
+import { AlphPositions } from "../Board/Piece/types";
 import { Colors } from "../Board/types";
 
 export enum direction {
     forward = 1,
     backward = -1
+}
+
+export enum Actions {
+    "NoPiece",
+    "FriendlyPiece",
+    "EnemyPiece",
+    "EnemyPieceAndEat",
+    "NoPieceAndMove",
+    "Unselect",
+    "UnselectEnemy",
 }
 
 export default class Player {
@@ -15,10 +25,6 @@ export default class Player {
         this.name = name;
         this.color = color;
         this.canViewPossibleEnemyMoves = canViewPossibleEnemyMoves;
-    }
-
-    friendlyPiece(piece: Piece):boolean {
-        return this.color === piece.color;
     }
 
     enemyColor() {
