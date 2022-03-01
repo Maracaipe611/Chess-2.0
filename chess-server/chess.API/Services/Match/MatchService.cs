@@ -18,8 +18,9 @@ namespace chess.API.Services
         }
         public Match Create(MatchDTO matchDTO)
         {
-            var players = this.mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
-            var match = new Match(matchDTO.Reference, players);
+            Board board = new Board();
+            var players = mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
+            var match = new Match(matchDTO.Reference, players, board);
             return this.matchRepository.Create(match);
         }
 
