@@ -11,9 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using chess.API.Providers;
 
 namespace chess.API
 {
@@ -31,8 +29,8 @@ namespace chess.API
             services.Configure<DatabaseConfig>(Configuration.GetSection(nameof(DatabaseConfig)));
             services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
 
-            services.AddScoped<IMatchService, MatchService>();
-            services.AddScoped<IMatchRepository, MatchRepository>();
+            ServicesProvider.Register(services);
+            RepositoriesProvider.Register(services);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();

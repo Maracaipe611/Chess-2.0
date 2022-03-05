@@ -16,5 +16,11 @@ namespace chess.API.Models
         public IList<Player> Players { get; set; }
         public Board Board { get; set; }
         public string Reference { get; set; }
+        public IList<Piece> History { get; set; }
+
+        internal void AddHistory(Piece piece)
+        {
+            History.Add(piece);
+        }
     }
 }

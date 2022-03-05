@@ -1,11 +1,8 @@
 ﻿namespace chess.API.Models
 {
-    public class Colors
+    public enum Colors
     {
-        public enum ColorsType
-        {
-            Black,
-            White,
-        }
+        Black,
+        White,
     }
 }

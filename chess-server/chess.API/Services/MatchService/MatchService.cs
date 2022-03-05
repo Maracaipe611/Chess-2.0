@@ -2,23 +2,26 @@
 using chess.API.Data.Repositories;
 using chess.API.Models;
 using chess.API.Models.DTO;
+using chess.API.Services.BoardService;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace chess.API.Services
+namespace chess.API.Services.MatchService
 {
     public class MatchService : IMatchService
     {
+        private readonly IBoardService boardService;
         private readonly IMatchRepository matchRepository;
         private readonly IMapper mapper;
-        public MatchService(IMatchRepository matchRepository, IMapper mapper)
+        public MatchService(IMatchRepository matchRepository, IMapper mapper, IBoardService boardService)
         {
             this.matchRepository = matchRepository;
             this.mapper = mapper;
+            this.boardService = boardService;
         }
         public Match Create(MatchDTO matchDTO)
         {
-            Board board = new Board();
+            Board board = boardService.BuildBoard();
             var players = mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
             var match = new Match(matchDTO.Reference, players, board);
             return this.matchRepository.Create(match);
@@ -42,9 +45,9 @@ namespace chess.API.Services
 
         public Match Update(MatchDTO matchDTO)
         {
-            var newMatch = matchRepository.GetByReference(matchDTO.Reference);
-            newMatch.Board = matchDTO.Board;
-            return this.matchRepository.Update(newMatch);
+            Match newMatch = matchRepository.GetByReference(matchDTO.Reference); //recebo todas as props da match anterior
+            newMatch.Board = matchDTO.Board; //substituo apenas o board
+            return matchRepository.Update(newMatch);
         }
     }
 }

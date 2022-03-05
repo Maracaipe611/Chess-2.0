@@ -2,7 +2,7 @@
 using chess.API.Models.DTO;
 using System.Collections.Generic;
 
-namespace chess.API.Services
+namespace chess.API.Services.MatchService
 {
     public interface IMatchService
     {

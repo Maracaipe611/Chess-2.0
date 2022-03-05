@@ -1,5 +1,5 @@
 ﻿using chess.API.Models.DTO;
-using chess.API.Services;
+using chess.API.Services.MatchService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
