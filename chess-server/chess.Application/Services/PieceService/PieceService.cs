@@ -1,9 +1,9 @@
 ﻿using chess.Domain.Entities;
-using chess.API.Services.MoveService;
+using chess.Application.Services.MoveService;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace chess.API.Services.PieceService
+namespace chess.Application.Services.PieceService
 {
     public class PieceService : IPieceService
     {

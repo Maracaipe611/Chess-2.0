@@ -1,4 +1,4 @@
-﻿using chess.API.Services.MatchService;
+﻿using chess.Application.Services.MatchService;
 using chess.Domain.Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;

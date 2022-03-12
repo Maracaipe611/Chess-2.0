@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System;
-using chess.API.Providers;
+using chess.Application.Providers;
 using chess.Domain.Data.Configurations;
 
 namespace chess.API

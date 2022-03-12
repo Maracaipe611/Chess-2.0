@@ -1,7 +1,7 @@
 ﻿using chess.Domain.Entities;
 using System.Collections.Generic;
 
-namespace chess.API.Services.MoveService
+namespace chess.Application.Services.MoveService
 {
     public class MoveService : IMoveService
     {

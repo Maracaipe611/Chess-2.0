@@ -1,7 +1,7 @@
 ﻿using chess.Domain.Entities;
 using System.Collections.Generic;
 
-namespace chess.API.Services.HouseService
+namespace chess.Application.Services.HouseService
 {
     public class HouseService : IHouseService
     {

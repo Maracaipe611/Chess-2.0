@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\chess.Application\chess.Application.csproj" />
     <ProjectReference Include="..\chess.Domain\chess.Domain.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using chess.Domain.Entities;
 
-namespace chess.API.Services.PieceService
+namespace chess.Application.Services.PieceService
 {
     public interface IPieceService
     {

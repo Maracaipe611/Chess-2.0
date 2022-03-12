@@ -1,11 +1,11 @@
-﻿using chess.API.Services.BoardService;
-using chess.API.Services.HouseService;
-using chess.API.Services.MatchService;
-using chess.API.Services.MoveService;
-using chess.API.Services.PieceService;
+﻿using chess.Application.Services.BoardService;
+using chess.Application.Services.HouseService;
+using chess.Application.Services.MatchService;
+using chess.Application.Services.MoveService;
+using chess.Application.Services.PieceService;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace chess.API.Providers
+namespace chess.Application.Providers
 {
     public static class ServicesProvider
     {

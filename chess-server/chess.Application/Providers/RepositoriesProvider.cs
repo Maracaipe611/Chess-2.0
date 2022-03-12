@@ -1,7 +1,7 @@
 ﻿using chess.Domain.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace chess.API.Providers
+namespace chess.Application.Providers
 {
     public static class RepositoriesProvider
     {

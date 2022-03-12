@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using chess.Domain.Entities;
-using chess.API.Services.BoardService;
+using chess.Application.Services.BoardService;
 using System.Collections.Generic;
 using System.Linq;
 using chess.Domain.Data.Repositories;
 using chess.Domain.Entities.DTO;
 
-namespace chess.API.Services.MatchService
+namespace chess.Application.Services.MatchService
 {
     public class MatchService : IMatchService
     {

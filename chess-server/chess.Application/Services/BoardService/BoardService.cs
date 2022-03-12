@@ -1,9 +1,9 @@
 ﻿using chess.Domain.Entities;
-using chess.API.Services.HouseService;
-using chess.API.Services.PieceService;
+using chess.Application.Services.HouseService;
+using chess.Application.Services.PieceService;
 using System.Linq;
 
-namespace chess.API.Services.BoardService
+namespace chess.Application.Services.BoardService
 {
     public class BoardService : IBoardService
     {
