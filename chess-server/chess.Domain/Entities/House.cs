@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static chess.API.Models.Colors;
+using chess.Domain.Entities;
 
-namespace chess.API.Models
+namespace chess.Domain.Entities
 {
     public class House
     {

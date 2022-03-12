@@ -1,5 +1,4 @@
-﻿using chess.API.Services;
-using chess.API.Services.BoardService;
+﻿using chess.API.Services.BoardService;
 using chess.API.Services.HouseService;
 using chess.API.Services.MatchService;
 using chess.API.Services.MoveService;

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace chess.API.Models
+namespace chess.Domain.Entities
 {
     public class Piece
     {

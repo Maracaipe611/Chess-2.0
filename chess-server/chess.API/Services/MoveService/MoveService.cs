@@ -1,6 +1,5 @@
-﻿using chess.API.Models;
+﻿using chess.Domain.Entities;
 using System.Collections.Generic;
-using static chess.API.Models.Directions;
 
 namespace chess.API.Services.MoveService
 {

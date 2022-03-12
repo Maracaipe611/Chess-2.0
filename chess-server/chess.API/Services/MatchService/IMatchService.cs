@@ -1,5 +1,5 @@
-﻿using chess.API.Models;
-using chess.API.Models.DTO;
+﻿using chess.Domain.Entities;
+using chess.Domain.Entities.DTO;
 using System.Collections.Generic;
 
 namespace chess.API.Services.MatchService

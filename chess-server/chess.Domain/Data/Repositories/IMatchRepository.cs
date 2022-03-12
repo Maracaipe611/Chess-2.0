@@ -1,7 +1,7 @@
-﻿using chess.API.Models;
+﻿using chess.Domain.Entities;
 using System.Collections.Generic;
 
-namespace chess.API.Data.Repositories
+namespace chess.Domain.Data.Repositories
 {
     public interface IMatchRepository
     {

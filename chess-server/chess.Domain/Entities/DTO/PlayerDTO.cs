@@ -1,4 +1,4 @@
-﻿namespace chess.API.Models.DTO
+﻿namespace chess.Domain.Entities.DTO
 {
     public class PlayerDTO
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using chess.API.Models;
+using chess.Domain.Entities;
 
 namespace chess.API.Services.PieceService
 {

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using chess.Domain.Entities;
+using chess.Domain.Entities.DTO;
+using System.Collections.Generic;
 
-namespace chess.API.Models.DTO
+namespace chess.Domain.Entities.DTO
 {
     public class MatchDTO
     {

@@ -1,4 +1,4 @@
-﻿namespace chess.API.Data.Configurations
+﻿namespace chess.Domain.Data.Configurations
 {
     public interface IDatabaseConfig
     {

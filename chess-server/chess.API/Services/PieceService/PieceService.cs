@@ -1,4 +1,4 @@
-﻿using chess.API.Models;
+﻿using chess.Domain.Entities;
 using chess.API.Services.MoveService;
 using System.Collections.Generic;
 using System.Linq;

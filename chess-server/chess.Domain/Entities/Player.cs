@@ -1,4 +1,4 @@
-﻿namespace chess.API.Models
+﻿namespace chess.Domain.Entities
 {
     public class Player
     {

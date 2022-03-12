@@ -1,9 +1,9 @@
-﻿using chess.API.Data.Configurations;
-using chess.API.Models;
+﻿using chess.Domain.Data.Configurations;
+using chess.Domain.Entities;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
-namespace chess.API.Data.Repositories
+namespace chess.Domain.Data.Repositories
 {
     public class MatchRepository : IMatchRepository
     {

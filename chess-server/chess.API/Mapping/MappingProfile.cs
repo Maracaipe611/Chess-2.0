@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using chess.API.Models;
-using chess.API.Models.DTO;
+using chess.Domain.Entities;
+using chess.Domain.Entities.DTO;
 
 namespace chess.API.Mapping
 {
