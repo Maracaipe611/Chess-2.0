@@ -37,9 +37,9 @@ namespace chess.API.Services.MatchService
             return matchRepository.Get();
         }
 
-        public Match GetByReference(string name)
+        public Match GetByReference(string reference)
         {
-            var match = matchRepository.GetByReference(name);
+            var match = matchRepository.GetByReference(reference);
             return match;
         }
 

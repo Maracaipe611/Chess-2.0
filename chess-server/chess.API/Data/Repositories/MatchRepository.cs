@@ -37,9 +37,9 @@ namespace chess.API.Data.Repositories
             this.matchs.DeleteOne(match => match.Reference == reference);
         }
 
-        public Match GetByReference(string name)
+        public Match GetByReference(string reference)
         {
-            return matchs.Find(match => match.Reference == name).FirstOrDefault();
+            return matchs.Find(match => match.Reference == reference).FirstOrDefault();
         }
     }
 }

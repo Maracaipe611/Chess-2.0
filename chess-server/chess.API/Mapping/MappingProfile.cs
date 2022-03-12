@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using chess.API.Models;
 using chess.API.Models.DTO;
-using System.Linq;
 
 namespace chess.API.Mapping
 {
