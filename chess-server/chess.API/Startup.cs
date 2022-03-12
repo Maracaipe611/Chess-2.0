@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using chess.Application.Providers;
 using chess.Domain.Data.Configurations;
+using chess.Application;
 
 namespace chess.API
 {
@@ -24,6 +25,7 @@ namespace chess.API
         {
             services.Configure<DatabaseConfig>(Configuration.GetSection(nameof(DatabaseConfig)));
             services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
+            services.AddSignalR();
 
             ServicesProvider.Register(services);
             RepositoriesProvider.Register(services);
@@ -52,6 +54,7 @@ namespace chess.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<MatchHub>("/matchHub");
             });
         }
     }
