@@ -3,9 +3,9 @@ using chess.Domain.Entities;
 
 namespace chess.Domain.Entities
 {
-    public class House
+    public class Square
     {
-        public House(Coordinate coordinate, Colors color, Piece piece = null)
+        public Square(Coordinate coordinate, Colors color, Piece piece = null)
         {
             Coordinate = coordinate;
             Piece = piece;

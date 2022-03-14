@@ -1,5 +1,5 @@
 ﻿using chess.Domain.Entities;
-using chess.Application.Services.HouseService;
+using chess.Application.Services.SquareService;
 using chess.Application.Services.PieceService;
 using System.Linq;
 
@@ -7,23 +7,23 @@ namespace chess.Application.Services.BoardService
 {
     public class BoardService : IBoardService
     {
-        private readonly IHouseService houseService;
+        private readonly ISquareService squareService;
         private readonly IPieceService pieceService;
 
-        public BoardService(IHouseService houseService, IPieceService pieceService)
+        public BoardService(ISquareService squareService, IPieceService pieceService)
         {
-            this.houseService = houseService;
+            this.squareService = squareService;
             this.pieceService = pieceService;
         }
         public Board BuildBoard()
         {
-            var Houses = houseService.BuildAllHouses().ToList();
+            var Squares = squareService.BuildAllSquares().ToList();
             var Pieces = pieceService.BuildAllPieces().ToList();
-            foreach (var house in Houses)
+            foreach (var square in Squares)
             {
-                house.Piece = Pieces.Find(piece => piece.Coordinate.Alpha == house.Coordinate.Alpha && piece.Coordinate.Index == house.Coordinate.Index);
+                square.Piece = Pieces.Find(piece => piece.Coordinate.Equals(square.Coordinate));
             }
-            return new Board(Houses);
+            return new Board(Squares);
         }
     }
 }

@@ -1,29 +1,29 @@
 ﻿using chess.Domain.Entities;
 using System.Collections.Generic;
 
-namespace chess.Application.Services.HouseService
+namespace chess.Application.Services.SquareService
 {
-    public class HouseService : IHouseService
+    public class SquareService : ISquareService
     {
-        public IList<House> BuildAllHouses()
+        public IList<Square> BuildAllSquares()
         {
             int[] indexes = { 1, 2, 3, 4, 5, 6, 7, 8 };
             int[] alphs = { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-            var allHouses = new List<House>();
+            var allSquares = new List<Square>();
             foreach (var alph in alphs)
             {
                 foreach (var index in indexes)
                 {
                     var color = (alph + index) % 2 == 0 ? Colors.Black : Colors.White;
                     var coordinate = new Coordinate(alph, index);
-                    allHouses.Add(new House(coordinate, color));
+                    allSquares.Add(new Square(coordinate, color));
                 }
             }
-            return allHouses;
+            return allSquares;
         }
 
-        public IList<House> PossibleHousesToMove(Board board, Piece piece)
+        public IList<Square> PossibleSquaresToMove(Board board, Piece piece)
         {
             throw new System.NotImplementedException();
         }

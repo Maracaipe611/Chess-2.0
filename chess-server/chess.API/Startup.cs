@@ -27,6 +27,10 @@ namespace chess.API
             services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
             services.AddSignalR();
 
+            services.AddCors();
+            services.AddOptions();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
             ServicesProvider.Register(services);
             RepositoriesProvider.Register(services);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -46,6 +50,9 @@ namespace chess.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "chess.API v1"));
             }
+
+            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseMvc();
 
             app.UseRouting();
 

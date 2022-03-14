@@ -5,12 +5,12 @@ namespace chess.Domain.Entities
 {
     public class Board
     {
-        public Board(List<House> houses)
+        public Board(List<Square> squares)
         {
             Id = Guid.NewGuid().ToString();
-            Houses = houses;
+            Squares = squares;
         }
         public string Id { get; set; }
-        public IList<House> Houses { get; set; }
+        public IList<Square> Squares { get; set; }
     }
 }
