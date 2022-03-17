@@ -1,40 +1,40 @@
 import { Types } from "../../Components/Board/Piece/types";
 import { Colors, Coordinate } from "../../Components/Board/types";
 
-export interface Player {
+export interface PlayerDTO {
         id: number;
         color: Colors;
         name: string;
 }
 
-export interface Move {
+export interface MoveDTO {
         coordinate: Coordinate;
         direction: number;
 }
 
-export interface Piece {
+export interface PieceDTO {
         type: Types;
         color: Colors;
-        move: Array<Move>;
+        move: Array<MoveDTO>;
         coordinate: Coordinate;
 }
 
-export interface Square {
+export interface SquareDTO {
         coordinate: Coordinate;
-        piece: Piece;
+        piece: PieceDTO;
         color: Colors;
 }
 
-export interface Board {
+export interface BoardDTO {
         id: string;
-        squares: Array<Square>;
+        squares: Array<SquareDTO>;
 }
 
-export interface Match {
+export interface MatchDTO {
         id: string;
-        players: Array<Player>;
-        board: Board;
+        players: Array<PlayerDTO>;
+        board: BoardDTO | null;
         reference: string;
-        history?: Array<Piece>;
+        history?: Array<PieceDTO>;
 }
 

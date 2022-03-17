@@ -7,7 +7,7 @@ const useMatchClient = () => {
     const getMatch = useCallback((reference: string): Promise<any> => new Promise(
         (resolve, reject) => {
             axios.get(reference, { baseURL }).then((response: any) => {
-                resolve(response);
+                resolve(response.data);
             }, (response: any) => reject(response));
         }, 
     ), [baseURL]);
@@ -15,7 +15,7 @@ const useMatchClient = () => {
     const createMatch = useCallback((body: string): Promise<any> => new Promise(
         (resolve, reject) => {
             axios.post("", body, { baseURL }).then((response: any) => {
-                resolve(response);
+                resolve(response.data);
             }, (response: any) => reject(response));
         }, 
     ), [baseURL]);
