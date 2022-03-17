@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace chess.API.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/v1/[controller]")]
     [ApiController]
     public class MatchController : Controller
     {
@@ -54,6 +54,8 @@ namespace chess.API.Controllers
         {
             try
             {
+                bool hasAnyMatchWithSameReference = Get(matchDTO.Reference).GetType() != NotFound().GetType();
+                if (hasAnyMatchWithSameReference) return Conflict();
                 var match = matchService.Create(matchDTO);
                 return Ok(match);
             }
