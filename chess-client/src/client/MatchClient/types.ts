@@ -24,16 +24,10 @@ export interface SquareDTO {
         piece: PieceDTO;
         color: Colors;
 }
-
-export interface BoardDTO {
-        id: string;
-        squares: Array<SquareDTO>;
-}
-
 export interface MatchDTO {
         id: string;
         players: Array<PlayerDTO>;
-        board: BoardDTO | null;
+        board: Array<SquareDTO> | undefined;
         reference: string;
         history?: Array<PieceDTO>;
 }
