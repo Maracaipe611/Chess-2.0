@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./Menu.css";
 import useMatchClient from "../../client/MatchClient/UseMatchClient";
 import { Match } from "../Board/types";
+import { useGameContext } from "../GameLogic/context";
+import { useNavigate  } from "react-router-dom";
 
 enum MenuActions {
   Create,
@@ -12,21 +14,26 @@ const Menu = () => {
     const [action, setAction] = useState<MenuActions | undefined>();
     const [matchId, setMatchId] = useState<string>("");
     const [playerName, setPlayerName] = useState<string>("");
+
+    const navigate = useNavigate();
     const matchClient = useMatchClient();
+    const { setMatch } = useGameContext();
 
-    const matchExists = () => {
+    const matchExists = useCallback(() => {
         matchClient().getMatch(matchId).then((match: Match) => {
-            console.log(match);
+            setMatch(match);
         });
-    };
+    }, [matchClient, matchId]);
 
-    const createMatch = () => {
+    const createMatch = useCallback(() => {
         matchClient().createMatch(matchId, playerName).then((match: Match) => {
-            console.log(match);
+            setMatch(match);
+        }).then(() => {
+            navigate("/play");
         });
-    };
+    }, [matchClient, matchId, playerName]);
 
-    const insertMatchReference = () => (
+    const insertMatchReference = useCallback(() => (
         <div className="match-reference-background">
             <span>Digite seu nome</span>
             <input onInput={(e) => setPlayerName(e.currentTarget.value)} />
@@ -34,7 +41,7 @@ const Menu = () => {
             <input onInput={(e) => setMatchId(e.currentTarget.value)} />
             <button onClick={() => action === MenuActions.Join ? matchExists() : createMatch()}>{action === MenuActions.Join ? "Entrar" : "Criar"}</button>
         </div>
-    );
+    ), [action, matchExists, createMatch]);
 
     return (
         <div className="menu-background-main">

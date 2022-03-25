@@ -4,6 +4,7 @@ import { AlphPositions, Piece } from "./Piece/types";
 
 export const Alphabet = ["A", "B", "C", "D", "E", "F", "G", "H",];
 export enum Colors { White = 0, Black = 1 }
+export enum ColorsVerbose { White = "White", Black = "Black" }
 
 export type Coordinate = {
     alpha: AlphPositions | number,

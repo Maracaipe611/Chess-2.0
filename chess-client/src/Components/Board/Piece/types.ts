@@ -1,26 +1,26 @@
 import House from "../House/types";
-import { Alphabet, Colors, Coordinate } from "../types";
+import { Alphabet, Colors, ColorsVerbose, Coordinate } from "../types";
 import { Move } from "../../GameLogic/Moves/moves";
 import Player from "../../Player/types";
 
 export enum Types {
-    Pawn = "Pawn",
-    Tower = "Tower",
-    Horse = "Horse",
-    Bishop = "Bishop",
-    Queen = "Queen",
-    King = "King",
+    Pawn,
+    Tower,
+    Horse,
+    Bishop,
+    Queen,
+    King,
 }
 
 export enum AlphPositions {
-    "A" = 1,
-    "B" = 2,
-    "C" = 3,
-    "D" = 4,
-    "E" = 5,
-    "F" = 6,
-    "G" = 7,
-    "H" = 8,
+    A = 1,
+    B = 2,
+    C = 3,
+    D = 4,
+    E = 5,
+    F = 6,
+    G = 7,
+    H = 8,
 }
 
 export class Piece {
@@ -41,9 +41,9 @@ export class Piece {
     }
 
     setBackgroundImage():string {
-        const imageSourcePrefix: string = "./Images/Chess" + (this.color === Colors.Black ? Colors.Black : Colors.White);
+        const imageSourcePrefix: string = "./Images/Chess" + (this.color === Colors.Black ? ColorsVerbose.Black : ColorsVerbose.White);
         const imageSourceSufix = ".png";
-        const imageSource = imageSourcePrefix + this.type + imageSourceSufix;
+        const imageSource = imageSourcePrefix + Types[this.type] + imageSourceSufix;
         return imageSource;
     }
 

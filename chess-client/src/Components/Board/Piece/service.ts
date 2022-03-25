@@ -50,7 +50,7 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
 
     return currentPieceAlphs.map((alph) => {
         return new Piece(
-            type + color + alph + currentIndex,
+            type.toString() + color + alph + currentIndex,
             type,
             {
                 alpha: alph,

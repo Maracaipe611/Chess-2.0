@@ -17,7 +17,7 @@ type GameContextProps = {
     setPlayer: React.Dispatch<React.SetStateAction<Player>>;
     selectedHouse: House | undefined;
     setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
-    boardHouses: Array<House>;
+    /* boardHouses: Array<House>;
     setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
     boardPieces: Array<Piece>;
     setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece>>>;
@@ -26,7 +26,7 @@ type GameContextProps = {
     dangerousHouses: Array<House>;
     setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
     ableHousesToMove: Array<House>;
-    setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>;
+    setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>; */
 };
 
 export const GameContext = createContext<GameContextProps | undefined>(
@@ -43,13 +43,13 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
     const [match, setMatch] = useState<Match | undefined>();
     const [player, setPlayer] = useState<Player>(whitePlayer);
     const [selectedHouse, setSelectedHouse] = useState<House>();
-    const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));
+    /* const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));
     const [boardPieces, setBoardPieces] = useState<Array<Piece>>([]);
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
-    const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]);
+    const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]); */
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!boardPieces.length) return;
         setBoardHouses(BoardBuilder(player, boardPieces)); //se caso mude o jogador, a perspectiva do jogo deve mudar. Porém as peças não.
     }, [player]);
@@ -62,7 +62,7 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
             }
         });
         setBoardPieces(allLivePieces);
-    }, [boardHouses]);
+    }, [boardHouses]); */
 
     const providerValue = useCallback((): GameContextProps => {
         return {
@@ -72,7 +72,7 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
             setPlayer,
             selectedHouse,
             setSelectedHouse,
-            boardHouses,
+            /* boardHouses,
             setBoardHouses,
             boardPieces,
             setBoardPieces,
@@ -81,10 +81,10 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
             dangerousHouses,
             setDangerousHouses,
             ableHousesToMove,
-            setAbleHousesToMove,
+            setAbleHousesToMove, */
         };
-    }, [ match, setMatch, player, setPlayer, selectedHouse, setSelectedHouse, boardHouses, setBoardHouses, boardPieces, setBoardPieces,
-        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove,]);
+    }, [match, setMatch, player, setPlayer, selectedHouse, setSelectedHouse/* , boardHouses, setBoardHouses, boardPieces, setBoardPieces,
+        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove */,]);
 
     return (
         <GameContext.Provider value={providerValue()}>

@@ -1,12 +1,9 @@
-import React from "react";
-import Player from "../Player/types";
 import { useGameContext } from "../GameLogic/context";
 import { HouseComponent } from "./House/index";
-import { Types } from "./Piece/types";
 
 const Board = () => {
     const { match } = useGameContext();
-
+    if (!match || !match.board) return (<></>);
     return (
         match && match.board &&
         <div style={{ display: "grid" }}>
