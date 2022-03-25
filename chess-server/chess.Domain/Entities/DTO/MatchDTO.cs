@@ -10,6 +10,6 @@ namespace chess.Domain.Entities.DTO
         public IList<PlayerDTO> Players { get; set; }
 
         #nullable enable
-        public Board? Board { get; set; }
+        public IList<Square>? Board { get; set; }
     }
 }

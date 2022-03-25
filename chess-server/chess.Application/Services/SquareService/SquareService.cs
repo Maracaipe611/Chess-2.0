@@ -23,7 +23,7 @@ namespace chess.Application.Services.SquareService
             return allSquares;
         }
 
-        public IList<Square> PossibleSquaresToMove(Board board, Piece piece)
+        public IList<Square> PossibleSquaresToMove(List<Square> board, Piece piece)
         {
             throw new System.NotImplementedException();
         }

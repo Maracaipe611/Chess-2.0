@@ -21,14 +21,13 @@ const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
         const otherPieceWantsToGetHere = "ableToReceive";
 
         // condicional para exibir EM VERMELHO casas inimigas onde o inimigo pode comer
-        if (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves) classNames.push(thePieceHereIsInDangerous); //temporario
         if (house === selectedHouse) {
             classNames.push(selected);
             return classNames.join(" ");
         } 
         if (!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(otherPieceWantsToGetHere);
-        if ((house.piece && house.piece.color === player.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves
-        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous);
+        /* if ((house.piece && house.piece.color === player.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves
+        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous); */
 
         return classNames.join(" ");
     }, [ableHousesToMove, selectedHouse, dangerousHouses, player, house]);

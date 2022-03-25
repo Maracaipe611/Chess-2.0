@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Menu.css";
 import useMatchClient from "../../client/MatchClient/UseMatchClient";
+import { Match } from "../Board/types";
 
 enum MenuActions {
   Create,
@@ -10,20 +11,28 @@ enum MenuActions {
 const Menu = () => {
     const [action, setAction] = useState<MenuActions | undefined>();
     const [matchId, setMatchId] = useState<string>("");
+    const [playerName, setPlayerName] = useState<string>("");
     const matchClient = useMatchClient();
 
     const matchExists = () => {
-        matchClient().getMatch(matchId).then((response) => {
-            console.log(response);
+        matchClient().getMatch(matchId).then((match: Match) => {
+            console.log(match);
         });
-        return true;
+    };
+
+    const createMatch = () => {
+        matchClient().createMatch(matchId, playerName).then((match: Match) => {
+            console.log(match);
+        });
     };
 
     const insertMatchReference = () => (
         <div className="match-reference-background">
+            <span>Digite seu nome</span>
+            <input onInput={(e) => setPlayerName(e.currentTarget.value)} />
             <span>Digite o ID da partida</span>
             <input onInput={(e) => setMatchId(e.currentTarget.value)} />
-            <button onClick={() => matchExists()}>Entrar</button>
+            <button onClick={() => action === MenuActions.Join ? matchExists() : createMatch()}>{action === MenuActions.Join ? "Entrar" : "Criar"}</button>
         </div>
     );
 

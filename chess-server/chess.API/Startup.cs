@@ -51,7 +51,7 @@ namespace chess.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "chess.API v1"));
             }
 
-            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
 
             app.UseRouting();

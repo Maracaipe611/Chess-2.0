@@ -2,7 +2,7 @@ import { Types } from "../../Components/Board/Piece/types";
 import { Colors, Coordinate } from "../../Components/Board/types";
 
 export interface PlayerDTO {
-        id: number;
+        id?: string;
         color: Colors;
         name: string;
 }
@@ -13,6 +13,7 @@ export interface MoveDTO {
 }
 
 export interface PieceDTO {
+        id: string;
         type: Types;
         color: Colors;
         move: Array<MoveDTO>;
@@ -21,13 +22,13 @@ export interface PieceDTO {
 
 export interface SquareDTO {
         coordinate: Coordinate;
-        piece: PieceDTO;
+        piece: PieceDTO | undefined;
         color: Colors;
 }
 export interface MatchDTO {
-        id: string;
+        id?: string | undefined;
         players: Array<PlayerDTO>;
-        board: Array<SquareDTO> | undefined;
+        board: Array<SquareDTO> | null;
         reference: string;
         history?: Array<PieceDTO>;
 }

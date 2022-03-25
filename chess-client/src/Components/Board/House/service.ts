@@ -18,9 +18,6 @@ export const BoardBuilder = (player: Player, boardPieces?:Array<Piece>) => {
         const pieceOnThisHouse = blackPieceOnThisHouse ?? whitePieceOnThisHouse;
 
         const color = (alpha + index) % 2 === 0 ? Colors.Black : Colors.White;
-        const imageSourcePrefix = "./Images/";
-        const imageSourceSufix = ".jpg";
-        const imageSource = imageSourcePrefix + (color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + imageSourceSufix;
         return new House(
             {
                 alpha: alpha,
@@ -28,7 +25,6 @@ export const BoardBuilder = (player: Player, boardPieces?:Array<Piece>) => {
             },
             color,
             pieceOnThisHouse,
-            imageSource,
         );
     };
     const completedBoard = (): Array<House> => {

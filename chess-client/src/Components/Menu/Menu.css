@@ -49,7 +49,7 @@
 
 .match-reference-background {
   background-color: #3f3f3f;
-  height: 90px;
+  height: fit-content;
   font-size: small;
   color: azure;
   width: 160px;

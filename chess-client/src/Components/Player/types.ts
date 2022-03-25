@@ -17,14 +17,14 @@ export enum Actions {
 }
 
 export default class Player {
+    id: string;
     name: string;
     color: Colors;
-    canViewPossibleEnemyMoves: boolean;
 
-    constructor(name: string, color: Colors, canViewPossibleEnemyMoves: boolean) {
+    constructor(id: string, name: string, color: Colors) {
+        this.id = id;
         this.name = name;
         this.color = color;
-        this.canViewPossibleEnemyMoves = canViewPossibleEnemyMoves;
     }
 
     enemyColor() {
@@ -33,11 +33,6 @@ export default class Player {
 
     direction(pieceIsMine: boolean):number {
         return pieceIsMine ? (this.color === Colors.White ? direction.forward : direction.backward) : (this.color === Colors.Black ? direction.forward : direction.backward);
-    }
-
-    viewEnemyMoves(): Player {
-        this.canViewPossibleEnemyMoves = true;
-        return this;
     }
 
     houseOrder():Array<AlphPositions> {

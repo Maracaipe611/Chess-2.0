@@ -4,13 +4,15 @@ import Player from "../Player/types";
 import { BoardBuilder } from "../Board/House/service";
 import House from "../Board/House/types";
 import { Piece } from "../Board/Piece/types";
-import { Colors } from "../Board/types";
+import { Colors, Match } from "../Board/types";
 
 type GameContextProviderProps = {
     children: React.ReactNode;
 };
 
 type GameContextProps = {
+    match: Match | undefined;
+    setMatch: React.Dispatch<React.SetStateAction<Match | undefined>>;
     player: Player;
     setPlayer: React.Dispatch<React.SetStateAction<Player>>;
     selectedHouse: House | undefined;
@@ -32,12 +34,13 @@ export const GameContext = createContext<GameContextProps | undefined>(
 );
 
 const whitePlayer:Player = new Player(
+    "aa",
     "Lucas",
     Colors.White,
-    false,
 );
 
 export const GameContextProvider:React.FC<GameContextProviderProps> = ({ children }) => {
+    const [match, setMatch] = useState<Match | undefined>();
     const [player, setPlayer] = useState<Player>(whitePlayer);
     const [selectedHouse, setSelectedHouse] = useState<House>();
     const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));
@@ -63,6 +66,8 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
 
     const providerValue = useCallback((): GameContextProps => {
         return {
+            match,
+            setMatch,
             player,
             setPlayer,
             selectedHouse,
@@ -78,8 +83,8 @@ export const GameContextProvider:React.FC<GameContextProviderProps> = ({ childre
             ableHousesToMove,
             setAbleHousesToMove,
         };
-    }, [player, setPlayer, selectedHouse, setSelectedHouse, boardHouses, setBoardHouses, boardPieces, setBoardPieces,
-        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove]);
+    }, [ match, setMatch, player, setPlayer, selectedHouse, setSelectedHouse, boardHouses, setBoardHouses, boardPieces, setBoardPieces,
+        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove,]);
 
     return (
         <GameContext.Provider value={providerValue()}>

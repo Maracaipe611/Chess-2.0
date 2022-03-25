@@ -21,7 +21,7 @@ namespace chess.Application.Services.MatchService
         }
         public Match Create(MatchDTO matchDTO)
         {
-            Board board = boardService.BuildBoard();
+            List<Square> board = boardService.BuildBoard().ToList();
             var players = mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
             var match = new Match(matchDTO.Reference, players, board);
             return this.matchRepository.Create(match);

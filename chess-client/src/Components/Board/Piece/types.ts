@@ -31,13 +31,20 @@ export class Piece {
     imageSource: string;
     moves: Array<Move>;
 
-    constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, imageSource: string, moves: Array<Move>,) {
+    constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, moves: Array<Move>,) {
         this.id = id;
         this.type = type;
         this.coordinate = coordinate;
         this.color = color;
-        this.imageSource = imageSource;
+        this.imageSource = this.setBackgroundImage();
         this.moves = moves;
+    }
+
+    setBackgroundImage():string {
+        const imageSourcePrefix: string = "./Images/Chess" + (this.color === Colors.Black ? Colors.Black : Colors.White);
+        const imageSourceSufix = ".png";
+        const imageSource = imageSourcePrefix + this.type + imageSourceSufix;
+        return imageSource;
     }
 
     isAbleToChange(): boolean {

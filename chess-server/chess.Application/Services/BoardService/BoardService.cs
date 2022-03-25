@@ -2,6 +2,7 @@
 using chess.Application.Services.SquareService;
 using chess.Application.Services.PieceService;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace chess.Application.Services.BoardService
 {
@@ -15,7 +16,7 @@ namespace chess.Application.Services.BoardService
             this.squareService = squareService;
             this.pieceService = pieceService;
         }
-        public Board BuildBoard()
+        public IList<Square> BuildBoard()
         {
             var Squares = squareService.BuildAllSquares().ToList();
             var Pieces = pieceService.BuildAllPieces().ToList();
@@ -23,7 +24,7 @@ namespace chess.Application.Services.BoardService
             {
                 square.Piece = Pieces.Find(piece => piece.Coordinate.Equals(square.Coordinate));
             }
-            return new Board(Squares);
+            return Squares;
         }
     }
 }

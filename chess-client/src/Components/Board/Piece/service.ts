@@ -16,10 +16,6 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const queenAlph = [D];
     const kingAlph = [E];
 
-    const imageSourcePrefix: string = "./Images/Chess" + (color === Colors.Black ? Colors.Black : Colors.White);
-    const imageSourceSufix = ".png";
-    const imageSource = imageSourcePrefix + type + imageSourceSufix;
-
     let currentPieceAlphs: Array<AlphPositions> = new Array<AlphPositions>();
     const currentIndex = type === Types.Pawn ? pawnIndex : communPiecesIndex;
 
@@ -61,7 +57,6 @@ function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
                 index: currentIndex,
             },
             color,
-            imageSource,
             moves,
         );
     });

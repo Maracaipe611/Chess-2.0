@@ -1,14 +1,16 @@
-﻿namespace chess.Domain.Entities
+﻿using System;
+
+namespace chess.Domain.Entities
 {
     public class Player
     {
-        public Player(int id, string name, Colors color)
+        public Player(string name, Colors color)
         {
-            Id = id;
+            Id = Guid.NewGuid().ToString();
             Color = color;
             Name = name;
         }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public Colors Color { get; set; }
     }

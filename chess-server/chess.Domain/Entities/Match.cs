@@ -5,7 +5,7 @@ namespace chess.Domain.Entities
 {
     public class Match
     {
-        public Match(string reference, IList<Player> players, Board board = null)
+        public Match(string reference, IList<Player> players, IList<Square> board)
         {
             Board = board;
             Players = players;
@@ -14,7 +14,7 @@ namespace chess.Domain.Entities
         }
         public string Id { get; set; }
         public IList<Player> Players { get; set; }
-        public Board Board { get; set; }
+        public IList<Square> Board { get; set; }
         public string Reference { get; set; }
         public IList<Piece> History { get; set; }
 

@@ -8,11 +8,18 @@ export default class House {
     piece?: Piece | undefined;
     imageSource: string;
 
-    constructor(coordinate: Coordinate, color: Colors, piece: Piece | undefined, imageSource:string) {
+    constructor(coordinate: Coordinate, color: Colors, piece: Piece | undefined) {
         this.coordinate = coordinate;
         this.color = color;
         this.piece = piece;
-        this.imageSource = imageSource;
+        this.imageSource = this.setBackgroundImage();
+    }
+
+    setBackgroundImage():string {
+        const imageSourcePrefix = "./Images/";
+        const imageSourceSufix = ".jpg";
+        const imageSource = imageSourcePrefix + (this.color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + imageSourceSufix;
+        return imageSource;
     }
 
     currentPosition(): string {
