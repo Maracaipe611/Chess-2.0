@@ -1,7 +1,7 @@
 import House from "../House/types";
-import { Alphabet, Colors, ColorsVerbose, Coordinate } from "../types";
-import { Move } from "../../GameLogic/Moves/moves";
-import Player from "../../Player/types";
+import { Alphabet, Colors, ColorsVerbose, Coordinate } from "../../client/Board/types";
+import { Move } from "../GameLogic/Moves/moves";
+import Player from "../Player/types";
 
 export enum Types {
     Pawn,

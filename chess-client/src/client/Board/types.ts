@@ -1,6 +1,6 @@
-import Player from "../Player/types";
-import House from "./House/types";
-import { AlphPositions, Piece } from "./Piece/types";
+import Player from "../../Components/Player/types";
+import House from "../../Components/House/types";
+import { AlphPositions, Piece } from "../../Components/Piece/types";
 
 export const Alphabet = ["A", "B", "C", "D", "E", "F", "G", "H",];
 export enum Colors { White = 0, Black = 1 }

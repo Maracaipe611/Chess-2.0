@@ -1,6 +1,6 @@
-import Player from "../../Player/types";
+import Player from "../Player/types";
 import { Piece, Types } from "../Piece/types";
-import { Alphabet, Colors, Coordinate } from "../types";
+import { Alphabet, Colors, Coordinate } from "../../client/Board/types";
 
 export default class House {
     coordinate: Coordinate;

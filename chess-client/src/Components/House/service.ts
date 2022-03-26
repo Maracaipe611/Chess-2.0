@@ -1,7 +1,7 @@
-import Player from "../../Player/types";
+import Player from "../Player/types";
 import { BuildAllPieces } from "../Piece/service";
 import { AlphPositions, Piece } from "../Piece/types";
-import { Colors, Coordinate } from "../types";
+import { Colors, Coordinate } from "../../client/Board/types";
 import House from "./types";
 
 export const BoardBuilder = (player: Player, boardPieces?:Array<Piece>) => {

@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useCallback } from "react";
-import House from "../../Components/Board/House/types";
-import { Piece } from "../../Components/Board/Piece/types";
-import { Colors, Match } from "../../Components/Board/types";
-import { useGameContext } from "../../Components/GameLogic/context";
+import House from "../../Components/House/types";
+import { Piece } from "../../Components/Piece/types";
+import { Colors, Match } from "../../client/Board/types";
 import { Move } from "../../Components/GameLogic/Moves/moves";
 import Player from "../../Components/Player/types";
 import { MatchDTO } from "./types";

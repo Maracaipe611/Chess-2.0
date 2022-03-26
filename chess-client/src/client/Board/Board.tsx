@@ -1,5 +1,6 @@
-import { useGameContext } from "../GameLogic/context";
-import { HouseComponent } from "./House/index";
+import { useGameContext } from "../../Components/GameLogic/context";
+import { HouseComponent } from "../../Components/House/index";
+import House from "../../Components/House/types";
 
 const Board = () => {
     const { match } = useGameContext();
@@ -16,7 +17,7 @@ const Board = () => {
                     flexWrap: "wrap",
                 }}
             >
-                {match.board.map((house) => (
+                {match.board.map((house: House) => (
                     <HouseComponent
                         house={house}
                         key={house.currentPosition()}

@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { createContext, useState } from "react";
 import Player from "../Player/types";
-import { BoardBuilder } from "../Board/House/service";
-import House from "../Board/House/types";
-import { Piece } from "../Board/Piece/types";
-import { Colors, Match } from "../Board/types";
+import { BoardBuilder } from "../House/service";
+import House from "../House/types";
+import { Piece } from "../Piece/types";
+import { Colors, Match } from "../../client/Board/types";
 
 type GameContextProviderProps = {
     children: React.ReactNode;

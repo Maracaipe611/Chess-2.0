@@ -1,5 +1,5 @@
-import { AlphPositions } from "../Board/Piece/types";
-import { Colors } from "../Board/types";
+import { AlphPositions } from "../Piece/types";
+import { Colors } from "../../client/Board/types";
 
 export enum direction {
     forward = 1,

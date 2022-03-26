@@ -1,5 +1,5 @@
-import { Types } from "../../Board/Piece/types";
-import { Coordinate } from "../../Board/types";
+import { Types } from "../../Piece/types";
+import { Coordinate } from "../../../client/Board/types";
 
 export enum MoveDirections {
     "Front",

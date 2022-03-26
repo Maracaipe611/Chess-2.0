@@ -5,6 +5,7 @@ using chess.Application.Services.MoveService;
 using chess.Application.Services.PieceService;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
+using chess.Application.Hubs.Interfaces;
 
 namespace chess.Application.Providers
 {
@@ -17,7 +18,7 @@ namespace chess.Application.Providers
             serviceColleciton.AddScoped<IMatchService, MatchService>();
             serviceColleciton.AddScoped<IMoveService, MoveService>();
             serviceColleciton.AddScoped<IPieceService, PieceService>();
-            serviceColleciton.AddScoped<Hub, MatchHub>();
+            serviceColleciton.AddScoped<Hub<IMatchHub>, MatchHub>();
         }
     }
 }

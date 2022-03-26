@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 import Player, { Actions } from "../../Components/Player/types";
-import House from "../../Components/Board/House/types";
-import { Piece, Types } from "../../Components/Board/Piece/types";
-import { Coordinate } from "../Board/types";
+import House from "../House/types";
+import { Piece, Types } from "../../Components/Piece/types";
+import { Coordinate } from "../../client/Board/types";
 import { useGameContext } from "./context";
 import { MoveDirections } from "./Moves/moves";
 

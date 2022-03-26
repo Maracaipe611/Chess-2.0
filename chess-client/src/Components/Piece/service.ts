@@ -1,6 +1,6 @@
 import { AlphPositions, Piece, Types } from "./types";
-import { Move, PieceMoves } from "../../GameLogic/Moves/moves";
-import { Colors } from "../types";
+import { Move, PieceMoves } from "../GameLogic/Moves/moves";
+import { Colors } from "../../client/Board/types";
 
 function BuildSinglePiece(type: Types, color: Colors): Array<Piece> {
     const { A, B, C, D, E, F, G, H } = AlphPositions;

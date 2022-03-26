@@ -1,5 +1,5 @@
-import { Types } from "../../Components/Board/Piece/types";
-import { Colors, Coordinate } from "../../Components/Board/types";
+import { Types } from "../../Components/Piece/types";
+import { Colors, Coordinate } from "../Board/types";
 
 export interface PlayerDTO {
         id?: string;

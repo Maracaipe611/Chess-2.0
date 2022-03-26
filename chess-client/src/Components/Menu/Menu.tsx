@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import "./Menu.css";
 import useMatchClient from "../../client/MatchClient/UseMatchClient";
-import { Match } from "../Board/types";
+import { Match } from "../../client/Board/types";
 import { useGameContext } from "../GameLogic/context";
 import { useNavigate  } from "react-router-dom";
 
