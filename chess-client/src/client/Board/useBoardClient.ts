@@ -5,7 +5,7 @@ import { useGameContext } from "../../Components/GameLogic/context";
 const useBoardClient = () => {
   const connectionRef = useRef<signalR.HubConnection>();
   const [isConnected, setIsConnected] = useState();
-  const { match } = useGameContext();
+  const { match, setMatch } = useGameContext();
 
   useEffect(() => {
     if (!isConnected) {
@@ -16,6 +16,7 @@ const useBoardClient = () => {
     if (!connectionRef.current) {
       connectionRef.current = new signalR.HubConnectionBuilder()
         .withUrl("/matchHub")
+        .withAutomaticReconnect()
         .configureLogging(signalR.LogLevel.Information)
         .build();
     }
@@ -24,12 +25,33 @@ const useBoardClient = () => {
 
     const watchMatch = async () => {
       try {
-        await connection.invoke("watchMatch", match);
+        const matchToWatch = await connection.invoke("watchMatch", match);
+        setMatch(matchToWatch);
       } catch (error) {
         console.log(error);
       }
+    };
+
+    const start = () => {
+      connection.start().then(async (...args) => {
+        console.info("Connected!", args);
+        await watchMatch();
+      }).catch(err => {
+        console.info(err);
+        setTimeout(start, 500);
+      });
+    };
+
+    if (connection.state === signalR.HubConnectionState.Connected) {
+      watchMatch();
     }
 
-  }, [connectionRef, isConnected, match])
-  
-}
+    if (connection.state === signalR.HubConnectionState.Disconnected) {
+      start();
+    }
+
+  }, [connectionRef, isConnected, match]);
+
+};
+
+export default useBoardClient;

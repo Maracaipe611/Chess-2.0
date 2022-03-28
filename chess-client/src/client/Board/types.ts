@@ -12,20 +12,20 @@ export type Coordinate = {
 };
 
 export class Match {
-    id: string;
-    players: Array<Player>;
-    board: Array<House> | undefined;
-    reference: string;
-    history: Array<Piece>;
-    constructor(id: string, board: Array<House> | undefined, players: Array<Player>, reference: string) {
-        this.id = id;
-        this.board = board;
-        this.players = players;
-        this.reference = reference;
-        this.history = new Array<Piece>();
-    }
+  id: string;
+  players: Array<Player>;
+  board: Array<House> | undefined;
+  reference: string;
+  history: Array<Piece>;
+  constructor(id: string, board: Array<House> | undefined, players: Array<Player>, reference: string) {
+    this.id = id;
+    this.board = board;
+    this.players = players;
+    this.reference = reference;
+    this.history = new Array<Piece>();
+  }
 
-    addHistory(piece:Piece) {
-        this.history.push(piece);
-    }
+  addHistory(piece:Piece) {
+    this.history.push(piece);
+  }
 }

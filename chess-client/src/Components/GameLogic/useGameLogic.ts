@@ -7,16 +7,16 @@ import { useGameContext } from "./context";
 import { MoveDirections } from "./Moves/moves";
 
 export const useGameLogic = () => {
-    const {
-        setSelectedHouse, selectedHouse,
-        player,
-        /* setBoardHouses, boardHouses,
+  const {
+    setSelectedHouse, selectedHouse,
+    player,
+    /* setBoardHouses, boardHouses,
         boardPieces,
         setDangerousHouses, dangerousHouses,
         setMovementHistory, movementHistory,
         setAbleHousesToMove, ableHousesToMove,  */ } = useGameContext();
 
-    /* useEffect(() => { //toda vez q uma peça tem alguma ação...
+  /* useEffect(() => { //toda vez q uma peça tem alguma ação...
         if (!boardPieces?.length) return;
         const enemyPieces: Array<Piece> = boardPieces.filter(piece => piece.color === player.enemyColor());
         const allPossibleMoves: Array<House> = enemyPieces.flatMap(enemyPiece => handleHousesToMove(enemyPiece, false));
@@ -24,14 +24,14 @@ export const useGameLogic = () => {
         setAbleHousesToMove([]);
     }, [boardPieces, player]); */
 
-    const handleReset = () => {
-        /* setAbleHousesToMove([]);
+  const handleReset = () => {
+    /* setAbleHousesToMove([]);
         setSelectedHouse(undefined);
         setDangerousHouses([]); */
-    };
+  };
     
-    const houseHandler = (house: House, action: Actions) => {
-        /* switch (action) {
+  const houseHandler = (house: House, action: Actions) => {
+    /* switch (action) {
         case Actions.FriendlyPiece:
             if(!house.piece) return;
             setSelectedHouse(house);
@@ -62,9 +62,9 @@ export const useGameLogic = () => {
             setSelectedHouse(undefined);
             break;
         } */
-    };
+  };
 
-    /* const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
+  /* const possibleHousesToMove = (piece: Piece, direction: number): Array<House> => {
         const possibleHousesToMove: Array<House> = new Array<House>();
         const canJump = Types.Horse === piece.type;
         const blockedDirections = new Array<MoveDirections>();
@@ -99,37 +99,37 @@ export const useGameLogic = () => {
         return possibleHousesToMove;
     }; */
 
-    /* const findHouseByCoordinates = (coordinate: Coordinate): House | undefined => {
+  /* const findHouseByCoordinates = (coordinate: Coordinate): House | undefined => {
         return boardHouses.find((house: House) => house.coordinate.alpha === coordinate.alpha && house.coordinate.index === coordinate.index);
     }; */
 
-    const enPassant = (movementHistory: Piece[], player: Player, possibleHousesToEat: House[]) => {
-        const enPassantHouses: Array<House> = new Array<House>();
-        const didntMovedAnyPiece = movementHistory.length === 0;
-        if (didntMovedAnyPiece) return enPassantHouses;
-        possibleHousesToEat.forEach((house: House) => {
-            if (house.pseudoPawn(movementHistory, player)) enPassantHouses.push(house);
-        });
-        return enPassantHouses;
-    };
+  const enPassant = (movementHistory: Piece[], player: Player, possibleHousesToEat: House[]) => {
+    const enPassantHouses: Array<House> = new Array<House>();
+    const didntMovedAnyPiece = movementHistory.length === 0;
+    if (didntMovedAnyPiece) return enPassantHouses;
+    possibleHousesToEat.forEach((house: House) => {
+      if (house.pseudoPawn(movementHistory, player)) enPassantHouses.push(house);
+    });
+    return enPassantHouses;
+  };
 
-    const getPossibleHousesToPawnEat = (myPieces: boolean, possibleHousesToEat: House[], diagonallyPos: House[], enPassant: boolean) => {
-        if (myPieces && enPassant) {
-            possibleHousesToEat = possibleHousesToEat.concat(diagonallyPos.filter(h => possibleHousesToEat.find(x => x.coordinate === h.coordinate)));
-        } else if (myPieces) {
-            possibleHousesToEat = diagonallyPos.filter(house => house.piece && house.piece.color === player.enemyColor());
-        } else {
-            possibleHousesToEat = diagonallyPos;
-        }
-        return possibleHousesToEat;
-    };
+  const getPossibleHousesToPawnEat = (myPieces: boolean, possibleHousesToEat: House[], diagonallyPos: House[], enPassant: boolean) => {
+    if (myPieces && enPassant) {
+      possibleHousesToEat = possibleHousesToEat.concat(diagonallyPos.filter(h => possibleHousesToEat.find(x => x.coordinate === h.coordinate)));
+    } else if (myPieces) {
+      possibleHousesToEat = diagonallyPos.filter(house => house.piece && house.piece.color === player.enemyColor());
+    } else {
+      possibleHousesToEat = diagonallyPos;
+    }
+    return possibleHousesToEat;
+  };
 
-    const kingCanRock = (piece : Piece) => {
+  const kingCanRock = (piece : Piece) => {
 
-        return true;
-    };
+    return true;
+  };
 
-    /* const handleHousesToMove = useCallback((piece: Piece, myPieces: boolean): Array<House> => {
+  /* const handleHousesToMove = useCallback((piece: Piece, myPieces: boolean): Array<House> => {
         let possibleHousesToEat: Array<House> = new Array<House>();
 
         let housesAbleToMoveProcessed = new Array<House>();
@@ -202,7 +202,7 @@ export const useGameLogic = () => {
         return possibleHousesToEat;
     }, [ableHousesToMove, movementHistory, boardPieces, player]); */
 
-    /* const replaceHouseInBoard = (houseToReplace: House, board: Array<House>) => {
+  /* const replaceHouseInBoard = (houseToReplace: House, board: Array<House>) => {
         const newBoard = board.map((house: House) => {
             if (house.coordinate === houseToReplace.coordinate) {
                 return houseToReplace;
@@ -212,7 +212,7 @@ export const useGameLogic = () => {
         return newBoard;
     }; */
 
-    /* const handleEat = (lastPieceHouse: House, newHouseForPiece: House): Array<House> => {
+  /* const handleEat = (lastPieceHouse: House, newHouseForPiece: House): Array<House> => {
         if(!lastPieceHouse.piece) return boardHouses;
         newHouseForPiece.piece = lastPieceHouse.piece; //a peça é setada na nova casa
         newHouseForPiece.piece.coordinate = newHouseForPiece.coordinate; //as coordenadas da peça são setadas de acordo com a nova casa dela
@@ -222,7 +222,7 @@ export const useGameLogic = () => {
         return newBoard;
     }; */
 
-    /* const movePiece = (lastHouseSelected: House | undefined, actuallyHouse: House) => {
+  /* const movePiece = (lastHouseSelected: House | undefined, actuallyHouse: House) => {
         if (!lastHouseSelected || actuallyHouse.piece?.color === player.color) return;
         if (actuallyHouse.piece && lastHouseSelected.piece) {
             const actuallyPiece = lastHouseSelected.piece;
@@ -256,6 +256,6 @@ export const useGameLogic = () => {
         }
     }; */
 
-    return { houseHandler };
+  return { houseHandler };
 };
 
