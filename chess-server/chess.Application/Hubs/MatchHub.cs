@@ -24,7 +24,7 @@ namespace chess.Application
         public async Task WatchMatch(string reference)
         {
             var match = matchService.GetByReference(reference);
-            await Clients.All.WatchMatch(match);
+            await Clients.Group("watch").WatchMatch(match);
         }
     }
 }

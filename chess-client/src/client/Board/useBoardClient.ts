@@ -1,5 +1,5 @@
 import * as signalR from "@microsoft/signalr";
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGameContext } from "../../Components/GameLogic/context";
 
 const useBoardClient = () => {
@@ -8,14 +8,18 @@ const useBoardClient = () => {
   const { match, setMatch } = useGameContext();
 
   useEffect(() => {
-    if (!isConnected) {
+    /* if (!isConnected) {
       if (connectionRef.current) connectionRef.current.stop();
       return;
     }
-
+ */
     if (!connectionRef.current) {
       connectionRef.current = new signalR.HubConnectionBuilder()
-        .withUrl("/matchHub")
+        .withUrl("http://localhost:5000/api/v1/matchHub", {
+          headers: {
+            Origin: window.location.origin,
+          }
+        })
         .withAutomaticReconnect()
         .configureLogging(signalR.LogLevel.Information)
         .build();

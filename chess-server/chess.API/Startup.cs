@@ -25,6 +25,7 @@ namespace chess.API
         {
             services.Configure<DatabaseConfig>(Configuration.GetSection(nameof(DatabaseConfig)));
             services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
+
             services.AddSignalR();
 
             services.AddCors();
@@ -51,7 +52,7 @@ namespace chess.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "chess.API v1"));
             }
 
-            app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(option => option.WithOrigins("http://localhost:3002").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseMvc();
 
             app.UseRouting();
