@@ -2,17 +2,17 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  width: 565px;
+  width: 100%;
   margin: 0 auto;
+  background-color: black;
+  justify-content: center;
 }
 
 .menu-modal {
   width: 400px;
   height: 30em;
   display: block;
-  margin: 0 auto;
   background-color: #3f3f3f;
-  align-items: center;
 }
 .modal-title {
   display: block;
@@ -45,6 +45,7 @@
 .menu-match-reference {
   display: flex;
   height: 30em;
+  margin: 0 1.125rem;
 }
 
 .match-reference-background {
