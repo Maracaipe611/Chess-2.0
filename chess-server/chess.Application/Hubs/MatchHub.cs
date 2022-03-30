@@ -26,5 +26,10 @@ namespace chess.Application
             var match = matchService.GetByReference(reference);
             await Clients.Group("watch").WatchMatch(match);
         }
+
+        public async Task Teste(string value)
+        {
+            await Clients.All.ReceiveMessage($"Teste, {value}");
+        }
     }
 }

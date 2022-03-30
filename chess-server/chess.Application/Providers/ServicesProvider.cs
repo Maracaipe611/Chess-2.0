@@ -18,7 +18,6 @@ namespace chess.Application.Providers
             serviceColleciton.AddScoped<IMatchService, MatchService>();
             serviceColleciton.AddScoped<IMoveService, MoveService>();
             serviceColleciton.AddScoped<IPieceService, PieceService>();
-            serviceColleciton.AddScoped<Hub<IMatchHub>, MatchHub>();
         }
     }
 }

@@ -28,7 +28,16 @@ namespace chess.API
 
             services.AddSignalR();
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3002")
+                        .AllowCredentials();
+                });
+            });
             services.AddOptions();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
@@ -52,7 +61,7 @@ namespace chess.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "chess.API v1"));
             }
 
-            app.UseCors(option => option.WithOrigins("http://localhost:3002").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            app.UseCors("ClientPermission");
             app.UseMvc();
 
             app.UseRouting();
@@ -62,7 +71,7 @@ namespace chess.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<MatchHub>("/matchHub");
+                endpoints.MapHub<MatchHub>("/hubs/matchHub");
             });
         }
     }

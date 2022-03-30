@@ -36,7 +36,7 @@ const useMatchClient = () => {
     });
 
     const players: Array<Player> = matchDto.players.map(player => {
-      if(!player.id) throw Error("Player not found");
+      if (!player.id) throw Error("Player not found");
       return new Player(
         player.id,
         player.name,
@@ -54,12 +54,12 @@ const useMatchClient = () => {
         const match = mapMatch(response);
         resolve(match);
       }, (response: any) => reject(response));
-    }, 
+    },
   ), [baseURL]);
 
   const createMatch = useCallback((reference: string, playerName: string): Promise<any> => new Promise(
     (resolve, reject) => {
-      const matchDto:MatchDTO = {
+      const matchDto: MatchDTO = {
         board: null,
         players: [{ color: Colors.Black, name: playerName }],
         reference: reference,
@@ -69,7 +69,7 @@ const useMatchClient = () => {
         const match = mapMatch(response);
         resolve(match);
       }, (response: any) => reject(response));
-    }, 
+    },
   ), [baseURL]);
 
   return useCallback(() => ({
