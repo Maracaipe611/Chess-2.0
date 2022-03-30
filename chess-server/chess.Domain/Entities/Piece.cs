@@ -11,12 +11,14 @@ namespace chess.Domain.Entities
             Move = moves;
             Color = color;
             Coordinate = coordinate;
+            hasMovedBefore = false;
         }
         public string Id { get; set; }
         public Types Type { get; set; }
         public Colors Color { get; set; }
         public IList<Move> Move { get; set; }
         public Coordinate Coordinate { get; set; }
+        public bool hasMovedBefore { get; set; }
     }
     public enum Types
     {

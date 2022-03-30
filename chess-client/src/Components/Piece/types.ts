@@ -4,23 +4,23 @@ import { Move } from "../GameLogic/Moves/moves";
 import Player from "../Player/types";
 
 export enum Types {
-    Pawn,
-    Tower,
-    Horse,
-    Bishop,
-    Queen,
-    King,
+  Pawn,
+  Tower,
+  Horse,
+  Bishop,
+  Queen,
+  King,
 }
 
 export enum AlphPositions {
-    A = 1,
-    B = 2,
-    C = 3,
-    D = 4,
-    E = 5,
-    F = 6,
-    G = 7,
-    H = 8,
+  A = 1,
+  B = 2,
+  C = 3,
+  D = 4,
+  E = 5,
+  F = 6,
+  G = 7,
+  H = 8,
 }
 
 export class Piece {
@@ -30,6 +30,7 @@ export class Piece {
   color: Colors;
   imageSource: string;
   moves: Array<Move>;
+  hasMovedBefore: boolean;
 
   constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, moves: Array<Move>,) {
     this.id = id;
@@ -38,9 +39,10 @@ export class Piece {
     this.color = color;
     this.imageSource = this.setBackgroundImage();
     this.moves = moves;
+    this.hasMovedBefore = false;
   }
 
-  setBackgroundImage():string {
+  setBackgroundImage(): string {
     const imageSourcePrefix: string = "./Images/Chess" + (this.color === Colors.Black ? ColorsVerbose.Black : ColorsVerbose.White);
     const imageSourceSufix = ".png";
     const imageSource = imageSourcePrefix + Types[this.type] + imageSourceSufix;
@@ -67,7 +69,7 @@ export class Piece {
     return boardHouses.find(house => house.piece?.id === this.id);
   };
 
-  isFriend = (player: Player):boolean => {
+  isFriend = (player: Player): boolean => {
     return player.color === this.color;
   };
 }
