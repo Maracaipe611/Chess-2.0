@@ -1,6 +1,8 @@
 import { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel } from "@microsoft/signalr";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useGameContext } from "../../Components/GameLogic/context";
+import { mapMatchDTO } from "../Mappers/MatchMappers";
+import { MatchDTO } from "../MatchClient/types";
 import { Match } from "./types";
 
 const useBoardClient = () => {
@@ -31,12 +33,13 @@ const useBoardClient = () => {
   useEffect(() => {
     if (connection) {
       connection.start()
-        .then(result => {
+        .then(() => {
           connectionRef.current = connection.state;
           console.log("Connected!");
 
-          connection.on("ReceiveMessage", message => {
-            const updatedMatch = message;
+          connection.on("ReceiveNewBoard", (message: MatchDTO) => {
+            const updatedMatch = mapMatchDTO(message);
+            if (!updatedMatch) return null;
             setMatch(updatedMatch);
           });
         })
