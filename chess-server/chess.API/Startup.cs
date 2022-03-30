@@ -43,6 +43,7 @@ namespace chess.API
 
             ServicesProvider.Register(services);
             RepositoriesProvider.Register(services);
+            FacadesProvider.Register(services);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();

@@ -2,6 +2,7 @@
 using chess.Application.Services.MoveService;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace chess.Application.Services.PieceService
 {
@@ -14,7 +15,7 @@ namespace chess.Application.Services.PieceService
             this.moveService = moveService;
         }
 
-        public IList<Piece> BuildAllPieces()
+        public IList<Piece> BuildAllPieces(IList<Square> squares)
         {
             var allPieces = new List<Piece>();
             var piecesTypes = new List<Types>
@@ -43,7 +44,8 @@ namespace chess.Application.Services.PieceService
                         List<Move> moves = moveService.BuildMoves(pieceType).ToList();
                         int index = DefaultIndexPositions(pieceType, color);
                         Coordinate coordinate = new Coordinate(alpha, index);
-                        allPieces.Add(new Piece(pieceType, moves, color, coordinate));
+                        List<String> squaresToMove = moveService.BuildSquaresToMove(pieceType, coordinate, color, squares, moves).ToList();
+                        allPieces.Add(new Piece(pieceType, color, coordinate, squaresToMove));
                     }
                 }
             }

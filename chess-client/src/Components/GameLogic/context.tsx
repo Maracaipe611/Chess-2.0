@@ -1,45 +1,43 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import { createContext, useState } from "react";
 import Player from "../Player/types";
-import { BoardBuilder } from "../House/service";
 import House from "../House/types";
-import { Piece } from "../Piece/types";
 import { Colors, Match } from "../../client/Board/types";
 
 type GameContextProviderProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 type GameContextProps = {
-    match: Match | undefined;
-    setMatch: React.Dispatch<React.SetStateAction<Match | undefined>>;
-    player: Player;
-    setPlayer: React.Dispatch<React.SetStateAction<Player>>;
-    selectedHouse: House | undefined;
-    setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
-    /* boardHouses: Array<House>;
-    setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
-    boardPieces: Array<Piece>;
-    setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece>>>;
-    movementHistory: Array<Piece>;
-    setMovementHistory: React.Dispatch<React.SetStateAction<Array<Piece>>>;
-    dangerousHouses: Array<House>;
-    setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
-    ableHousesToMove: Array<House>;
-    setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>; */
+  match: Match | undefined;
+  setMatch: React.Dispatch<React.SetStateAction<Match | undefined>>;
+  player: Player;
+  setPlayer: React.Dispatch<React.SetStateAction<Player>>;
+  selectedHouse: House | undefined;
+  setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
+  /* boardHouses: Array<House>;
+  setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
+  boardPieces: Array<Piece>;
+  setBoardPieces: React.Dispatch<React.SetStateAction<Array<Piece>>>;
+  movementHistory: Array<Piece>;
+  setMovementHistory: React.Dispatch<React.SetStateAction<Array<Piece>>>;
+  dangerousHouses: Array<House>;
+  setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
+  ableHousesToMove: Array<House>;
+  setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>; */
 };
 
 export const GameContext = createContext<GameContextProps | undefined>(
   undefined
 );
 
-const whitePlayer:Player = new Player(
+const whitePlayer: Player = new Player(
   "aa",
   "Lucas",
   Colors.White,
 );
 
-export const GameContextProvider:React.FC<GameContextProviderProps> = ({ children }) => {
+export const GameContextProvider: React.FC<GameContextProviderProps> = ({ children }) => {
   const [match, setMatch] = useState<Match | undefined>();
   const [player, setPlayer] = useState<Player>(whitePlayer);
   const [selectedHouse, setSelectedHouse] = useState<House>();

@@ -7,20 +7,16 @@ export interface PlayerDTO {
         name: string;
 }
 
-export interface MoveDTO {
-        coordinate: Coordinate;
-        direction: number;
-}
-
 export interface PieceDTO {
         id: string;
         type: Types;
         color: Colors;
-        move: Array<MoveDTO>;
+        squaresToMove: Array<string>;
         coordinate: Coordinate;
 }
 
 export interface SquareDTO {
+        id: string,
         coordinate: Coordinate;
         piece: PieceDTO | undefined;
         color: Colors;

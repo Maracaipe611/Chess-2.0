@@ -19,7 +19,7 @@ namespace chess.Application.Services.BoardService
         public IList<Square> BuildBoard()
         {
             var Squares = squareService.BuildAllSquares().ToList();
-            var Pieces = pieceService.BuildAllPieces().ToList();
+            var Pieces = pieceService.BuildAllPieces(Squares).ToList();
             foreach (var square in Squares)
             {
                 square.Piece = Pieces.Find(piece => piece.Coordinate.Equals(square.Coordinate));

@@ -53,7 +53,7 @@ namespace chess.Application.Services.MatchService
             return matchRepository.Update(newMatch);
         }
 
-        public Match ValidateMovement(Match match)
+        public Match ValidateMoves(Match match)
         {
             return matchFacade.ValidateMoves(match);
         }

@@ -10,6 +10,5 @@
         downRight,
         upLeft,
         downLeft,
-        
     }
 }

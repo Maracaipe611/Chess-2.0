@@ -1,5 +1,7 @@
 ﻿using chess.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace chess.Application.Services.MoveService
 {
@@ -59,6 +61,29 @@ namespace chess.Application.Services.MoveService
                 default: return moves;
             }
             return moves;
+        }
+
+        public IList<String> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IList<Square> squares, IList<Move> moves)
+        {
+            int playerDirection = color == Colors.Black ? -1 : 1;
+            var possiblesSquaresToMove = new List<String>();
+            var pieceAlpha = coordinate.Alpha;
+            var pieceIndex = coordinate.Index;
+
+            foreach (var move in moves)
+            {
+                var moveAlpha = move.Coordinate.Alpha;
+                var moveIndex = move.Coordinate.Index;
+
+                var Alpha = (pieceAlpha + moveAlpha) * playerDirection;
+                var Index = (pieceIndex + moveIndex) * playerDirection;
+
+                var futureSquareCoordinate = new Coordinate(Alpha, Index);
+                var futureSquare = squares.Where(square => square.Coordinate.Equals(futureSquareCoordinate)).FirstOrDefault();
+                if (futureSquare is null) continue;
+                possiblesSquaresToMove.Add(futureSquare.Id);
+            }
+            return possiblesSquaresToMove;
         }
 
         #region Private

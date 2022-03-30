@@ -15,6 +15,9 @@ namespace chess.Application.Facades.MatchFacade
             var pieces = board.Where(square => square.Piece != null).Select(square => square.Piece);
             foreach (var piece in pieces)
             {
+                bool isInDefaultPosition = DefaultIndexPositions(piece.Type, piece.Color) == piece.Coordinate.Index;
+                bool hasMovedBefore = isInDefaultPosition && !piece.HasMovedBefore;
+
                 switch (piece.Type)
                 {
                     case Types.Pawn:
@@ -46,5 +49,18 @@ namespace chess.Application.Facades.MatchFacade
             match.Board = board;
             return match;
         }
+
+        #region Private
+        private static int DefaultIndexPositions(Types type, Colors color)
+        {
+            if (type == Types.Pawn)
+            {
+                return color == Colors.White ? 2 : 7;
+            }
+
+            return color == Colors.White ? 1 : 8;
+        }
+
+        #endregion
     }
 }

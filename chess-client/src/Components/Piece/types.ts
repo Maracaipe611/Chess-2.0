@@ -1,6 +1,5 @@
 import House from "../House/types";
 import { Alphabet, Colors, ColorsVerbose, Coordinate } from "../../client/Board/types";
-import { Move } from "../GameLogic/Moves/moves";
 import Player from "../Player/types";
 
 export enum Types {
@@ -29,16 +28,16 @@ export class Piece {
   coordinate: Coordinate;
   color: Colors;
   imageSource: string;
-  moves: Array<Move>;
+  housesToMove: Array<string>;
   hasMovedBefore: boolean;
 
-  constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, moves: Array<Move>,) {
+  constructor(id: string, type: Types, coordinate: Coordinate, color: Colors, housesToMove: Array<string>,) {
     this.id = id;
     this.type = type;
     this.coordinate = coordinate;
     this.color = color;
     this.imageSource = this.setBackgroundImage();
-    this.moves = moves;
+    this.housesToMove = housesToMove;
     this.hasMovedBefore = false;
   }
 
