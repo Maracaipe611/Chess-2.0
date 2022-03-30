@@ -11,7 +11,40 @@ namespace chess.Application.Facades.MatchFacade
     {
         public Match ValidateMoves(Match match)
         {
-            throw new NotImplementedException();
+            var board = match.Board;
+            var pieces = board.Where(square => square.Piece != null).Select(square => square.Piece);
+            foreach (var piece in pieces)
+            {
+                switch (piece.Type)
+                {
+                    case Types.Pawn:
+                    {
+                        break;
+                    }
+                    case Types.Tower:
+                    {
+                        break;
+                    }
+                    case Types.Horse:
+                    {
+                        break;
+                    }
+                    case Types.Bishop:
+                    {
+                        break;
+                    }
+                    case Types.Queen:
+                    {
+                        break;
+                    }
+                    case Types.King:
+                    {
+                        break;
+                    }
+                }
+            }
+            match.Board = board;
+            return match;
         }
     }
 }
