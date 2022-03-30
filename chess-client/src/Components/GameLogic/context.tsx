@@ -15,6 +15,8 @@ type GameContextProps = {
   setPlayer: React.Dispatch<React.SetStateAction<Player>>;
   selectedHouse: House | undefined;
   setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
+  ableHousesToMove: Array<House>;
+  setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>;
   /* boardHouses: Array<House>;
   setBoardHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
   boardPieces: Array<Piece>;
@@ -23,8 +25,7 @@ type GameContextProps = {
   setMovementHistory: React.Dispatch<React.SetStateAction<Array<Piece>>>;
   dangerousHouses: Array<House>;
   setDangerousHouses: React.Dispatch<React.SetStateAction<Array<House>>>;
-  ableHousesToMove: Array<House>;
-  setAbleHousesToMove: React.Dispatch<React.SetStateAction<Array<House>>>; */
+   */
 };
 
 export const GameContext = createContext<GameContextProps | undefined>(
@@ -41,11 +42,12 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = ({ childr
   const [match, setMatch] = useState<Match | undefined>();
   const [player, setPlayer] = useState<Player>(whitePlayer);
   const [selectedHouse, setSelectedHouse] = useState<House>();
+  const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]);
   /* const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));
     const [boardPieces, setBoardPieces] = useState<Array<Piece>>([]);
     const [movementHistory, setMovementHistory] = useState<Array<Piece>>([]);
     const [dangerousHouses, setDangerousHouses] = useState<Array<House>>([]);
-    const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]); */
+     */
 
   /* useEffect(() => {
         if (!boardPieces.length) return;
@@ -70,6 +72,8 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = ({ childr
       setPlayer,
       selectedHouse,
       setSelectedHouse,
+      ableHousesToMove,
+      setAbleHousesToMove,
       /* boardHouses,
             setBoardHouses,
             boardPieces,
@@ -77,12 +81,10 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = ({ childr
             movementHistory,
             setMovementHistory,
             dangerousHouses,
-            setDangerousHouses,
-            ableHousesToMove,
-            setAbleHousesToMove, */
+            setDangerousHouses, */
     };
-  }, [match, setMatch, player, setPlayer, selectedHouse, setSelectedHouse/* , boardHouses, setBoardHouses, boardPieces, setBoardPieces,
-        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses, ableHousesToMove, setAbleHousesToMove */,]);
+  }, [match, setMatch, player, setPlayer, selectedHouse, setSelectedHouse, ableHousesToMove, setAbleHousesToMove/* , boardHouses, setBoardHouses, boardPieces, setBoardPieces,
+        movementHistory, setMovementHistory, dangerousHouses, setDangerousHouses */,]);
 
   return (
     <GameContext.Provider value={providerValue()}>

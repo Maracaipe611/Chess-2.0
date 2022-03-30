@@ -5,6 +5,6 @@ namespace chess.Application.Services.PieceService
 {
     public interface IPieceService
     {
-        IList<Piece> BuildAllPieces(IList<Square> squares);
+        IEnumerable<Piece> BuildAllPieces(IEnumerable<Square> squares);
     }
 }

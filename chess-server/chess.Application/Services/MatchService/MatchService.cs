@@ -35,7 +35,7 @@ namespace chess.Application.Services.MatchService
             matchRepository.Delete(reference);
         }
 
-        public IList<Match> GetAll()
+        public IEnumerable<Match> GetAll()
         {
             return matchRepository.Get();
         }
@@ -51,11 +51,6 @@ namespace chess.Application.Services.MatchService
             Match newMatch = matchRepository.GetByReference(matchDTO.Reference); //recebo todas as props da match anterior
             newMatch.Board = matchDTO.Board; //substituo apenas o board
             return matchRepository.Update(newMatch);
-        }
-
-        public Match ValidateMoves(Match match)
-        {
-            return matchFacade.ValidateMoves(match);
         }
     }
 }

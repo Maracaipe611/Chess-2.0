@@ -9,8 +9,8 @@ export default class House {
   piece?: Piece | undefined;
   imageSource: string;
 
-  constructor(coordinate: Coordinate, color: Colors, piece: Piece | undefined) {
-    this.id = coordinate.alpha.toString() + coordinate.index.toString();
+  constructor(id: string, coordinate: Coordinate, color: Colors, piece: Piece | undefined) {
+    this.id = id;
     this.coordinate = coordinate;
     this.color = color;
     this.piece = piece;
@@ -22,14 +22,6 @@ export default class House {
     const imageSourceSufix = ".jpg";
     const imageSource = imageSourcePrefix + (this.color === Colors.White ? "lightWoodenHouse" : "woodenHouse") + imageSourceSufix;
     return imageSource;
-  }
-
-  currentPosition(): string {
-    return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
-  }
-
-  checkIfHouseIsOnThisArray(sampleArray: Array<House>): boolean {
-    return !!sampleArray.find(house => this.currentPosition() === house.currentPosition());
   }
 
   pseudoPawn(movementHistory: Array<Piece>, player: Player): Piece | undefined {

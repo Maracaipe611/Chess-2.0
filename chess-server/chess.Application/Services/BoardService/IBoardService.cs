@@ -5,6 +5,6 @@ namespace chess.Application.Services.BoardService
 {
     public interface IBoardService
     {
-        IList<Square> BuildBoard();
+        IEnumerable<Square> BuildBoard();
     }
 }

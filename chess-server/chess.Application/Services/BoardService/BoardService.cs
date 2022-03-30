@@ -3,6 +3,8 @@ using chess.Application.Services.SquareService;
 using chess.Application.Services.PieceService;
 using System.Linq;
 using System.Collections.Generic;
+using chess.Application.Services.MatchService;
+using chess.Application.Facades.MatchFacade;
 
 namespace chess.Application.Services.BoardService
 {
@@ -10,13 +12,15 @@ namespace chess.Application.Services.BoardService
     {
         private readonly ISquareService squareService;
         private readonly IPieceService pieceService;
+        private readonly IMatchFacade matchFacade;
 
-        public BoardService(ISquareService squareService, IPieceService pieceService)
+        public BoardService(ISquareService squareService, IPieceService pieceService, IMatchFacade matchFacade)
         {
             this.squareService = squareService;
             this.pieceService = pieceService;
+            this.matchFacade = matchFacade;
         }
-        public IList<Square> BuildBoard()
+        public IEnumerable<Square> BuildBoard()
         {
             var Squares = squareService.BuildAllSquares().ToList();
             var Pieces = pieceService.BuildAllPieces(Squares).ToList();
@@ -24,7 +28,8 @@ namespace chess.Application.Services.BoardService
             {
                 square.Piece = Pieces.Find(piece => piece.Coordinate.Equals(square.Coordinate));
             }
-            return Squares;
+            var Board = matchFacade.ValidateMoves(Squares);
+            return Board;
         }
     }
 }

@@ -52,10 +52,6 @@ export class Piece {
     return this.type === Types.Pawn;
   }
 
-  currentPosition(): string {
-    return Alphabet[this.coordinate.alpha - 1] + this.coordinate.index.toString();
-  }
-
   hasMoved(movementHistory: Array<Piece>): boolean {
     return !!movementHistory.find(piece => piece.id === this.id);
   }

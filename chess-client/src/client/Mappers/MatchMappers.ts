@@ -23,6 +23,7 @@ const mapMatchDTO = (matchDto: MatchDTO): Match | null => {
 
 const mapHousesDTO = (houses: Array<SquareDTO>): Array<House> => {
   return houses.map(house => new House(
+    house.id,
     house.coordinate,
     house.color,
     mapPieceDTO(house?.piece),

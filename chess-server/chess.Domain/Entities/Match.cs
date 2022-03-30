@@ -6,7 +6,7 @@ namespace chess.Domain.Entities
 {
     public class Match
     {
-        public Match(string reference, IList<Player> players, IList<Square> board)
+        public Match(string reference, IEnumerable<Player> players, IEnumerable<Square> board)
         {
             Board = board;
             Players = players;
@@ -14,14 +14,9 @@ namespace chess.Domain.Entities
             Id = Guid.NewGuid().ToString();
         }
         public string Id { get; set; }
-        public IList<Player> Players { get; set; }
-        public IList<Square> Board { get; set; }
+        public IEnumerable<Player> Players { get; set; }
+        public IEnumerable<Square> Board { get; set; }
         public string Reference { get; set; }
-        public IList<Piece> History { get; set; }
-
-        internal void AddHistory(Piece piece)
-        {
-            History.Add(piece);
-        }
+        public IEnumerable<Piece> History { get; set; }
     }
 }

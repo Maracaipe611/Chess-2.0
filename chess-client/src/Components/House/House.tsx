@@ -7,63 +7,64 @@ import { useGameContext } from "../GameLogic/context";
 import { Actions } from "../Player/types";
 
 interface HouseComponentProps {
-    house: House;
+  house: House;
 }
 
-const HouseComponent:React.FC<HouseComponentProps> = ({ house }) => {
-  const { /* ableHousesToMove, dangerousHouses, */ selectedHouse, player } = useGameContext();
+const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
+  const { ableHousesToMove, selectedHouse, player } = useGameContext();
   const { houseHandler } = useGameLogic();
 
   const houseStyle = useCallback((): string => {
-    const classNames:Array<string> = ["house"];
+    const classNames: Array<string> = ["house"];
     const selected = "selectedHouse";
     const thePieceHereIsInDangerous = "prey";
     const otherPieceWantsToGetHere = "ableToReceive";
 
-    // condicional para exibir EM VERMELHO casas inimigas onde o inimigo pode comer
     if (house === selectedHouse) {
       classNames.push(selected);
       return classNames.join(" ");
-    } 
-    /* if (!house.piece && house.checkIfHouseIsOnThisArray(ableHousesToMove)) classNames.push(otherPieceWantsToGetHere); */
+    }
+    if (!house.piece && ableHousesToMove.includes(house)) classNames.push(otherPieceWantsToGetHere);
+
     /* if ((house.piece && house.piece.color === player.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves
         || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous); */
 
     return classNames.join(" ");
-  }, [/* ableHousesToMove, dangerousHouses, */selectedHouse, player, house]);
+  }, [ableHousesToMove, selectedHouse, player, house]);
 
-  /* const action = (): Actions => {
-        let userAction;
-        if(selectedHouse === house) return userAction = !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
-        if(!house.piece) {
-            house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
-                userAction = Actions.NoPieceAndMove :
-                userAction = Actions.NoPiece;
-        }else {
-            if(house.piece.isFriend(player)) {
-                selectedHouse === house ?
-                    userAction = Actions.Unselect :
-                    userAction = Actions.FriendlyPiece;
-            } else {
-                house.checkIfHouseIsOnThisArray(ableHousesToMove) ?
-                    userAction = Actions.EnemyPieceAndEat :
-                    userAction = Actions.EnemyPiece;
-            }
-        }
-        return userAction;
-    }; */
+  const action = (): Actions => {
+    let userAction;
+    if (selectedHouse === house) return userAction = !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
+    if (!house.piece) {
+      ableHousesToMove.includes(house) ?
+        userAction = Actions.NoPieceAndMove :
+        userAction = Actions.NoPiece;
+    } else {
+      if (house.piece.isFriend(player)) {
+        selectedHouse === house ?
+          userAction = Actions.Unselect :
+          userAction = Actions.FriendlyPiece;
+      } else {
+        ableHousesToMove.includes(house) ?
+          userAction = Actions.EnemyPieceAndEat :
+          userAction = Actions.EnemyPiece;
+      }
+    }
+    return userAction;
+  };
 
   return (
     <div
-      className={ houseStyle() }
+      className={houseStyle()}
       style={{
         backgroundImage: `url(${house.imageSource})`,
         cursor: house.piece ? "pointer" : "unset",
       }}
-      id={house.currentPosition()}
-      /* onClick={() => houseHandler(house, action())} */
+      id={house.id}
+      key={house.id}
+      onClick={() => houseHandler(house, action())}
     >
-      { house.piece ? <PieceComponent piece={house.piece} /> : null }
+      {house.piece ? <PieceComponent piece={house.piece} /> : null}
     </div>
   );
 };

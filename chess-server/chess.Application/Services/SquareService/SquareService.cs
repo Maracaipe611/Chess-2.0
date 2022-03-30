@@ -5,7 +5,7 @@ namespace chess.Application.Services.SquareService
 {
     public class SquareService : ISquareService
     {
-        public IList<Square> BuildAllSquares()
+        public IEnumerable<Square> BuildAllSquares()
         {
             int[] indexes = { 1, 2, 3, 4, 5, 6, 7, 8 };
             int[] alphs = { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -23,7 +23,7 @@ namespace chess.Application.Services.SquareService
             return allSquares;
         }
 
-        public IList<Square> PossibleSquaresToMove(List<Square> board, Piece piece)
+        public IEnumerable<Square> PossibleSquaresToMove(List<Square> board, Piece piece)
         {
             throw new System.NotImplementedException();
         }

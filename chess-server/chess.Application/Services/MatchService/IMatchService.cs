@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace chess.Application.Services.MatchService
 {
-    public interface IMatchService : IMatchFacade
+    public interface IMatchService
     {
-        IList<Match> GetAll();
+        IEnumerable<Match> GetAll();
         Match GetByReference(string name);
         Match Create(MatchDTO matchDTO);
         Match Update(MatchDTO matchDTO);

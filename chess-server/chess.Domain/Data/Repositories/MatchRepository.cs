@@ -16,7 +16,7 @@ namespace chess.Domain.Data.Repositories
 
             this.matchs = database.GetCollection<Match>("matchs");
         }
-        public IList<Match> Get()
+        public IEnumerable<Match> Get()
         {
             return matchs.Find(match => true).ToList();
         }

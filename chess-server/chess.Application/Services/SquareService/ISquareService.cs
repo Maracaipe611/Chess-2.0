@@ -5,7 +5,7 @@ namespace chess.Application.Services.SquareService
 {
     public interface ISquareService
     {
-        IList<Square> BuildAllSquares();
-        IList<Square> PossibleSquaresToMove(List<Square> board, Piece piece);
+        IEnumerable<Square> BuildAllSquares();
+        IEnumerable<Square> PossibleSquaresToMove(List<Square> board, Piece piece);
     }
 }

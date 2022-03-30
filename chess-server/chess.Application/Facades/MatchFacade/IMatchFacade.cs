@@ -9,6 +9,6 @@ namespace chess.Application.Facades.MatchFacade
 {
     public interface IMatchFacade
     {
-        Match ValidateMoves(Match match);
+        IEnumerable<Square> ValidateMoves(IEnumerable<Square> squares);
     }
 }

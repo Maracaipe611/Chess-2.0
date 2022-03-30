@@ -9,6 +9,6 @@ namespace chess.Domain.Data.Repositories
         Match Update(Match match);
         Match GetByReference(string reference);
         void Delete(string reference);
-        IList<Match> Get();
+        IEnumerable<Match> Get();
     }
 }

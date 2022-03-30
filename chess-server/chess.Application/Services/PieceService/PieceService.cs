@@ -15,7 +15,7 @@ namespace chess.Application.Services.PieceService
             this.moveService = moveService;
         }
 
-        public IList<Piece> BuildAllPieces(IList<Square> squares)
+        public IEnumerable<Piece> BuildAllPieces(IEnumerable<Square> squares)
         {
             var allPieces = new List<Piece>();
             var piecesTypes = new List<Types>
