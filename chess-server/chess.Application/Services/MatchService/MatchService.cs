@@ -14,17 +14,16 @@ namespace chess.Application.Services.MatchService
         private readonly IBoardService boardService;
         private readonly IMatchRepository matchRepository;
         private readonly IMapper mapper;
-        private readonly IMatchFacade matchFacade;
-        public MatchService(IMatchRepository matchRepository, IMapper mapper, IBoardService boardService, IMatchFacade matchFacade)
+        public MatchService(IMatchRepository matchRepository, IMapper mapper, IBoardService boardService)
         {
             this.matchRepository = matchRepository;
             this.mapper = mapper;
             this.boardService = boardService;
-            this.matchFacade = matchFacade;
         }
         public Match Create(MatchDTO matchDTO)
         {
             List<Square> board = boardService.BuildBoard().ToList();
+            board = boardService.ValidateMoves(board).ToList();
             var players = mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
             var match = new Match(matchDTO.Reference, players, board);
             return this.matchRepository.Create(match);

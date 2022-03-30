@@ -12,7 +12,7 @@ namespace chess.Application.Providers
     {
         public static void Register(IServiceCollection serviceColleciton)
         {
-            serviceColleciton.AddScoped<IMatchFacade, MatchFacade>();
+            serviceColleciton.AddScoped<MatchFacade>();
         }
     }
 }

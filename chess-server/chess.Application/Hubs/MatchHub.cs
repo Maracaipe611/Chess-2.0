@@ -9,25 +9,23 @@ namespace chess.Application
 {
     public class MatchHub : Hub<IMatchHub>
     {
-        private readonly IMatchService matchService;
-        private readonly IMatchFacade matchFacade;
+        private readonly MatchFacade matchFacade;
 
-        public MatchHub(IMatchService matchService, IMatchFacade matchFacade)
+        public MatchHub(IMatchService matchService, MatchFacade matchFacade)
         {
-            this.matchService = matchService;
             this.matchFacade = matchFacade;
         }
 
         public async Task ReceiveMove(MatchDTO matchDTO)
         {
-            var match = matchService.GetByReference(matchDTO.Reference);
+            var match = matchFacade.GetByReference(matchDTO.Reference);
             match.Board = matchFacade.ValidateMoves(match.Board);
             await Clients.Group("messageReceived").ReceiveMove(match);
         }
 
         public async Task WatchMatch(string reference)
         {
-            var match = matchService.GetByReference(reference);
+            var match = matchFacade.GetByReference(reference);
             await Clients.Group("watch").WatchMatch(match);
         }
 

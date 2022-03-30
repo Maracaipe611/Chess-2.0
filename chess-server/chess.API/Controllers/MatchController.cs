@@ -1,4 +1,4 @@
-﻿using chess.Application.Services.MatchService;
+﻿using chess.Application.Facades.MatchFacade;
 using chess.Domain.Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,10 +10,10 @@ namespace chess.API.Controllers
     [ApiController]
     public class MatchController : Controller
     {
-        private readonly IMatchService matchService;
-        public MatchController(IMatchService matchService)
+        private readonly MatchFacade matchFacade;
+        public MatchController(MatchFacade matchFacade)
         {
-            this.matchService = matchService;
+            this.matchFacade = matchFacade;
         }
 
         // GET: MatchController
@@ -22,7 +22,7 @@ namespace chess.API.Controllers
         {
             try
             {
-                var matchs = matchService.GetAll().ToList();
+                var matchs = matchFacade.GetAll().ToList();
                 return Ok(matchs);
             }
             catch (Exception)
@@ -37,7 +37,7 @@ namespace chess.API.Controllers
         {
             try
             {
-                var match = matchService.GetByReference(reference);
+                var match = matchFacade.GetByReference(reference);
                 if (match == null)
                     return NotFound();
                 return Ok(match);
@@ -56,7 +56,7 @@ namespace chess.API.Controllers
             {
                 bool hasAnyMatchWithSameReference = Get(matchDTO.Reference).GetType() != NotFound().GetType();
                 if (hasAnyMatchWithSameReference) return Conflict();
-                var match = matchService.Create(matchDTO);
+                var match = matchFacade.Create(matchDTO);
                 return Ok(match);
             }
             catch (Exception)
@@ -71,7 +71,7 @@ namespace chess.API.Controllers
         {
             try
             {
-                var match = matchService.Update(matchDTO);
+                var match = matchFacade.Update(matchDTO);
                 return Ok(match);
             }
             catch (Exception)
@@ -86,10 +86,10 @@ namespace chess.API.Controllers
         {
             try
             {
-                var match = matchService.GetByReference(reference);
+                var match = matchFacade.GetByReference(reference);
                 if (match == null)
                     return NotFound();
-                matchService.Delete(reference);
+                matchFacade.Delete(reference);
                 return Ok();
             }
             catch (Exception)

@@ -1,4 +1,7 @@
-﻿using chess.Domain.Entities;
+﻿using chess.Application.Services.BoardService;
+using chess.Application.Services.MatchService;
+using chess.Domain.Entities;
+using chess.Domain.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,75 +10,48 @@ using System.Threading.Tasks;
 
 namespace chess.Application.Facades.MatchFacade
 {
-    public class MatchFacade : IMatchFacade
+    public class MatchFacade
     {
-        public IEnumerable<Square> ValidateMoves(IEnumerable<Square> board)
+        private readonly IMatchService matchService;
+        private readonly IBoardService boardService;
+        public MatchFacade(IMatchService matchService, IBoardService boardService)
         {
-            foreach (var square in board)
-            {
-                if (square.Piece is null) continue;
-                var piece = square.Piece;
-                bool isInDefaultPosition = DefaultIndexPositions(piece.Type, piece.Color) == piece.Coordinate.Index;
-                bool hasMovedBefore = !isInDefaultPosition && !piece.HasMovedBefore;
-                List<Square> possiblesSquaresToMove = new List<Square>();
-
-                foreach (var squareId in piece.SquaresToMove)
-                {
-                    possiblesSquaresToMove.AddRange(board.Where(square => square.Id.Equals(squareId)));
-                }
-
-                RemoveSquareWithFriendPieces(piece, possiblesSquaresToMove);
-
-                switch (piece.Type)
-                {
-                    case Types.Pawn:
-                        {
-                            if (hasMovedBefore)
-                            {
-                                RemoveLongMove(piece, possiblesSquaresToMove);
-                            }
-                        }
-                        break;
-                    case Types.Tower:
-                        break;
-                    case Types.Horse:
-                        break;
-                    case Types.Bishop:
-                        break;
-                    case Types.Queen:
-                        break;
-                    case Types.King:
-                        break;
-                }
-                square.Piece = piece;
-            }
-            return board;
+            this.matchService = matchService;
+            this.boardService = boardService;
+        }
+        public IEnumerable<Square> BuildBoard()
+        {
+            return boardService.BuildBoard();
         }
 
-        #region Private
-        private static int DefaultIndexPositions(Types type, Colors color)
+        public Match Create(MatchDTO matchDTO)
         {
-            if (type == Types.Pawn)
-            {
-                return color == Colors.White ? 2 : 7;
-            }
-
-            return color == Colors.White ? 1 : 8;
+            return matchService.Create(matchDTO);
         }
 
-        private static void RemoveLongMove(Piece piece, IEnumerable<Square> possibleSquaresToMove)
+        public void Delete(string reference)
         {
-            int direction = piece.Color == Colors.Black ? -1 : 1;
-            var longgestSquare = possibleSquaresToMove.Where(square => square.Coordinate.Index > (piece.Coordinate.Index + 1 * direction)).FirstOrDefault();
-            piece.SquaresToMove = possibleSquaresToMove.Where(square => square.Coordinate.Equals(longgestSquare.Coordinate)).Select(square => square.Id);
+            matchService.Delete(reference);
         }
 
-        private static void RemoveSquareWithFriendPieces(Piece piece, IEnumerable<Square> possibleSquaresToMove)
+        public IEnumerable<Match> GetAll()
         {
-            possibleSquaresToMove = possibleSquaresToMove.Where(square => square.Piece is null || square.Piece is not null && square.Piece.Color != piece.Color);
-            piece.SquaresToMove = possibleSquaresToMove.Select(square => square.Id);
+            return matchService.GetAll();
         }
 
-        #endregion
+        public Match GetByReference(string name)
+        {
+            return matchService.GetByReference(name);
+        }
+
+        public Match Update(MatchDTO matchDTO)
+        {
+            return matchService.Update(matchDTO);
+        }
+
+        public IEnumerable<Square> ValidateMoves(IEnumerable<Square> squares)
+        {
+            return boardService.ValidateMoves(squares);
+        }
     }
 }

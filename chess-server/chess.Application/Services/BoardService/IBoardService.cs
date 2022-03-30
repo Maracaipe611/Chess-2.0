@@ -6,5 +6,6 @@ namespace chess.Application.Services.BoardService
     public interface IBoardService
     {
         IEnumerable<Square> BuildBoard();
+        IEnumerable<Square> ValidateMoves(IEnumerable<Square> squares);
     }
 }
