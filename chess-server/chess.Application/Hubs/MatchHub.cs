@@ -18,6 +18,7 @@ namespace chess.Application
         public async Task ReceiveMove(MatchDTO matchDTO)
         {
             var match = matchService.GetByReference(matchDTO.Reference);
+            match = matchService.ValidateMoves(match);
             await Clients.Group("messageReceived").ReceiveMove(match);
         }
 

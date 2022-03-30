@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using chess.Domain.Data.Repositories;
 using chess.Domain.Entities.DTO;
+using chess.Application.Facades.MatchFacade;
 
 namespace chess.Application.Services.MatchService
 {
@@ -13,11 +14,13 @@ namespace chess.Application.Services.MatchService
         private readonly IBoardService boardService;
         private readonly IMatchRepository matchRepository;
         private readonly IMapper mapper;
-        public MatchService(IMatchRepository matchRepository, IMapper mapper, IBoardService boardService)
+        private readonly IMatchFacade matchFacade;
+        public MatchService(IMatchRepository matchRepository, IMapper mapper, IBoardService boardService, IMatchFacade matchFacade)
         {
             this.matchRepository = matchRepository;
             this.mapper = mapper;
             this.boardService = boardService;
+            this.matchFacade = matchFacade;
         }
         public Match Create(MatchDTO matchDTO)
         {
@@ -48,6 +51,11 @@ namespace chess.Application.Services.MatchService
             Match newMatch = matchRepository.GetByReference(matchDTO.Reference); //recebo todas as props da match anterior
             newMatch.Board = matchDTO.Board; //substituo apenas o board
             return matchRepository.Update(newMatch);
+        }
+
+        public Match ValidateMovement(Match match)
+        {
+            return matchFacade.ValidateMoves(match);
         }
     }
 }
