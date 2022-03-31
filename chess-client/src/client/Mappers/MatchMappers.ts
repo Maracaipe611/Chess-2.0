@@ -37,7 +37,7 @@ const mapPieceDTO = (piece: PieceDTO | undefined): Piece | undefined => {
     piece.type,
     piece.coordinate,
     piece.color,
-    piece.squaresToMove,
+    piece.squaresToMove.map(square => square.id),
   );
 };
 

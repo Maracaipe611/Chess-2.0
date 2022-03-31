@@ -1,6 +1,9 @@
 import { Types } from "../../Components/Piece/types";
 import { Colors, Coordinate } from "../Board/types";
 
+export interface Dictionary<T> {
+        [Key: string]: T;
+}
 export interface PlayerDTO {
         id?: string;
         color: Colors;
@@ -11,7 +14,7 @@ export interface PieceDTO {
         id: string;
         type: Types;
         color: Colors;
-        squaresToMove: Array<string>;
+        squaresToMove: Dictionary<string>;
         coordinate: Coordinate;
 }
 

@@ -47,25 +47,10 @@ const useBoardClient = () => {
     }
   }, [connection]);
 
-  useEffect(() => {
-    if (connection?.state === HubConnectionState.Connected) {
-
-      const sendMessage = () => {
-        connection.invoke("Teste", "teste").then(res => {
-          console.log(res);
-        }).catch(err => {
-          console.log("Something goes wrong", err);
-        });
-      };
-
-      sendMessage();
-    }
-  }, [connectionRef, connection]);
-
   const sendMove = async (currentMatch: Match) => {
     if (connection?.state === HubConnectionState.Connected) {
       try {
-        await connection.send("Teste", JSON.stringify(currentMatch));
+        await connection.invoke("ValidateNewMatch", currentMatch);
       }
       catch (e) {
         console.log(e);
