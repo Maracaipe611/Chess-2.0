@@ -10,6 +10,7 @@ namespace chess.Application.Services.BoardService
     {
         private readonly ISquareService squareService;
         private readonly IPieceService pieceService;
+        private List<Square> board;
         public BoardService(ISquareService squareService, IPieceService pieceService)
         {
             this.squareService = squareService;
@@ -27,20 +28,16 @@ namespace chess.Application.Services.BoardService
         }
         public IEnumerable<Square> ValidateMoves(IEnumerable<Square> board)
         {
+            this.board = board.ToList();
             foreach (var square in board)
             {
                 if (square.Piece is null) continue;
                 var piece = square.Piece;
                 bool isInDefaultPosition = DefaultIndexPositions(piece.Type, piece.Color) == piece.Coordinate.Index;
                 bool hasMovedBefore = !isInDefaultPosition && !piece.HasMovedBefore;
-                List<Square> possiblesSquaresToMove = new List<Square>();
 
-                foreach (var squareId in piece.SquaresToMove)
-                {
-                    possiblesSquaresToMove.AddRange(board.Where(square => square.Id.Equals(squareId.Key)));
-                }
-
-                RemoveSquareWithFriendPieces(piece, possiblesSquaresToMove);
+                RemoveSquaresNotAbleToJump(piece);
+                RemoveSquareWithFriendPieces(piece);
 
                 switch (piece.Type)
                 {
@@ -48,7 +45,7 @@ namespace chess.Application.Services.BoardService
                         {
                             if (hasMovedBefore)
                             {
-                                RemoveLongMove(piece, possiblesSquaresToMove);
+                                RemoveLongMove(piece);
                             }
                         }
                         break;
@@ -79,42 +76,80 @@ namespace chess.Application.Services.BoardService
             return color == Colors.White ? 1 : 8;
         }
 
-        private static void RemoveLongMove(Piece piece, IEnumerable<Square> possibleSquaresToMove)
+        private List<Square> GetSquaresById(IEnumerable<string> squaresIds)
+        {
+            List<Square> possiblesSquaresToMove = new List<Square>();
+
+            foreach (var squareId in squaresIds)
+            {
+                possiblesSquaresToMove.AddRange(this.board.Where(square => square.Id.Equals(squareId)));
+            }
+
+            return possiblesSquaresToMove;
+        }
+
+        private void RemoveLongMove(Piece piece)
         {
             int direction = piece.Color == Colors.Black ? -1 : 1;
+            var possibleSquaresToMove = GetSquaresById(piece.PossiblesSquaresToMove.Select(ps => ps.Id));
             var longgestSquare = possibleSquaresToMove.Where(square => square.Coordinate.Index > (piece.Coordinate.Index + 1 * direction)).SingleOrDefault();
             foreach (var possibleSquare in possibleSquaresToMove)
             {
                 if (possibleSquare == longgestSquare)
                 {
-                    piece.SquaresToMove.Remove(longgestSquare.Id);
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != longgestSquare.Id);
                 }
             }
         }
 
-        private static void RemoveSquareWithFriendPieces(Piece piece, IList<Square> possibleSquaresToMove)
+        private void RemoveSquareWithFriendPieces(Piece piece)
         {
             //select all squares that piece is not able to move
+            var possibleSquaresToMove = GetSquaresById(piece.PossiblesSquaresToMove.Select(ps => ps.Id));
             var impossibleSquaresToMove = possibleSquaresToMove.Where(square => square.Piece is not null && square.Piece.Color == piece.Color).ToList();
 
             foreach (var impossibleSquare in impossibleSquaresToMove)
             {
                 possibleSquaresToMove.Remove(impossibleSquare);
-                if (piece.SquaresToMove.ContainsKey(impossibleSquare.Id))
+                if (piece.PossiblesSquaresToMove.Select(pq => pq.Id).Contains(impossibleSquare.Id))
                 {
-                    //if the dictionary contains some impossible square to move, then it will be removed
-                    piece.SquaresToMove.Remove(impossibleSquare.Id);
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != impossibleSquare.Id);
                 }
             }
         }
 
-        //private static void RemoveSquaresNotAbleToJump(Piece piece)
-        //{
-        //    foreach (var direction in piece.)
-        //    {
+        private void RemoveSquaresNotAbleToJump(Piece piece)
+        {
+            if (piece.Type == Types.Horse) return;
+            List<PossibleSquareToMove> unablePossibilities = new List<PossibleSquareToMove>();
+            List<MovesDirections> unableDirections = new List<MovesDirections>();
+            
+            foreach (var possibleSquareToMove in piece.PossiblesSquaresToMove)
+            {
+                bool thisDirectionIsAlreadyUnable = unableDirections.Contains(possibleSquareToMove.Direction);
+                if (thisDirectionIsAlreadyUnable)
+                {
+                    unablePossibilities.Add(possibleSquareToMove);
+                    continue;
+                }
 
-        //    }
-        //}
+                bool possibleSquareHasAnyPiece = board.Where(square => square.Id.Equals(possibleSquareToMove.Id)).SingleOrDefault().Piece != null;
+                if (possibleSquareHasAnyPiece)
+                {
+                    unableDirections.Add(possibleSquareToMove.Direction);
+                    unablePossibilities.Add(possibleSquareToMove);
+                    continue;
+                }
+            }
+
+            foreach (var impossibleSquareToMove in unablePossibilities)
+            {
+                if (piece.PossiblesSquaresToMove.Contains(impossibleSquareToMove))
+                {
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => !pq.Equals(impossibleSquareToMove));
+                }
+            }
+        }
 
         #endregion
     }

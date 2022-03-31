@@ -18,7 +18,6 @@ const mapMatchDTO = (matchDto: MatchDTO): Match | null => {
   const players = mapPlayerDTO(matchDto.players);
 
   return new Match(matchDto.id, houses, players, matchDto.reference);
-
 };
 
 const mapHousesDTO = (houses: Array<SquareDTO>): Array<House> => {
@@ -37,7 +36,7 @@ const mapPieceDTO = (piece: PieceDTO | undefined): Piece | undefined => {
     piece.type,
     piece.coordinate,
     piece.color,
-    piece.squaresToMove.map(square => square.id),
+    piece.possiblesSquaresToMove.map(square => square.id),
   );
 };
 

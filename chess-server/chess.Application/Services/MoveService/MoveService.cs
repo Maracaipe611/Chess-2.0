@@ -63,10 +63,10 @@ namespace chess.Application.Services.MoveService
             return moves;
         }
 
-        public Dictionary<String, MovesDirections> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
+        public IEnumerable<PossibleSquareToMove> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
         {
             int playerDirection = color == Colors.Black ? -1 : 1;
-            var possiblesSquaresToMove = new Dictionary<String, MovesDirections>();
+            var possiblesSquaresToMove = new List<PossibleSquareToMove>();
             var pieceAlpha = coordinate.Alpha;
             var pieceIndex = coordinate.Index;
 
@@ -81,7 +81,10 @@ namespace chess.Application.Services.MoveService
                 var futureSquareCoordinate = new Coordinate(Alpha, Index);
                 var futureSquare = squares.Where(square => square.Coordinate.Equals(futureSquareCoordinate)).SingleOrDefault();
                 if (futureSquare is null) continue;
-                possiblesSquaresToMove.Add(futureSquare.Id, move.Direction);
+                possiblesSquaresToMove.Add(new PossibleSquareToMove(){
+                    Id = futureSquare.Id,
+                    Direction = move.Direction,
+                });
             }
             return possiblesSquaresToMove;
         }

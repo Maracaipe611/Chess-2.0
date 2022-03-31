@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using chess.Domain.Entities;
-
-namespace chess.Domain.Entities
+﻿namespace chess.Domain.Entities
 {
     public class Square
     {
