@@ -44,7 +44,7 @@ namespace chess.Application.Services.PieceService
                         List<Move> moves = moveService.BuildMoves(pieceType).ToList();
                         int index = DefaultIndexPositions(pieceType, color);
                         Coordinate coordinate = new Coordinate(alpha, index);
-                        List<String> squaresToMove = moveService.BuildSquaresToMove(pieceType, coordinate, color, squares, moves).ToList();
+                        Dictionary<String, MovesDirections> squaresToMove = moveService.BuildSquaresToMove(pieceType, coordinate, color, squares, moves);
                         allPieces.Add(new Piece(pieceType, color, coordinate, squaresToMove));
                     }
                 }

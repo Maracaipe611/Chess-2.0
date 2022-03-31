@@ -1,10 +1,8 @@
-﻿using chess.Domain.Entities;
+﻿using chess.Application.Services.PieceService;
 using chess.Application.Services.SquareService;
-using chess.Application.Services.PieceService;
-using System.Linq;
+using chess.Domain.Entities;
 using System.Collections.Generic;
-using chess.Application.Services.MatchService;
-using chess.Application.Facades.MatchFacade;
+using System.Linq;
 
 namespace chess.Application.Services.BoardService
 {
@@ -39,7 +37,7 @@ namespace chess.Application.Services.BoardService
 
                 foreach (var squareId in piece.SquaresToMove)
                 {
-                    possiblesSquaresToMove.AddRange(board.Where(square => square.Id.Equals(squareId)));
+                    possiblesSquaresToMove.AddRange(board.Where(square => square.Id.Equals(squareId.Key)));
                 }
 
                 RemoveSquareWithFriendPieces(piece, possiblesSquaresToMove);
@@ -84,15 +82,39 @@ namespace chess.Application.Services.BoardService
         private static void RemoveLongMove(Piece piece, IEnumerable<Square> possibleSquaresToMove)
         {
             int direction = piece.Color == Colors.Black ? -1 : 1;
-            var longgestSquare = possibleSquaresToMove.Where(square => square.Coordinate.Index > (piece.Coordinate.Index + 1 * direction)).FirstOrDefault();
-            piece.SquaresToMove = possibleSquaresToMove.Where(square => square.Coordinate.Equals(longgestSquare.Coordinate)).Select(square => square.Id);
+            var longgestSquare = possibleSquaresToMove.Where(square => square.Coordinate.Index > (piece.Coordinate.Index + 1 * direction)).SingleOrDefault();
+            foreach (var possibleSquare in possibleSquaresToMove)
+            {
+                if (possibleSquare == longgestSquare)
+                {
+                    piece.SquaresToMove.Remove(longgestSquare.Id);
+                }
+            }
         }
 
-        private static void RemoveSquareWithFriendPieces(Piece piece, IEnumerable<Square> possibleSquaresToMove)
+        private static void RemoveSquareWithFriendPieces(Piece piece, IList<Square> possibleSquaresToMove)
         {
-            possibleSquaresToMove = possibleSquaresToMove.Where(square => square.Piece is null || square.Piece is not null && square.Piece.Color != piece.Color);
-            piece.SquaresToMove = possibleSquaresToMove.Select(square => square.Id);
+            //select all squares that piece is not able to move
+            var impossibleSquaresToMove = possibleSquaresToMove.Where(square => square.Piece is not null && square.Piece.Color == piece.Color).ToList();
+
+            foreach (var impossibleSquare in impossibleSquaresToMove)
+            {
+                possibleSquaresToMove.Remove(impossibleSquare);
+                if (piece.SquaresToMove.ContainsKey(impossibleSquare.Id))
+                {
+                    //if the dictionary contains some impossible square to move, then it will be removed
+                    piece.SquaresToMove.Remove(impossibleSquare.Id);
+                }
+            }
         }
+
+        //private static void RemoveSquaresNotAbleToJump(Piece piece)
+        //{
+        //    foreach (var direction in piece.)
+        //    {
+
+        //    }
+        //}
 
         #endregion
     }

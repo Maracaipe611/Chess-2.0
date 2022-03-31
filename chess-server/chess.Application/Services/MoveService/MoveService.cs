@@ -23,7 +23,7 @@ namespace chess.Application.Services.MoveService
 
                 case Types.Tower:
                     {
-                        for (int i = 0; i <= multiplier; i++)
+                        for (int i = 1; i <= multiplier; i++)
                         {
                             moves.AddRange(HorizontalAndVerticalMoves(i));
                         }
@@ -36,7 +36,7 @@ namespace chess.Application.Services.MoveService
                     }
                 case Types.Bishop:
                     {
-                        for (int i = 0; i <= multiplier; i++)
+                        for (int i = 1; i <= multiplier; i++)
                         {
                             moves.AddRange(DiagonalMoves(i));
                         }
@@ -44,7 +44,7 @@ namespace chess.Application.Services.MoveService
                     }
                 case Types.Queen:
                     {
-                        for (int i = 0; i <= multiplier; i++)
+                        for (int i = 1; i <= multiplier; i++)
                         {
                             moves.AddRange(HorizontalAndVerticalMoves(i));
                             moves.AddRange(DiagonalMoves(i));
@@ -63,10 +63,10 @@ namespace chess.Application.Services.MoveService
             return moves;
         }
 
-        public IEnumerable<String> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
+        public Dictionary<String, MovesDirections> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
         {
             int playerDirection = color == Colors.Black ? -1 : 1;
-            var possiblesSquaresToMove = new List<String>();
+            var possiblesSquaresToMove = new Dictionary<String, MovesDirections>();
             var pieceAlpha = coordinate.Alpha;
             var pieceIndex = coordinate.Index;
 
@@ -79,9 +79,9 @@ namespace chess.Application.Services.MoveService
                 var Index = pieceIndex + (moveIndex * playerDirection) ;
 
                 var futureSquareCoordinate = new Coordinate(Alpha, Index);
-                var futureSquare = squares.Where(square => square.Coordinate.Equals(futureSquareCoordinate)).FirstOrDefault();
+                var futureSquare = squares.Where(square => square.Coordinate.Equals(futureSquareCoordinate)).SingleOrDefault();
                 if (futureSquare is null) continue;
-                possiblesSquaresToMove.Add(futureSquare.Id);
+                possiblesSquaresToMove.Add(futureSquare.Id, move.Direction);
             }
             return possiblesSquaresToMove;
         }

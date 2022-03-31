@@ -11,7 +11,7 @@ namespace chess.Application
     {
         private readonly MatchFacade matchFacade;
 
-        public MatchHub(IMatchService matchService, MatchFacade matchFacade)
+        public MatchHub(MatchFacade matchFacade)
         {
             this.matchFacade = matchFacade;
         }
@@ -29,9 +29,11 @@ namespace chess.Application
             await Clients.Group("watch").WatchMatch(match);
         }
 
-        public async Task Teste(string value)
+        public async Task ValidateNewMatch(MatchDTO matchDTO)
         {
-            await Clients.All.ReceiveMessage($"Teste, {value}");
+            var match = matchFacade.GetByReference(matchDTO.Reference);
+            match.Board = matchFacade.ValidateMoves(match.Board);
+            await Clients.All.ReceiveNewBoard(match);
         }
     }
 }
