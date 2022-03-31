@@ -47,7 +47,7 @@ const useBoardClient = () => {
     }
   }, [connection]);
 
-  const sendMove = async (currentMatch: Match) => {
+  const sendMove = useCallback(async (currentMatch: Match) => {
     if (connection?.state === HubConnectionState.Connected) {
       try {
         await connection.invoke("ValidateNewMatch", currentMatch);
@@ -59,11 +59,11 @@ const useBoardClient = () => {
     else {
       alert("No connection to server yet.");
     }
-  };
+  }, [connection]);
 
-  return useCallback(() => {
-    sendMove;
-  }, [
+  return useCallback(() => ({
+    sendMove,
+  }), [
     sendMove,
   ]);
 

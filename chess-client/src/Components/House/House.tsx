@@ -33,24 +33,20 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
   }, [ableHousesToMove, selectedHouse, player, house]);
 
   const action = (): Actions => {
-    let userAction;
-    if (selectedHouse === house) return userAction = !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
-    if (!house.piece) {
-      ableHousesToMove.includes(house) ?
-        userAction = Actions.NoPieceAndMove :
-        userAction = Actions.NoPiece;
-    } else {
-      if (house.piece.isFriend(player)) {
-        selectedHouse === house ?
-          userAction = Actions.Unselect :
-          userAction = Actions.FriendlyPiece;
-      } else {
-        ableHousesToMove.includes(house) ?
-          userAction = Actions.EnemyPieceAndEat :
-          userAction = Actions.EnemyPiece;
-      }
+
+    if (selectedHouse === house) {
+      return !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
     }
-    return userAction;
+
+    if (!house.piece) {
+      return ableHousesToMove.includes(house) ? Actions.MovePiece : Actions.NoPiece;
+    }
+
+    if (house.piece.isFriend(player)) {
+      return selectedHouse === house ? Actions.Unselect : Actions.FriendlyPiece;
+    } else {
+      return ableHousesToMove.includes(house) ? Actions.EnemyPieceAndEat : Actions.EnemyPiece;
+    }
   };
 
   return (

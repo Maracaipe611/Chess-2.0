@@ -2,18 +2,18 @@ import { AlphPositions } from "../Piece/types";
 import { Colors } from "../../client/Board/types";
 
 export enum direction {
-    forward = 1,
-    backward = -1
+  forward = 1,
+  backward = -1
 }
 
 export enum Actions {
-    "NoPiece",
-    "FriendlyPiece",
-    "EnemyPiece",
-    "EnemyPieceAndEat",
-    "NoPieceAndMove",
-    "Unselect",
-    "UnselectEnemy",
+  "NoPiece",
+  "FriendlyPiece",
+  "MovePiece",
+  "EnemyPiece",
+  "EnemyPieceAndEat",
+  "Unselect",
+  "UnselectEnemy",
 }
 
 export default class Player {
@@ -31,11 +31,11 @@ export default class Player {
     return this.color == Colors.Black ? Colors.White : Colors.Black;
   }
 
-  direction(pieceIsMine: boolean):number {
+  direction(pieceIsMine: boolean): number {
     return pieceIsMine ? (this.color === Colors.White ? direction.forward : direction.backward) : (this.color === Colors.Black ? direction.forward : direction.backward);
   }
 
-  houseOrder():Array<AlphPositions> {
+  houseOrder(): Array<AlphPositions> {
     const { A, B, C, D, E, F, G, H } = AlphPositions;
     return this.color === Colors.Black ? [A, B, C, D, E, F, G, H] : [H, G, F, E, D, C, B, A];
   }

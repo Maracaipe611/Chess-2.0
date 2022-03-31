@@ -37,7 +37,7 @@ namespace chess.Application.Services.BoardService
                 bool hasMovedBefore = !isInDefaultPosition && !piece.HasMovedBefore;
 
                 RemoveSquaresNotAbleToJump(piece);
-                RemoveSquareWithFriendPieces(piece);
+                // RemoveSquareWithFriendPieces(piece);
 
                 switch (piece.Type)
                 {
