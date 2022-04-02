@@ -4,6 +4,7 @@ import { Piece } from "../../Components/Piece/types";
 import { useGameContext } from "./context";
 import useBoardClient from "../../client/Board/useBoardClient";
 import { Match } from "../../client/Board/types";
+import { useMemo } from "react";
 
 export const useGameLogic = () => {
     const {
@@ -17,7 +18,7 @@ export const useGameLogic = () => {
         setMovementHistory, movementHistory,
         setAbleHousesToMove, ableHousesToMove,  */ } = useGameContext();
 
-    const boardClient = useBoardClient();
+    const boardClient = useMemo(useBoardClient(), []);
 
     const houseHandler = (house: House, action: Actions) => {
         switch (action) {
@@ -29,7 +30,7 @@ export const useGameLogic = () => {
                 break;
             case Actions.MovePiece:
                 const newMatch = movePiece();
-                boardClient().sendMove(newMatch);
+                boardClient.sendMove(newMatch);
                 break;
             default:
                 break;
