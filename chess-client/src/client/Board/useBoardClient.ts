@@ -1,6 +1,7 @@
 import { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel } from "@microsoft/signalr";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useGameContext } from "../../Components/GameLogic/context";
+import House from "../../Components/House/types";
 import { mapMatchDTO } from "../Mappers/MatchMappers";
 import { MatchDTO } from "../MatchClient/types";
 import { Match } from "./types";
@@ -9,11 +10,16 @@ const useBoardClient = () => {
   const currentMatchRef = useRef<Match | undefined>();
   const connectionRef = useRef<HubConnectionState>();
   const [connection, setConnection] = useState<HubConnection>();
+  const [connected, setConnected] = useState(false);
   const { match, setMatch } = useGameContext();
 
   currentMatchRef.current = match;
 
   const baseURL = process.env.REACT_APP_LOCAL_BASE_URL_API;
+
+  const connect = () => {
+    setConnected(true);
+  };
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
@@ -28,7 +34,7 @@ const useBoardClient = () => {
 
     setConnection(newConnection);
 
-  }, []);
+  }, [connected]);
 
   useEffect(() => {
     if (connection) {
@@ -47,10 +53,10 @@ const useBoardClient = () => {
     }
   }, [connection]);
 
-  const sendMove = useCallback(async (currentMatch: Match) => {
-    if (connection?.state === HubConnectionState.Connected) {
+  const sendMove = useCallback(async (selectedHouse: House, futureHouse: House) => {
+    if (connection?.state === HubConnectionState.Connected && currentMatchRef.current) {
       try {
-        await connection.invoke("ValidateNewMatch", currentMatch);
+        await connection.invoke("ValidateNewMatch", selectedHouse, futureHouse, currentMatchRef.current.reference);
       }
       catch (e) {
         console.log(e);
@@ -61,11 +67,7 @@ const useBoardClient = () => {
     }
   }, [connection]);
 
-  return useCallback(() => ({
-    sendMove,
-  }), [
-    sendMove,
-  ]);
+  return { sendMove, connect };
 
 };
 

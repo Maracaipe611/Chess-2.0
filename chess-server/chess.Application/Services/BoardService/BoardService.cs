@@ -97,7 +97,7 @@ namespace chess.Application.Services.BoardService
             {
                 if (possibleSquare == longgestSquare)
                 {
-                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != longgestSquare.Id);
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != longgestSquare.Id).ToList();
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace chess.Application.Services.BoardService
                 possibleSquaresToMove.Remove(impossibleSquare);
                 if (piece.PossiblesSquaresToMove.Select(pq => pq.Id).Contains(impossibleSquare.Id))
                 {
-                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != impossibleSquare.Id);
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != impossibleSquare.Id).ToList();
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace chess.Application.Services.BoardService
             {
                 if (piece.PossiblesSquaresToMove.Contains(impossibleSquareToMove))
                 {
-                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => !pq.Equals(impossibleSquareToMove));
+                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => !pq.Equals(impossibleSquareToMove)).ToList();
                 }
             }
         }

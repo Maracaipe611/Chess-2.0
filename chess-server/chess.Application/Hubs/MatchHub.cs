@@ -1,6 +1,7 @@
 ﻿using chess.Application.Facades.MatchFacade;
 using chess.Application.Hubs.Interfaces;
 using chess.Application.Services.MatchService;
+using chess.Domain.Entities;
 using chess.Domain.Entities.DTO;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
@@ -29,11 +30,29 @@ namespace chess.Application
             await Clients.Group("watch").WatchMatch(match);
         }
 
-        public async Task ValidateNewMatch(MatchDTO matchDTO)
+        public async Task ValidateNewMatch(Square selectedHouse, Square futureHouse, string reference)
         {
-            var match = matchFacade.GetByReference(matchDTO.Reference);
+            var match = matchFacade.GetByReference(reference);
+            MovePiece(selectedHouse, futureHouse, ref match);
             match.Board = matchFacade.ValidateMoves(match.Board);
             await Clients.All.ReceiveNewBoard(match);
+        }
+
+        private void MovePiece(Square selectedHouse, Square futureHouse, ref Match match)
+        {
+            var pieceMoved = selectedHouse.Piece;
+            pieceMoved.Coordinate = futureHouse.Coordinate;
+            foreach (var house in match.Board)
+            {
+                if (house.Coordinate.Equals(selectedHouse.Coordinate))
+                {
+                    house.Piece = null;
+                } else
+                if (house.Coordinate.Equals(futureHouse.Coordinate))
+                {
+                    house.Piece = pieceMoved;
+                }
+            }
         }
     }
 }

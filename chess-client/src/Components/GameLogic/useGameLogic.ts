@@ -4,7 +4,7 @@ import { Piece } from "../../Components/Piece/types";
 import { useGameContext } from "./context";
 import useBoardClient from "../../client/Board/useBoardClient";
 import { Match } from "../../client/Board/types";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export const useGameLogic = () => {
     const {
@@ -18,7 +18,7 @@ export const useGameLogic = () => {
         setMovementHistory, movementHistory,
         setAbleHousesToMove, ableHousesToMove,  */ } = useGameContext();
 
-    const boardClient = useMemo(useBoardClient(), []);
+    const { sendMove, connect } = useBoardClient();
 
     const houseHandler = (house: House, action: Actions) => {
         switch (action) {
@@ -29,27 +29,13 @@ export const useGameLogic = () => {
                 setAbleHousesToMove(findHousesByIds(house.piece?.housesToMove));
                 break;
             case Actions.MovePiece:
-                const newMatch = movePiece();
-                boardClient.sendMove(newMatch);
+                if (!selectedHouse || !match) return;
+                sendMove(selectedHouse, house);
                 break;
             default:
                 break;
         }
     };
-
-    const movePiece = (): Match => {
-        const currentPiece = selectedHouse?.piece;
-        if (!currentPiece || !match || !match.board) throw new Error("This is not an movement action");
-        const newBoard = match.board.map(square => {
-            if (square.id === selectedHouse.id) {
-                square.piece = currentPiece;
-            }
-            return square;
-        })
-        let newMatch = match;
-        newMatch.board = newBoard;
-        return newMatch;
-    }
 
     const findHousesByIds = (housesIds: Array<string>): Array<House> => {
         const board = match?.board;

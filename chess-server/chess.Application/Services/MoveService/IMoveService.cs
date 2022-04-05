@@ -7,6 +7,6 @@ namespace chess.Application.Services.MoveService
     public interface IMoveService
     {
         IEnumerable<Move> BuildMoves(Types type);
-        IEnumerable<PossibleSquareToMove> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves);
+        IList<PossibleSquareToMove> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves);
     }
 }

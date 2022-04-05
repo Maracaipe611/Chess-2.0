@@ -6,11 +6,11 @@ namespace chess.Domain.Entities
 {
     public class Piece
     {
-        public Piece(Types type, Colors color, Coordinate coordinate, IEnumerable<PossibleSquareToMove> possiblesSquaresToMove)
+        public Piece(Types type, Colors color, Coordinate coordinate, IList<PossibleSquareToMove> possiblesSquaresToMove)
         {
             Id = type.ToString() + coordinate.Alpha.ToString() + coordinate.Index.ToString();
             Type = type;
-            PossiblesSquaresToMove = possiblesSquaresToMove;
+            PossiblesSquaresToMove = possiblesSquaresToMove ?? new List<PossibleSquareToMove>();
             Color = color;
             Coordinate = coordinate;
             HasMovedBefore = false;
@@ -18,7 +18,7 @@ namespace chess.Domain.Entities
         public string Id { get; set; }
         public Types Type { get; set; }
         public Colors Color { get; set; }
-        public IEnumerable<PossibleSquareToMove> PossiblesSquaresToMove { get; set; }
+        public IList<PossibleSquareToMove> PossiblesSquaresToMove { get; set; }
         public Coordinate Coordinate { get; set; }
         public bool HasMovedBefore { get; set; }
     }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { useGameContext } from "../GameLogic/context";
 import { HouseComponent } from "../House/index";
 import House from "../House/types";

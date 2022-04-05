@@ -63,7 +63,7 @@ namespace chess.Application.Services.MoveService
             return moves;
         }
 
-        public IEnumerable<PossibleSquareToMove> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
+        public IList<PossibleSquareToMove> BuildSquaresToMove(Types type, Coordinate coordinate, Colors color, IEnumerable<Square> squares, IEnumerable<Move> moves)
         {
             int playerDirection = color == Colors.Black ? -1 : 1;
             var possiblesSquaresToMove = new List<PossibleSquareToMove>();
