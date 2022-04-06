@@ -1,15 +1,15 @@
-# Xadrez do Lucão
-###### Personal project to improve my knowledge :)
+# ♟️Xadrez do Lucão
+###### Personal project to improve my knowledge 😁
 
-## Tecnologias usadas:
-### - Client:
+## 📁 Solutions:
+### 🎮 Client:
 - React
 - Typescript
 
-### - Server:
+### 🧩 Server:
 - .Net Core 5.0
 
-### - Environment:
+### 🎲 Environment:
 - Mongo
 - Docker
 
@@ -19,7 +19,7 @@
 Before you get it started, you gonna need:
 * .Net SDK 5.0
 * NodeJS 16.^
-* Docker
+* 🐳 Docker
 
 ### 🚀 Running
 
