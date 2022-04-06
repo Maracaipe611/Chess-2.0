@@ -1,5 +1,6 @@
 ﻿using chess.Application.Services.BoardService;
 using chess.Application.Services.MatchService;
+using chess.Application.Services.MoveService;
 using chess.Domain.Entities;
 using chess.Domain.Entities.DTO;
 using System;
@@ -14,10 +15,12 @@ namespace chess.Application.Facades.MatchFacade
     {
         private readonly IMatchService matchService;
         private readonly IBoardService boardService;
-        public MatchFacade(IMatchService matchService, IBoardService boardService)
+        private readonly IMoveService moveService;
+        public MatchFacade(IMatchService matchService, IBoardService boardService, IMoveService moveService)
         {
             this.matchService = matchService;
             this.boardService = boardService;
+            this.moveService = moveService;
         }
         public IEnumerable<Square> BuildBoard()
         {
@@ -44,14 +47,24 @@ namespace chess.Application.Facades.MatchFacade
             return matchService.GetByReference(name);
         }
 
-        public Match Update(MatchDTO matchDTO)
+        public Match Update(Match match)
         {
-            return matchService.Update(matchDTO);
+            return matchService.Update(match);
         }
 
         public IEnumerable<Square> ValidateMoves(IEnumerable<Square> squares)
         {
             return boardService.ValidateMoves(squares);
+        }
+
+        public IEnumerable<Square> BuildPossiblesSquaresToMove(IEnumerable<Square> board)
+        {
+            foreach (var square in board)
+            {
+                if (square.Piece is null) continue;
+                square.Piece.PossiblesSquaresToMove = moveService.BuildSquaresToMove(square.Piece, board);
+            }
+            return board;
         }
     }
 }

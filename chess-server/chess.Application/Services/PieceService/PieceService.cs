@@ -41,10 +41,9 @@ namespace chess.Application.Services.PieceService
                     var alphaPositions = DefaultAlphPositions(pieceType);
                     foreach (var alpha in alphaPositions)
                     {
-                        List<Move> moves = moveService.BuildMoves(pieceType).ToList();
                         int index = DefaultIndexPositions(pieceType, color);
                         Coordinate coordinate = new Coordinate(alpha, index);
-                        var possiblesSquaresToMove = moveService.BuildSquaresToMove(pieceType, coordinate, color, squares, moves);
+                        IList<PossibleSquareToMove> possiblesSquaresToMove = moveService.BuildSquaresToMove(pieceType, coordinate, color, squares);
                         allPieces.Add(new Piece(pieceType, color, coordinate, possiblesSquaresToMove));
                     }
                 }

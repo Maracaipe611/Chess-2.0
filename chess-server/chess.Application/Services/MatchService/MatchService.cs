@@ -45,10 +45,10 @@ namespace chess.Application.Services.MatchService
             return match;
         }
 
-        public Match Update(MatchDTO matchDTO)
+        public Match Update(Match match)
         {
-            Match newMatch = matchRepository.GetByReference(matchDTO.Reference); //recebo todas as props da match anterior
-            newMatch.Board = matchDTO.Board; //substituo apenas o board
+            Match newMatch = matchRepository.GetByReference(match.Reference); //recebo todas as props da match anterior
+            newMatch.Board = match.Board; //substituo apenas o board
             return matchRepository.Update(newMatch);
         }
     }

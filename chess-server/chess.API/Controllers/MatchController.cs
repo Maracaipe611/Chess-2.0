@@ -1,7 +1,10 @@
-﻿using chess.Application.Facades.MatchFacade;
+﻿using AutoMapper;
+using chess.Application.Facades.MatchFacade;
+using chess.Domain.Entities;
 using chess.Domain.Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace chess.API.Controllers
@@ -11,9 +14,11 @@ namespace chess.API.Controllers
     public class MatchController : Controller
     {
         private readonly MatchFacade matchFacade;
-        public MatchController(MatchFacade matchFacade)
+        private readonly IMapper mapper;
+        public MatchController(MatchFacade matchFacade, IMapper mapper)
         {
             this.matchFacade = matchFacade;
+            this.mapper = mapper;
         }
 
         // GET: MatchController
@@ -71,8 +76,10 @@ namespace chess.API.Controllers
         {
             try
             {
-                var match = matchFacade.Update(matchDTO);
-                return Ok(match);
+                var players = mapper.Map<List<Player>>(matchDTO.Players);
+                var match = new Match(matchDTO.Reference, players, matchDTO.Board);
+                var newMatch = matchFacade.Update(match);
+                return Ok(newMatch);
             }
             catch (Exception)
             {

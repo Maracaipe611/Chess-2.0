@@ -10,7 +10,7 @@ namespace chess.Application.Services.MatchService
         IEnumerable<Match> GetAll();
         Match GetByReference(string name);
         Match Create(MatchDTO matchDTO);
-        Match Update(MatchDTO matchDTO);
+        Match Update(Match matchDTO);
         void Delete(string reference);
     }
 }

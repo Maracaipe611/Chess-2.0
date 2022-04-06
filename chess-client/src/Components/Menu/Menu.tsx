@@ -3,7 +3,7 @@ import "./Menu.css";
 import useMatchClient from "../../client/MatchClient/UseMatchClient";
 import { Match } from "../../client/Board/types";
 import { useGameContext } from "../GameLogic/context";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 enum MenuActions {
   Create,
@@ -22,6 +22,8 @@ const Menu = () => {
   const matchExists = useCallback(() => {
     matchClient().getMatch(matchId).then((match: Match) => {
       setMatch(match);
+    }).then(() => {
+      navigate("/play");
     });
   }, [matchClient, matchId]);
 
@@ -58,8 +60,8 @@ const Menu = () => {
       <div className="menu-match-reference">
         {
           (action === MenuActions.Create || action === MenuActions.Join)
-                  &&
-                  insertMatchReference()
+          &&
+          insertMatchReference()
         }
       </div>
     </div>

@@ -34,8 +34,10 @@ namespace chess.Application
         {
             var match = matchFacade.GetByReference(reference);
             MovePiece(selectedHouse, futureHouse, ref match);
+            match.Board = matchFacade.BuildPossiblesSquaresToMove(match.Board);
             match.Board = matchFacade.ValidateMoves(match.Board);
-            await Clients.All.ReceiveNewBoard(match);
+            var updatedMatch = matchFacade.Update(match);
+            await Clients.All.ReceiveNewBoard(updatedMatch);
         }
 
         private void MovePiece(Square selectedHouse, Square futureHouse, ref Match match)
@@ -47,7 +49,8 @@ namespace chess.Application
                 if (house.Coordinate.Equals(selectedHouse.Coordinate))
                 {
                     house.Piece = null;
-                } else
+                }
+                else
                 if (house.Coordinate.Equals(futureHouse.Coordinate))
                 {
                     house.Piece = pieceMoved;
