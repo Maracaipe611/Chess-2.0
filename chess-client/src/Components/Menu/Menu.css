@@ -1,0 +1,77 @@
+.menu-background-main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  background-color: black;
+  justify-content: center;
+}
+
+.menu-modal {
+  width: 400px;
+  height: 30em;
+  display: block;
+  background-color: #3f3f3f;
+}
+.modal-title {
+  display: block;
+  font-size: 2rem;
+  width: 100%;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+#title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.125rem;
+}
+
+.menu-actions {
+  margin-top: 2em;
+  height: 80%;
+  display: grid;
+  justify-content: center;
+}
+
+.menu-actions > button {
+  height: 60px;
+  width: 320px;
+}
+
+.menu-match-reference {
+  display: flex;
+  height: 30em;
+  margin: 0 1.125rem;
+}
+
+.match-reference-background {
+  background-color: #3f3f3f;
+  height: fit-content;
+  font-size: small;
+  color: azure;
+  width: 160px;
+  display: -ms-inline-grid;
+  margin: 0 auto;
+}
+.match-reference-background > span {
+  margin: 0.5rem auto;
+  display: flex;
+  justify-content: center;
+}
+.match-reference-background > input {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.match-reference-background > button {
+  width: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .2rem auto;
+}
