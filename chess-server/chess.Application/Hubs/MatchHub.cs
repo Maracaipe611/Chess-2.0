@@ -17,6 +17,11 @@ namespace chess.Application
             this.matchFacade = matchFacade;
         }
 
+        public async void JoinMatch(string reference)
+        {
+            await Groups.AddToGroupAsync(this.Context.ConnectionId, reference);
+        }
+
         public async Task ReceiveMove(MatchDTO matchDTO)
         {
             var match = matchFacade.GetByReference(matchDTO.Reference);
@@ -37,10 +42,10 @@ namespace chess.Application
             match.Board = matchFacade.BuildPossiblesSquaresToMove(match.Board);
             match.Board = matchFacade.ValidateMoves(match.Board);
             var updatedMatch = matchFacade.Update(match);
-            await Clients.All.ReceiveNewBoard(updatedMatch);
+            await Clients.Group(reference).UpdateMatch(updatedMatch);
         }
 
-        private void MovePiece(Square selectedHouse, Square futureHouse, ref Match match)
+        private static void MovePiece(Square selectedHouse, Square futureHouse, ref Match match)
         {
             var pieceMoved = selectedHouse.Piece;
             pieceMoved.Coordinate = futureHouse.Coordinate;

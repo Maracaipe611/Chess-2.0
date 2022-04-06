@@ -12,6 +12,6 @@ namespace chess.Application.Hubs.Interfaces
     {
         Task ReceiveMove(Match match);
         Task WatchMatch(Match match);
-        Task ReceiveNewBoard(Match match);
+        Task UpdateMatch(Match match);
     }
 }

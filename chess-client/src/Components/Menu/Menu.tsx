@@ -20,12 +20,12 @@ const Menu = () => {
   const { setMatch } = useGameContext();
 
   const matchExists = useCallback(() => {
-    matchClient().getMatch(matchId).then((match: Match) => {
+    matchClient().getMatch(matchId, playerName).then((match: Match) => {
       setMatch(match);
     }).then(() => {
       navigate("/play");
     });
-  }, [matchClient, matchId]);
+  }, [matchClient, matchId, playerName]);
 
   const createMatch = useCallback(() => {
     matchClient().createMatch(matchId, playerName).then((match: Match) => {

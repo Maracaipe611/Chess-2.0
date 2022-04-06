@@ -37,21 +37,24 @@ const useBoardClient = () => {
   }, [connected]);
 
   useEffect(() => {
-    if (connection) {
-      connection.start()
-        .then(() => {
-          connectionRef.current = connection.state;
-          console.log("Connected!");
+    if (!connection || !currentMatchRef.current || !currentMatchRef.current.reference) return;
+    connection.start()
+      .then(() => {
+        connectionRef.current = connection.state;
+        console.log("Connected!");
 
-          connection.on("ReceiveNewBoard", (message: MatchDTO) => {
-            const updatedMatch = mapMatchDTO(message);
-            if (!updatedMatch) return null;
-            setMatch(updatedMatch);
-          });
-        })
-        .catch(e => console.log("Connection failed: ", e));
-    }
-  }, [connection]);
+        connection.invoke("JoinMatch", currentMatchRef.current?.reference).then(() => {
+          console.log("Joined Group");
+        });
+
+        connection.on("UpdateMatch", (message: MatchDTO) => {
+          const updatedMatch = mapMatchDTO(message);
+          if (!updatedMatch) return null;
+          setMatch(updatedMatch);
+        });
+      })
+      .catch(e => console.log("Connection failed: ", e));
+  }, [connection, currentMatchRef]);
 
   const sendMove = useCallback(async (selectedHouse: House, futureHouse: House) => {
     if (connection?.state === HubConnectionState.Connected && currentMatchRef.current) {

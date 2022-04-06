@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Match } from "../../client/Board/types";
 import { MatchDTO } from "./types";
 import { createNewMatchDTO, mapMatchDTO } from "../Mappers/MatchMappers";
@@ -9,7 +9,7 @@ const useMatchClient = () => {
   const baseURL = `${process.env.REACT_APP_LOCAL_URL_API}/Match/`;
   const { connect } = useBoardClient();
 
-  const getMatch = useCallback((reference: string): Promise<Match> => new Promise(
+  const getMatch = useCallback((reference: string, playerName: string): Promise<Match> => new Promise(
     (resolve, reject) => {
       axios.get(reference, { baseURL }).then((response: AxiosResponse) => {
         const match = mapMatchDTO(response.data);
