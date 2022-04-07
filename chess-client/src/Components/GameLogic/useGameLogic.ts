@@ -1,10 +1,8 @@
-import Player, { Actions } from "../../Components/Player/types";
+import { Actions } from "../../Components/Player/types";
 import House from "../House/types";
-import { Piece } from "../../Components/Piece/types";
 import { useGameContext } from "./context";
 import useBoardClient from "../../client/Board/useBoardClient";
-import { Match } from "../../client/Board/types";
-import { useEffect, useMemo } from "react";
+import { useCallback } from "react";
 
 export const useGameLogic = () => {
     const {
@@ -18,9 +16,11 @@ export const useGameLogic = () => {
         setMovementHistory, movementHistory,
         setAbleHousesToMove, ableHousesToMove,  */ } = useGameContext();
 
-    const { sendMove, connect } = useBoardClient();
+    const { sendMove } = useBoardClient();
 
-    const houseHandler = (house: House, action: Actions) => {
+    const houseHandler = useCallback((house: House, action: Actions) => {
+        if (!match) throw Error("Match not found");
+        if (!player) throw Error("Player not found");
         switch (action) {
             case Actions.FriendlyPiece:
             case Actions.EnemyPiece:
@@ -29,13 +29,14 @@ export const useGameLogic = () => {
                 setAbleHousesToMove(findHousesByIds(house.piece?.housesToMove));
                 break;
             case Actions.MovePiece:
-                if (!selectedHouse || !match) return;
+                if (!selectedHouse) return; //if there is no selected house, do nothing
+                if (match.turn !== player.color) return; //if is not players turn, do nothing
                 sendMove(selectedHouse, house);
                 break;
             default:
                 break;
         }
-    };
+    }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove]);
 
     const findHousesByIds = (housesIds: Array<string>): Array<House> => {
         const board = match?.board;

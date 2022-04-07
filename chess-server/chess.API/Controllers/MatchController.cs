@@ -53,6 +53,24 @@ namespace chess.API.Controllers
             }
         }
 
+        // GET: MatchController/{id}/{playerName}
+        [HttpGet("{reference}/{playerName}")]
+        public ActionResult JoinMatch(string reference, string playerName)
+        {
+            try
+            {
+                var match = matchFacade.GetByReference(reference);
+                if (match == null)
+                    return NotFound();
+                match = matchFacade.AddPlayerToMatch(match, playerName);
+                return Ok(match);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         // POST: MatchController/
         [HttpPost]
         public ActionResult Create([FromBody] MatchDTO matchDTO)

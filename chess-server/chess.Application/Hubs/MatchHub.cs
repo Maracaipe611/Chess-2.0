@@ -17,30 +17,24 @@ namespace chess.Application
             this.matchFacade = matchFacade;
         }
 
-        public async void JoinMatch(string reference)
+        public async void JoinMatchGroup(string reference)
         {
             await Groups.AddToGroupAsync(this.Context.ConnectionId, reference);
         }
 
-        public async Task ReceiveMove(MatchDTO matchDTO)
-        {
-            var match = matchFacade.GetByReference(matchDTO.Reference);
-            match.Board = matchFacade.ValidateMoves(match.Board);
-            await Clients.Group("messageReceived").ReceiveMove(match);
-        }
-
-        public async Task WatchMatch(string reference)
+        public async Task JoinMatch(string reference)
         {
             var match = matchFacade.GetByReference(reference);
-            await Clients.Group("watch").WatchMatch(match);
+            await Clients.Group(reference).NewPlayerJoined(match);
         }
 
-        public async Task ValidateNewMatch(Square selectedHouse, Square futureHouse, string reference)
+        public async Task UpdateMatch(Square selectedHouse, Square futureHouse, string reference)
         {
             var match = matchFacade.GetByReference(reference);
             MovePiece(selectedHouse, futureHouse, ref match);
             match.Board = matchFacade.BuildPossiblesSquaresToMove(match.Board);
             match.Board = matchFacade.ValidateMoves(match.Board);
+            SwitchPlayersTurn(ref match);
             var updatedMatch = matchFacade.Update(match);
             await Clients.Group(reference).UpdateMatch(updatedMatch);
         }
@@ -60,6 +54,18 @@ namespace chess.Application
                 {
                     house.Piece = pieceMoved;
                 }
+            }
+        }
+
+        private static void SwitchPlayersTurn(ref Match match)
+        {
+            if (match.Turn == Colors.White)
+            {
+                match.Turn = Colors.Black;
+            }
+            else
+            {
+                match.Turn = Colors.White;
             }
         }
     }

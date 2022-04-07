@@ -33,15 +33,14 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
   }, [ableHousesToMove, selectedHouse, player, house]);
 
   const action = (): Actions => {
+    if (!player) throw Error("Player not found");
 
     if (selectedHouse === house) {
       return !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
     }
-
     if (!house.piece) {
       return ableHousesToMove.includes(house) ? Actions.MovePiece : Actions.NoPiece;
     }
-
     if (house.piece.isFriend(player)) {
       return selectedHouse === house ? Actions.Unselect : Actions.FriendlyPiece;
     } else {

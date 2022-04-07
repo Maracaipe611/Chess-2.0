@@ -37,14 +37,18 @@ const useBoardClient = () => {
   }, [connected]);
 
   useEffect(() => {
-    if (!connection || !currentMatchRef.current || !currentMatchRef.current.reference) return;
+    if (!connection) return;
     connection.start()
       .then(() => {
         connectionRef.current = connection.state;
         console.log("Connected!");
 
-        connection.invoke("JoinMatch", currentMatchRef.current?.reference).then(() => {
-          console.log("Joined Group");
+        connection.on("NewPlayerJoined", (message: MatchDTO) => {
+          console.log("New Player Joined");
+          const updatedMatch = mapMatchDTO(message);
+          if (updatedMatch) {
+            setMatch(updatedMatch);
+          }
         });
 
         connection.on("UpdateMatch", (message: MatchDTO) => {
@@ -54,12 +58,26 @@ const useBoardClient = () => {
         });
       })
       .catch(e => console.log("Connection failed: ", e));
-  }, [connection, currentMatchRef]);
+  }, [connection]);
 
   const sendMove = useCallback(async (selectedHouse: House, futureHouse: House) => {
     if (connection?.state === HubConnectionState.Connected && currentMatchRef.current) {
       try {
-        await connection.invoke("ValidateNewMatch", selectedHouse, futureHouse, currentMatchRef.current.reference);
+        await connection.invoke("UpdateMatch", selectedHouse, futureHouse, currentMatchRef.current.reference);
+      }
+      catch (e) {
+        console.log(e);
+      }
+    }
+    else {
+      alert("No connection to server yet.");
+    }
+  }, [connection, currentMatchRef]);
+
+  const joinMatch = useCallback(async (reference: string) => {
+    if (connection?.state === HubConnectionState.Connected) {
+      try {
+        await connection.invoke("JoinMatch", reference);
       }
       catch (e) {
         console.log(e);
@@ -70,7 +88,21 @@ const useBoardClient = () => {
     }
   }, [connection]);
 
-  return { sendMove, connect };
+  const joinMatchGroup = useCallback(async (reference: string) => {
+    if (connection?.state === HubConnectionState.Connected) {
+      try {
+        await connection.invoke("JoinMatchGroup", reference);
+      }
+      catch (e) {
+        console.log(e);
+      }
+    }
+    else {
+      alert("No connection to server yet.");
+    }
+  }, [connection]);
+
+  return { sendMove, connect, joinMatch, joinMatchGroup };
 
 };
 

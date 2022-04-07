@@ -10,8 +10,7 @@ namespace chess.Application.Hubs.Interfaces
 {
     public interface IMatchHub
     {
-        Task ReceiveMove(Match match);
-        Task WatchMatch(Match match);
+        Task NewPlayerJoined(Match match);
         Task UpdateMatch(Match match);
     }
 }

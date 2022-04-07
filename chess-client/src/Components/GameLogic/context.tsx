@@ -11,8 +11,8 @@ type GameContextProviderProps = {
 type GameContextProps = {
   match: Match | undefined;
   setMatch: React.Dispatch<React.SetStateAction<Match | undefined>>;
-  player: Player;
-  setPlayer: React.Dispatch<React.SetStateAction<Player>>;
+  player: Player | null;
+  setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   selectedHouse: House | undefined;
   setSelectedHouse: React.Dispatch<React.SetStateAction<House | undefined>>;
   ableHousesToMove: Array<House>;
@@ -32,15 +32,9 @@ export const GameContext = createContext<GameContextProps | undefined>(
   undefined
 );
 
-const whitePlayer: Player = new Player(
-  "aa",
-  "Lucas",
-  Colors.White,
-);
-
 export const GameContextProvider: React.FC<GameContextProviderProps> = ({ children }) => {
   const [match, setMatch] = useState<Match | undefined>();
-  const [player, setPlayer] = useState<Player>(whitePlayer);
+  const [player, setPlayer] = useState<Player | null>(null);
   const [selectedHouse, setSelectedHouse] = useState<House>();
   const [ableHousesToMove, setAbleHousesToMove] = useState<Array<House>>([]);
   /* const [boardHouses, setBoardHouses] = useState<Array<House>>(BoardBuilder(player));

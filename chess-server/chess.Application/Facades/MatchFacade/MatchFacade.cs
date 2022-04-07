@@ -52,6 +52,12 @@ namespace chess.Application.Facades.MatchFacade
             return matchService.Update(match);
         }
 
+        public Match AddPlayerToMatch(Match match, string playerName)
+        {
+            match.Players.Add(new Player(playerName, Colors.Black)); //The second player added is always black
+            return matchService.Update(match);
+        }
+
         public IEnumerable<Square> ValidateMoves(IEnumerable<Square> squares)
         {
             return boardService.ValidateMoves(squares);

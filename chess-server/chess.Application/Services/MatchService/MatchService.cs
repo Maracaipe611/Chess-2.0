@@ -25,6 +25,7 @@ namespace chess.Application.Services.MatchService
             List<Square> board = boardService.BuildBoard().ToList();
             board = boardService.ValidateMoves(board).ToList();
             var players = mapper.Map<List<PlayerDTO>, List<Player>>(matchDTO.Players.ToList());
+            players.FirstOrDefault().Color = Colors.White;
             var match = new Match(matchDTO.Reference, players, board);
             return this.matchRepository.Create(match);
         }
@@ -41,15 +42,12 @@ namespace chess.Application.Services.MatchService
 
         public Match GetByReference(string reference)
         {
-            var match = matchRepository.GetByReference(reference);
-            return match;
+            return matchRepository.GetByReference(reference);
         }
 
         public Match Update(Match match)
         {
-            Match newMatch = matchRepository.GetByReference(match.Reference); //recebo todas as props da match anterior
-            newMatch.Board = match.Board; //substituo apenas o board
-            return matchRepository.Update(newMatch);
+            return matchRepository.Update(match);
         }
     }
 }

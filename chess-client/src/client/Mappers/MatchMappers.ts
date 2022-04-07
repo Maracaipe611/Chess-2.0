@@ -7,8 +7,9 @@ import { MatchDTO, PieceDTO, PlayerDTO, SquareDTO } from "../MatchClient/types";
 const createNewMatchDTO = (playerName: string, reference: string): MatchDTO => (
   {
     board: null,
-    players: [{ color: Colors.Black, name: playerName }],
+    players: [{ color: null, name: playerName }],
     reference: reference,
+    turn: 0,
   }
 );
 
@@ -17,7 +18,7 @@ const mapMatchDTO = (matchDto: MatchDTO): Match | null => {
   const houses: Array<House> = mapHousesDTO(matchDto.board);
   const players = mapPlayerDTO(matchDto.players);
 
-  return new Match(matchDto.id, houses, players, matchDto.reference);
+  return new Match(matchDto.id, houses, players, matchDto.reference, matchDto.turn);
 };
 
 const mapHousesDTO = (houses: Array<SquareDTO>): Array<House> => {
@@ -42,7 +43,7 @@ const mapPieceDTO = (piece: PieceDTO | undefined): Piece | undefined => {
 
 const mapPlayerDTO = (playerDto: Array<PlayerDTO>): Player[] => {
   return playerDto.map(player => {
-    if (!player.id) throw Error("Player not found");
+    if (!player.id || player.color === null) throw Error("Player not found");
     return new Player(
       player.id,
       player.name,
