@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { createContext, useState } from "react";
 import Player from "../Player/types";
 import House from "../House/types";
-import { Colors, Match } from "../../client/Board/types";
+import { Match } from "../../client/Board/types";
 
 type GameContextProviderProps = {
   children: React.ReactNode;

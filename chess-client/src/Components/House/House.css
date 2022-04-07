@@ -25,7 +25,34 @@
     cursor: pointer !important;
 }
 
-
 .prey {
     box-shadow: inset 0 0 20px 3px red;
+}
+
+@keyframes Rotate-House-Spin-BlackPlayer { 
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
+
+@keyframes Rotate-House-Spin-WhitePlayer { 
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+.rotate-House-BlackPlayer {
+    animation: Rotate-House-Spin-BlackPlayer 3s linear normal;
+    animation-fill-mode: forwards;
+}
+
+.rotate-House-WhitePlayer {
+    animation: Rotate-House-Spin-WhitePlayer 3s linear normal;
+    animation-fill-mode: forwards;
 }

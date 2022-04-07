@@ -1,7 +1,7 @@
 import House from "../../Components/House/types";
 import { Piece } from "../../Components/Piece/types";
 import Player from "../../Components/Player/types";
-import { Colors, Match } from "../Board/types";
+import { Match } from "../Board/types";
 import { MatchDTO, PieceDTO, PlayerDTO, SquareDTO } from "../MatchClient/types";
 
 const createNewMatchDTO = (playerName: string, reference: string): MatchDTO => (

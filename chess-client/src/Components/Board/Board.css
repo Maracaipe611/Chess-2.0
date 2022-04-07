@@ -1,0 +1,27 @@
+@keyframes Rotate-Board-Spin-BlackPlayer { 
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes Rotate-Board-Spin-WhitePlayer { 
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
+
+.rotate-Board-BlackPlayer {
+    animation: Rotate-Board-Spin-BlackPlayer 3s linear normal;
+    animation-fill-mode: forwards;
+}
+
+.rotate-Board-WhitePlayer {
+    animation: Rotate-Board-Spin-WhitePlayer 3s linear normal;
+    animation-fill-mode: forwards;
+}

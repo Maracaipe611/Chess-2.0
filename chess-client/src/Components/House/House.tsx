@@ -5,6 +5,7 @@ import PieceComponent from "../Piece/Piece";
 import { useGameLogic } from "../GameLogic/useGameLogic";
 import { useGameContext } from "../GameLogic/context";
 import { Actions } from "../Player/types";
+import { Colors } from "../../client/Board/types";
 
 interface HouseComponentProps {
   house: House;
@@ -19,6 +20,11 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
     const selected = "selectedHouse";
     const thePieceHereIsInDangerous = "prey";
     const otherPieceWantsToGetHere = "ableToReceive";
+
+    if (player) {
+      const rotateDirection = player?.color === Colors.White ? "rotate-House-WhitePlayer" : "rotate-House-BlackPlayer";
+      classNames.push(rotateDirection);
+    }
 
     if (house === selectedHouse) {
       classNames.push(selected);
