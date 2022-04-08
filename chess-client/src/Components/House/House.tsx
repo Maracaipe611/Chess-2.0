@@ -32,8 +32,7 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
     }
     if (!house.piece && ableHousesToMove.includes(house)) classNames.push(otherPieceWantsToGetHere);
 
-    /* if ((house.piece && house.piece.color === player.enemyColor()) && (house.checkIfHouseIsOnThisArray(dangerousHouses) && player.canViewPossibleEnemyMoves
-        || house.checkIfHouseIsOnThisArray(ableHousesToMove))) classNames.push(thePieceHereIsInDangerous); */
+    if (house.piece && house.piece.color !== player?.color && ableHousesToMove.includes(house)) classNames.push(thePieceHereIsInDangerous);
 
     return classNames.join(" ");
   }, [ableHousesToMove, selectedHouse, player, house]);
@@ -42,15 +41,15 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
     if (!player) throw Error("Player not found");
 
     if (selectedHouse === house) {
-      return !house.piece?.isFriend(player) ? Actions.UnselectEnemy : Actions.Unselect;
+      return Actions.Unselect;
     }
     if (!house.piece) {
       return ableHousesToMove.includes(house) ? Actions.MovePiece : Actions.NoPiece;
     }
     if (house.piece.isFriend(player)) {
-      return selectedHouse === house ? Actions.Unselect : Actions.FriendlyPiece;
+      return selectedHouse === house ? Actions.Unselect : Actions.SelectFriendlyPiece;
     } else {
-      return ableHousesToMove.includes(house) ? Actions.EnemyPieceAndEat : Actions.EnemyPiece;
+      return ableHousesToMove.includes(house) ? Actions.EatEnemyPiece : Actions.SelectEnemyPiece;
     }
   };
 

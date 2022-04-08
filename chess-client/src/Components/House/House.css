@@ -48,11 +48,11 @@
 }
 
 .rotate-House-BlackPlayer {
-    animation: Rotate-House-Spin-BlackPlayer 3s linear normal;
+    animation: Rotate-House-Spin-BlackPlayer 1s linear normal;
     animation-fill-mode: forwards;
 }
 
 .rotate-House-WhitePlayer {
-    animation: Rotate-House-Spin-WhitePlayer 3s linear normal;
+    animation: Rotate-House-Spin-WhitePlayer 1s linear normal;
     animation-fill-mode: forwards;
 }

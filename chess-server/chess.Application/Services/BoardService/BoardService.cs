@@ -133,8 +133,16 @@ namespace chess.Application.Services.BoardService
                     continue;
                 }
 
-                bool possibleSquareHasAnyPiece = board.Where(square => square.Id.Equals(possibleSquareToMove.Id)).SingleOrDefault().Piece != null;
-                if (possibleSquareHasAnyPiece)
+                var possibleSquare = board.Where(square => square.Id.Equals(possibleSquareToMove.Id)).SingleOrDefault();
+                bool possibleSquareHasAnyPiece = possibleSquare.Piece != null;
+                bool thisPossiblePieceIsNotMine = possibleSquareHasAnyPiece && possibleSquare.Piece.Color != piece.Color;
+                if (thisPossiblePieceIsNotMine)
+                {
+                    //when some piece is nearly to a enemy piece, this some piece still can move to enemy piece, but cannot move to this direction anymore
+                    unableDirections.Add(possibleSquareToMove.Direction);
+                    continue;
+                }
+                else if (possibleSquareHasAnyPiece)
                 {
                     unableDirections.Add(possibleSquareToMove.Direction);
                     unablePossibilities.Add(possibleSquareToMove);

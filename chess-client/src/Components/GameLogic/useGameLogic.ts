@@ -22,13 +22,21 @@ export const useGameLogic = () => {
         if (!match) throw Error("Match not found");
         if (!player) throw Error("Player not found");
         switch (action) {
-            case Actions.FriendlyPiece:
-            case Actions.EnemyPiece:
+            case Actions.Unselect:
+                setSelectedHouse(undefined);
+                setAbleHousesToMove([]);
+                break;
+            case Actions.SelectFriendlyPiece:
                 if (!house.piece?.housesToMove) return;
                 setSelectedHouse(house);
-                setAbleHousesToMove(findHousesByIds(house.piece?.housesToMove));
+                setAbleHousesToMove(findHousesByIds(house.piece.housesToMove));
+                break;
+            case Actions.SelectEnemyPiece:
+                setSelectedHouse(house);
+                setAbleHousesToMove([]);
                 break;
             case Actions.MovePiece:
+            case Actions.EatEnemyPiece:
                 if (!selectedHouse) return; //if there is no selected house, do nothing
                 if (match.turn !== player.color) return; //if is not players turn, do nothing
                 sendMove(selectedHouse, house);
