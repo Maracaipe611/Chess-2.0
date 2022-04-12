@@ -43,10 +43,12 @@ namespace chess.Application.Services.BoardService
                 {
                     case Types.Pawn:
                         {
-                            if (hasMovedBefore)
+                            if (!hasMovedBefore)
                             {
-                                RemoveLongMove(piece);
+                                AddLongMove(piece);
                             }
+
+                            AddPossiblesSquaresToEatDiagonally(board, piece);
                         }
                         break;
                     case Types.Tower:
@@ -63,6 +65,40 @@ namespace chess.Application.Services.BoardService
                 square.Piece = piece;
             }
             return board;
+        }
+
+        private static void AddPossiblesSquaresToEatDiagonally(IEnumerable<Square> board, Piece piece)
+        {
+            int direction = piece.Color == Colors.Black ? -1 : 1;
+            var rightDiagonalCoordinate = new Coordinate(piece.Coordinate.Alpha + 1, piece.Coordinate.Index + direction);
+            var leftDiagonalCoordinate = new Coordinate(piece.Coordinate.Alpha - 1, piece.Coordinate.Index + direction);
+
+            var rightDiagonalSquare = board.Where(square =>
+            square.Coordinate.Equals(rightDiagonalCoordinate)
+            && square.Piece != null
+            ).SingleOrDefault();
+            var leftDiagonalSquare = board.Where(square =>
+            square.Coordinate.Equals(leftDiagonalCoordinate)
+            && square.Piece != null
+            ).SingleOrDefault();
+
+            if (rightDiagonalSquare != null && rightDiagonalSquare.Piece.Color != piece.Color)
+            {
+                piece.PossiblesSquaresToMove.Add(new PossibleSquareToMove()
+                {
+                    Id = rightDiagonalSquare.Id,
+                    Direction = direction == 1 ? MovesDirections.upRight : MovesDirections.downRight
+                });
+            }
+
+            if (leftDiagonalSquare != null && leftDiagonalSquare.Piece.Color != piece.Color)
+            {
+                piece.PossiblesSquaresToMove.Add(new PossibleSquareToMove()
+                {
+                    Id = leftDiagonalSquare.Id,
+                    Direction = direction == 1 ? MovesDirections.upLeft : MovesDirections.downLeft
+                });
+            }
         }
 
         #region Private
@@ -88,18 +124,21 @@ namespace chess.Application.Services.BoardService
             return possiblesSquaresToMove;
         }
 
-        private void RemoveLongMove(Piece piece)
+        private void AddLongMove(Piece piece)
         {
             int direction = piece.Color == Colors.Black ? -1 : 1;
-            var possibleSquaresToMove = GetSquaresById(piece.PossiblesSquaresToMove.Select(ps => ps.Id));
-            var longgestSquare = possibleSquaresToMove.Where(square => square.Coordinate.Index > (piece.Coordinate.Index + 1 * direction)).SingleOrDefault();
-            foreach (var possibleSquare in possibleSquaresToMove)
+            var longestSquareCoordinate = new Coordinate(piece.Coordinate.Alpha, piece.Coordinate.Index + (2 * direction));
+            var longestSquare = board.Find(square => square.Coordinate.Equals(longestSquareCoordinate));
+
+            if (longestSquare != null)
             {
-                if (possibleSquare == longgestSquare)
+                piece.PossiblesSquaresToMove.Add(new PossibleSquareToMove()
                 {
-                    piece.PossiblesSquaresToMove = piece.PossiblesSquaresToMove.Where(pq => pq.Id != longgestSquare.Id).ToList();
-                }
+                    Id = longestSquare.Id,
+                    Direction = direction == 1 ? MovesDirections.up : MovesDirections.down
+                });
             }
+            
         }
 
         private void RemoveSquareWithFriendPieces(Piece piece)
