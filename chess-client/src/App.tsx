@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes as Switch } from "react-router-dom";
 import "./App.css";
 import Menu from "./Components/Menu";
-import { GameContextProvider } from "./Components/GameLogic/context";
+import { GameContextProvider } from "./Components/GameLogic/useGameContext";
 import Match from "./Components/Match";
 
 const App: React.FC = () => (

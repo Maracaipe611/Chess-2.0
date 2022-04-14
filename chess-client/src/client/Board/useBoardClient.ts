@@ -1,6 +1,6 @@
 import { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel } from "@microsoft/signalr";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { useGameContext } from "../../Components/GameLogic/context";
+import { useGameContext } from "../../Components/GameLogic/useGameContext";
 import House from "../../Components/House/types";
 import { mapMatchDTO } from "../Mappers/MatchMappers";
 import { MatchDTO } from "../MatchClient/types";
@@ -10,8 +10,7 @@ const useBoardClient = () => {
   const currentMatchRef = useRef<Match | undefined>();
   const connectionRef = useRef<HubConnectionState>();
   const [connection, setConnection] = useState<HubConnection>();
-  const [connected, setConnected] = useState(false);
-  const { match, setMatch } = useGameContext();
+  const { match, setMatch, connected, setConnected } = useGameContext();
 
   currentMatchRef.current = match;
 

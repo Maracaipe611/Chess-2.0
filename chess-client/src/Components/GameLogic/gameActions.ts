@@ -1,20 +1,15 @@
-import { Actions } from "../../Components/Player/types";
+import { Actions } from "../Player/types";
 import House from "../House/types";
-import { useGameContext } from "./context";
+import { useGameContext } from "./useGameContext";
 import useBoardClient from "../../client/Board/useBoardClient";
 import { useCallback } from "react";
 
-export const useGameLogic = () => {
+export const gameActions = () => {
     const {
-        setSelectedHouse, selectedHouse,
+        selectedHouse, setSelectedHouse,
         player,
         ableHousesToMove, setAbleHousesToMove,
-        match, setMatch,
-    /* setBoardHouses, boardHouses,
-        boardPieces,
-        setDangerousHouses, dangerousHouses,
-        setMovementHistory, movementHistory,
-        setAbleHousesToMove, ableHousesToMove,  */ } = useGameContext();
+        match, } = useGameContext();
 
     const { sendMove } = useBoardClient();
 

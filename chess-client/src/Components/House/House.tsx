@@ -2,18 +2,18 @@ import React, { useCallback } from "react";
 import "./House.css";
 import House from "./types";
 import PieceComponent from "../Piece/Piece";
-import { useGameLogic } from "../GameLogic/useGameLogic";
-import { useGameContext } from "../GameLogic/context";
+import { useGameContext } from "../GameLogic/useGameContext";
 import { Actions } from "../Player/types";
 import { Colors } from "../../client/Board/types";
 
 interface HouseComponentProps {
   house: House;
+  houseHandler: (house: House, action: Actions) => void;
 }
 
-const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
+const HouseComponent: React.FC<HouseComponentProps> = ({ house, houseHandler }) => {
+
   const { ableHousesToMove, selectedHouse, player } = useGameContext();
-  const { houseHandler } = useGameLogic();
 
   const houseStyle = useCallback((): string => {
     const classNames: Array<string> = ["house"];
@@ -22,8 +22,10 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
     const otherPieceWantsToGetHere = "ableToReceive";
 
     if (player) {
-      const rotateDirection = player?.color === Colors.White ? "rotate-House-WhitePlayer" : "rotate-House-BlackPlayer";
+      const rotateDirection = player.color === Colors.White ? "rotate-House-WhitePlayer" : "rotate-House-BlackPlayer";
       classNames.push(rotateDirection);
+
+      if (house.piece && house.piece.color !== player.color && ableHousesToMove.includes(house)) classNames.push(thePieceHereIsInDangerous);
     }
 
     if (house === selectedHouse) {
@@ -31,8 +33,6 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house }) => {
       return classNames.join(" ");
     }
     if (!house.piece && ableHousesToMove.includes(house)) classNames.push(otherPieceWantsToGetHere);
-
-    if (house.piece && house.piece.color !== player?.color && ableHousesToMove.includes(house)) classNames.push(thePieceHereIsInDangerous);
 
     return classNames.join(" ");
   }, [ableHousesToMove, selectedHouse, player, house]);

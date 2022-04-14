@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
-import { Match } from "../../client/Board/types";
+import { Match } from "../Board/types";
 import { MatchDTO } from "./types";
 import { createNewMatchDTO, mapMatchDTO } from "../Mappers/MatchMappers";
 

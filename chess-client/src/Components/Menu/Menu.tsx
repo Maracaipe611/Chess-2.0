@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-import "./Menu.css";
-import useMatchClient from "../../client/MatchClient/UseMatchClient";
+import { useCallback, useLayoutEffect, useState } from "react";
+import useMatchClient from "../../client/MatchClient";
 import { Match } from "../../client/Board/types";
-import { useGameContext } from "../GameLogic/context";
+import { useGameContext } from "../GameLogic/useGameContext";
 import { useNavigate } from "react-router-dom";
 import useBoardClient from "../../client/Board/useBoardClient";
+import "./Menu.css";
 
 enum MenuActions {
   Create,
@@ -18,12 +18,12 @@ const Menu = () => {
 
   const navigate = useNavigate();
   const matchClient = useMatchClient();
-  const { setMatch, setPlayer } = useGameContext();
+  const { setMatch, setPlayer, connected } = useGameContext();
   const { connect, joinMatch: introducePlayerOnMatch, joinMatchGroup } = useBoardClient();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     connect();
-  }, []);
+  }, [connected, connect]);
 
   const joinMatch = useCallback(() => {
     console.log("joinning Match");
