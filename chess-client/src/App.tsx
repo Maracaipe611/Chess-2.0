@@ -6,14 +6,14 @@ import { GameContextProvider } from "./Components/GameLogic/useGameContext";
 import Match from "./Components/Match";
 
 const App: React.FC = () => (
-    <GameContextProvider>
-        <Router>
-            <Switch>
-                <Route path="/" element={<Menu />} />
-                <Route path="/play" element={<Match />} />
-            </Switch>
-        </Router>
-    </GameContextProvider>
+  <GameContextProvider>
+    <Router>
+      <Switch>
+        <Route path="/" element={<Menu />} />
+        <Route path="/play" element={<Match />} />
+      </Switch>
+    </Router>
+  </GameContextProvider>
 );
 
 export default App;
