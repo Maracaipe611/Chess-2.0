@@ -3,11 +3,7 @@ using chess.Application.Services.MatchService;
 using chess.Application.Services.MoveService;
 using chess.Domain.Entities;
 using chess.Domain.Entities.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chess.Application.Facades.MatchFacade
 {

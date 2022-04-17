@@ -3,12 +3,12 @@ import { Colors } from "../../client/Board/types";
 import { useGameContext } from "../GameLogic/useGameContext";
 import { HouseComponent } from "../House/index";
 import House from "../House/types";
-import { gameActions } from "../GameLogic/gameActions";
+import { useGameActions } from "../GameLogic/useGameActions";
 import "./Board.css";
 
 const Board = () => {
-  const { match, player } = useGameContext();
-  const { houseHandler } = gameActions();
+  const { match, player, selectedHouse } = useGameContext();
+  const { houseHandler } = useGameActions();
 
   const setRotateDirection = useCallback(() => {
     if (!player) throw Error("Player not found");
@@ -42,7 +42,7 @@ const Board = () => {
         </div>
       </div>
     );
-  }, [match]);
+  }, [match, houseHandler, player, selectedHouse]);
 
   if (!match || !match.board) return (<></>);
   return renderBoard(match.board);

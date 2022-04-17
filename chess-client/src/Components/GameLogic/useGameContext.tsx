@@ -60,7 +60,10 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = ({ childr
 
 export function useGameContext(): GameContextProps {
   const context = useContext(GameContext);
-  if (!context) throw new Error("Game context not found");
+  if (!context) {
+    // if the context is not defined, maybe the reason is that the context have circular dependency
+    throw new Error("Game context not found");
+  }
 
   return context;
 }

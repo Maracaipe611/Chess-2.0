@@ -4,7 +4,7 @@ import { useGameContext } from "./useGameContext";
 import useBoardClient from "../../client/Board/useBoardClient";
 import { useCallback } from "react";
 
-export const gameActions = () => {
+export const useGameActions = () => {
     const {
         selectedHouse, setSelectedHouse,
         player,
@@ -39,7 +39,7 @@ export const gameActions = () => {
             default:
                 break;
         }
-    }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove]);
+    }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove, setSelectedHouse, useBoardClient]);
 
     const findHousesByIds = (housesIds: Array<string>): Array<House> => {
         const board = match?.board;

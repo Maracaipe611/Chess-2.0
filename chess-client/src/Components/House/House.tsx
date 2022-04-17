@@ -24,8 +24,6 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house, houseHandler }) 
     if (player) {
       const rotateDirection = player.color === Colors.White ? "rotate-House-WhitePlayer" : "rotate-House-BlackPlayer";
       classNames.push(rotateDirection);
-
-      if (house.piece && house.piece.color !== player.color && ableHousesToMove.includes(house)) classNames.push(thePieceHereIsInDangerous);
     }
 
     if (house === selectedHouse) {
@@ -33,11 +31,12 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house, houseHandler }) 
       return classNames.join(" ");
     }
     if (!house.piece && ableHousesToMove.includes(house)) classNames.push(otherPieceWantsToGetHere);
+    if (player && house.piece && house.piece.color !== player.color && ableHousesToMove.includes(house)) classNames.push(thePieceHereIsInDangerous);
 
     return classNames.join(" ");
   }, [ableHousesToMove, selectedHouse, player, house]);
 
-  const action = (): Actions => {
+  const action = useCallback((): Actions => {
     if (!player) throw Error("Player not found");
 
     if (selectedHouse === house) {
@@ -51,7 +50,7 @@ const HouseComponent: React.FC<HouseComponentProps> = ({ house, houseHandler }) 
     } else {
       return ableHousesToMove.includes(house) ? Actions.EatEnemyPiece : Actions.SelectEnemyPiece;
     }
-  };
+  }, [ableHousesToMove, selectedHouse, player, house]);
 
   return (
     <div

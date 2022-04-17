@@ -11,8 +11,7 @@
         }
         public string Id { get; set; }
         public Coordinate Coordinate { get; set; }
-        #nullable enable
-        public Piece? Piece { get; set; }
-        public Colors Color { get; set; } 
+        public Piece Piece { get; set; }
+        public Colors Color { get; set; }
     }
 }
