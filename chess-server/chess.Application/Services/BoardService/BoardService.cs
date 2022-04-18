@@ -28,6 +28,7 @@ namespace chess.Application.Services.BoardService
         }
         public IEnumerable<Square> ValidateMoves(IEnumerable<Square> board)
         {
+            //King must be the last to validate, cause some piece get new possible moves on validate
             this.board = board.OrderBy(square => square.Piece is not null && square.Piece.Type is Types.King).ToList();
 
             foreach (var square in this.board)
@@ -62,7 +63,7 @@ namespace chess.Application.Services.BoardService
                     case Types.Queen:
                         break;
                     case Types.King:
-                        RemoveDangerousSquaresToMove(board.Where(square => square.Piece is not null).Select(square => square.Piece).ToList(), piece);
+                        RemoveDangerousSquaresToMove(this.board.Where(square => square.Piece is not null).Select(square => square.Piece), piece);
                         break;
                 }
                 square.Piece = piece;
@@ -140,7 +141,7 @@ namespace chess.Application.Services.BoardService
             }
         }
 
-        private static void RemoveDangerousSquaresToMove(IList<Piece> allPieces, Piece piece)
+        private static void RemoveDangerousSquaresToMove(IEnumerable<Piece> allPieces, Piece piece)
         {
             var enemyPieces = allPieces.Where(singlePiece => singlePiece.Color != piece.Color);
             var enemyPossibleSquares = enemyPieces.SelectMany(singlePiece => singlePiece.PossiblesSquaresToMove);

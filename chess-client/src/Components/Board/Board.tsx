@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { Colors } from "../../client/Board/types";
+import { useGameActions } from "../GameLogic/useGameActions";
 import { useGameContext } from "../GameLogic/useGameContext";
 import { HouseComponent } from "../House/index";
 import House from "../House/types";
-import { useGameActions } from "../GameLogic/useGameActions";
 import "./Board.css";
 
 const Board = () => {

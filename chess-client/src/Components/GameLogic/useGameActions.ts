@@ -39,7 +39,7 @@ export const useGameActions = () => {
     default:
       break;
     }
-  }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove, setSelectedHouse, useBoardClient]);
+  }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove, setSelectedHouse]);
 
   const findHousesByIds = (housesIds: Array<string>): Array<House> => {
     const board = match?.board;
