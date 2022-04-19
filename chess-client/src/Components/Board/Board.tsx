@@ -7,7 +7,7 @@ import House from "../House/types";
 import "./Board.css";
 
 const Board = () => {
-  const { match, player, selectedHouse } = useGameContext();
+  const { match, player } = useGameContext();
   const { houseHandler } = useGameActions();
 
   const setRotateDirection = useCallback(() => {
@@ -42,7 +42,7 @@ const Board = () => {
         </div>
       </div>
     );
-  }, [match, houseHandler, player, selectedHouse]);
+  }, [houseHandler, setRotateDirection]);
 
   if (!match || !match.board) return (<></>);
   return renderBoard(match.board);

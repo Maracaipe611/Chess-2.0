@@ -8,10 +8,25 @@ export const useGameActions = () => {
   const {
     selectedHouse, setSelectedHouse,
     player,
-    ableHousesToMove, setAbleHousesToMove,
+    setAbleHousesToMove,
     match, } = useGameContext();
 
   const { sendMove } = useBoardClient();
+
+  const findHousesByIds = useCallback((housesIds: Array<string>): Array<House> => {
+    const board = match?.board;
+    if (!board) throw new Error("Board not found");
+
+    const houses = new Array<House>();
+    housesIds.forEach(houseId => {
+      board.map(house => {
+        if (house.id === houseId) {
+          houses.push(house);
+        }
+      });
+    });
+    return houses;
+  }, [match]);
 
   const houseHandler = useCallback((house: House, action: Actions) => {
     if (!match) throw Error("Match not found");
@@ -39,22 +54,7 @@ export const useGameActions = () => {
     default:
       break;
     }
-  }, [match, player, selectedHouse, ableHousesToMove, setAbleHousesToMove, sendMove, setSelectedHouse]);
-
-  const findHousesByIds = (housesIds: Array<string>): Array<House> => {
-    const board = match?.board;
-    if (!board) throw new Error("Board not found");
-
-    const houses = new Array<House>();
-    housesIds.forEach(houseId => {
-      board.map(house => {
-        if (house.id === houseId) {
-          houses.push(house);
-        }
-      });
-    });
-    return houses;
-  };
+  }, [match, player, selectedHouse, findHousesByIds, setAbleHousesToMove, sendMove, setSelectedHouse]);
 
   return { houseHandler };
 };

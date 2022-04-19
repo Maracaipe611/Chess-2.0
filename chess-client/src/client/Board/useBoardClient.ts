@@ -1,5 +1,5 @@
 import { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel } from "@microsoft/signalr";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useGameContext } from "../../Components/GameLogic/useGameContext";
 import House from "../../Components/House/types";
 import { mapMatchDTO } from "../Mappers/MatchMappers";
@@ -33,7 +33,7 @@ const useBoardClient = () => {
 
     setConnection(newConnection);
 
-  }, [connected]);
+  }, [connected, baseURL]);
 
   useEffect(() => {
     if (!connection) return;
@@ -57,7 +57,7 @@ const useBoardClient = () => {
         });
       })
       .catch(e => console.log("Connection failed: ", e));
-  }, [connection]);
+  }, [connection, setMatch]);
 
   const sendMove = useCallback(async (selectedHouse: House, futureHouse: House) => {
     if (connection?.state === HubConnectionState.Connected && currentMatchRef.current) {
