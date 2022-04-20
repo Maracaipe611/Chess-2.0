@@ -1,0 +1,1094 @@
+[
+    {
+      "id": "11",
+      "coordinate": {
+        "alpha": 1,
+        "index": 1
+      },
+      "piece": {
+        "id": "Tower11",
+        "type": 1,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 1,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "12",
+      "coordinate": {
+        "alpha": 1,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn12",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "13",
+            "direction": 0
+          },
+          {
+            "id": "14",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 1,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "13",
+      "coordinate": {
+        "alpha": 1,
+        "index": 3
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "14",
+      "coordinate": {
+        "alpha": 1,
+        "index": 4
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "15",
+      "coordinate": {
+        "alpha": 1,
+        "index": 5
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "16",
+      "coordinate": {
+        "alpha": 1,
+        "index": 6
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "17",
+      "coordinate": {
+        "alpha": 1,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn17",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "16",
+            "direction": 0
+          },
+          {
+            "id": "15",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 1,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "18",
+      "coordinate": {
+        "alpha": 1,
+        "index": 8
+      },
+      "piece": {
+        "id": "Tower18",
+        "type": 1,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 1,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "21",
+      "coordinate": {
+        "alpha": 2,
+        "index": 1
+      },
+      "piece": {
+        "id": "Horse21",
+        "type": 2,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "42",
+            "direction": 4
+          },
+          {
+            "id": "33",
+            "direction": 4
+          },
+          {
+            "id": "13",
+            "direction": 6
+          }
+        ],
+        "coordinate": {
+          "alpha": 2,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "22",
+      "coordinate": {
+        "alpha": 2,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn22",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "23",
+            "direction": 0
+          },
+          {
+            "id": "24",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 2,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "23",
+      "coordinate": {
+        "alpha": 2,
+        "index": 3
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "24",
+      "coordinate": {
+        "alpha": 2,
+        "index": 4
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "25",
+      "coordinate": {
+        "alpha": 2,
+        "index": 5
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "26",
+      "coordinate": {
+        "alpha": 2,
+        "index": 6
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "27",
+      "coordinate": {
+        "alpha": 2,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn27",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "26",
+            "direction": 0
+          },
+          {
+            "id": "25",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 2,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "28",
+      "coordinate": {
+        "alpha": 2,
+        "index": 8
+      },
+      "piece": {
+        "id": "Horse28",
+        "type": 2,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "16",
+            "direction": 4
+          },
+          {
+            "id": "47",
+            "direction": 6
+          },
+          {
+            "id": "36",
+            "direction": 6
+          }
+        ],
+        "coordinate": {
+          "alpha": 2,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "31",
+      "coordinate": {
+        "alpha": 3,
+        "index": 1
+      },
+      "piece": {
+        "id": "Bishop31",
+        "type": 3,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 3,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "32",
+      "coordinate": {
+        "alpha": 3,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn32",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "33",
+            "direction": 0
+          },
+          {
+            "id": "34",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 3,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "33",
+      "coordinate": {
+        "alpha": 3,
+        "index": 3
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "34",
+      "coordinate": {
+        "alpha": 3,
+        "index": 4
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "35",
+      "coordinate": {
+        "alpha": 3,
+        "index": 5
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "36",
+      "coordinate": {
+        "alpha": 3,
+        "index": 6
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "37",
+      "coordinate": {
+        "alpha": 3,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn37",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "36",
+            "direction": 0
+          },
+          {
+            "id": "35",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 3,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "38",
+      "coordinate": {
+        "alpha": 3,
+        "index": 8
+      },
+      "piece": {
+        "id": "Bishop38",
+        "type": 3,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 3,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "41",
+      "coordinate": {
+        "alpha": 4,
+        "index": 1
+      },
+      "piece": {
+        "id": "King41",
+        "type": 5,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 4,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "42",
+      "coordinate": {
+        "alpha": 4,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn42",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "43",
+            "direction": 0
+          },
+          {
+            "id": "44",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 4,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "43",
+      "coordinate": {
+        "alpha": 4,
+        "index": 3
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "44",
+      "coordinate": {
+        "alpha": 4,
+        "index": 4
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "45",
+      "coordinate": {
+        "alpha": 4,
+        "index": 5
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "46",
+      "coordinate": {
+        "alpha": 4,
+        "index": 6
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "47",
+      "coordinate": {
+        "alpha": 4,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn47",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "46",
+            "direction": 0
+          },
+          {
+            "id": "45",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 4,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "48",
+      "coordinate": {
+        "alpha": 4,
+        "index": 8
+      },
+      "piece": {
+        "id": "King48",
+        "type": 5,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 4,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "51",
+      "coordinate": {
+        "alpha": 5,
+        "index": 1
+      },
+      "piece": {
+        "id": "Queen51",
+        "type": 4,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 5,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "52",
+      "coordinate": {
+        "alpha": 5,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn52",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "53",
+            "direction": 0
+          },
+          {
+            "id": "54",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 5,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "53",
+      "coordinate": {
+        "alpha": 5,
+        "index": 3
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "54",
+      "coordinate": {
+        "alpha": 5,
+        "index": 4
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "55",
+      "coordinate": {
+        "alpha": 5,
+        "index": 5
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "56",
+      "coordinate": {
+        "alpha": 5,
+        "index": 6
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "57",
+      "coordinate": {
+        "alpha": 5,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn57",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "56",
+            "direction": 0
+          },
+          {
+            "id": "55",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 5,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "58",
+      "coordinate": {
+        "alpha": 5,
+        "index": 8
+      },
+      "piece": {
+        "id": "Queen58",
+        "type": 4,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 5,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "61",
+      "coordinate": {
+        "alpha": 6,
+        "index": 1
+      },
+      "piece": {
+        "id": "Bishop61",
+        "type": 3,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 6,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "62",
+      "coordinate": {
+        "alpha": 6,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn62",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "63",
+            "direction": 0
+          },
+          {
+            "id": "64",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 6,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "63",
+      "coordinate": {
+        "alpha": 6,
+        "index": 3
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "64",
+      "coordinate": {
+        "alpha": 6,
+        "index": 4
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "65",
+      "coordinate": {
+        "alpha": 6,
+        "index": 5
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "66",
+      "coordinate": {
+        "alpha": 6,
+        "index": 6
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "67",
+      "coordinate": {
+        "alpha": 6,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn67",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "66",
+            "direction": 0
+          },
+          {
+            "id": "65",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 6,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "68",
+      "coordinate": {
+        "alpha": 6,
+        "index": 8
+      },
+      "piece": {
+        "id": "Bishop68",
+        "type": 3,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 6,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "71",
+      "coordinate": {
+        "alpha": 7,
+        "index": 1
+      },
+      "piece": {
+        "id": "Horse71",
+        "type": 2,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "83",
+            "direction": 4
+          },
+          {
+            "id": "52",
+            "direction": 6
+          },
+          {
+            "id": "63",
+            "direction": 6
+          }
+        ],
+        "coordinate": {
+          "alpha": 7,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "72",
+      "coordinate": {
+        "alpha": 7,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn72",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "73",
+            "direction": 0
+          },
+          {
+            "id": "74",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 7,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "73",
+      "coordinate": {
+        "alpha": 7,
+        "index": 3
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "74",
+      "coordinate": {
+        "alpha": 7,
+        "index": 4
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "75",
+      "coordinate": {
+        "alpha": 7,
+        "index": 5
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "76",
+      "coordinate": {
+        "alpha": 7,
+        "index": 6
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "77",
+      "coordinate": {
+        "alpha": 7,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn77",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "76",
+            "direction": 0
+          },
+          {
+            "id": "75",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 7,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "78",
+      "coordinate": {
+        "alpha": 7,
+        "index": 8
+      },
+      "piece": {
+        "id": "Horse78",
+        "type": 2,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "57",
+            "direction": 4
+          },
+          {
+            "id": "66",
+            "direction": 4
+          },
+          {
+            "id": "86",
+            "direction": 6
+          }
+        ],
+        "coordinate": {
+          "alpha": 7,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "81",
+      "coordinate": {
+        "alpha": 8,
+        "index": 1
+      },
+      "piece": {
+        "id": "Tower81",
+        "type": 1,
+        "color": 0,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 8,
+          "index": 1
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "82",
+      "coordinate": {
+        "alpha": 8,
+        "index": 2
+      },
+      "piece": {
+        "id": "Pawn82",
+        "type": 0,
+        "color": 0,
+        "possiblesSquaresToMove": [
+          {
+            "id": "83",
+            "direction": 0
+          },
+          {
+            "id": "84",
+            "direction": 0
+          }
+        ],
+        "coordinate": {
+          "alpha": 8,
+          "index": 2
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    },
+    {
+      "id": "83",
+      "coordinate": {
+        "alpha": 8,
+        "index": 3
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "84",
+      "coordinate": {
+        "alpha": 8,
+        "index": 4
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "85",
+      "coordinate": {
+        "alpha": 8,
+        "index": 5
+      },
+      "piece": null,
+      "color": 0
+    },
+    {
+      "id": "86",
+      "coordinate": {
+        "alpha": 8,
+        "index": 6
+      },
+      "piece": null,
+      "color": 1
+    },
+    {
+      "id": "87",
+      "coordinate": {
+        "alpha": 8,
+        "index": 7
+      },
+      "piece": {
+        "id": "Pawn87",
+        "type": 0,
+        "color": 1,
+        "possiblesSquaresToMove": [
+          {
+            "id": "86",
+            "direction": 0
+          },
+          {
+            "id": "85",
+            "direction": 1
+          }
+        ],
+        "coordinate": {
+          "alpha": 8,
+          "index": 7
+        },
+        "hasMovedBefore": false
+      },
+      "color": 0
+    },
+    {
+      "id": "88",
+      "coordinate": {
+        "alpha": 8,
+        "index": 8
+      },
+      "piece": {
+        "id": "Tower88",
+        "type": 1,
+        "color": 1,
+        "possiblesSquaresToMove": [],
+        "coordinate": {
+          "alpha": 8,
+          "index": 8
+        },
+        "hasMovedBefore": false
+      },
+      "color": 1
+    }
+  ]
