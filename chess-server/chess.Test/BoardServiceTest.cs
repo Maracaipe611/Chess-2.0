@@ -34,7 +34,7 @@ namespace chess.Test
         {
             //Arrange
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var boardString = System.IO.File.ReadAllText(path + @"./assets/Board-without-moves.json");
+            var boardString = System.IO.File.ReadAllText(path + "/assets/Board-without-moves.json");
             var boardFromString = JsonConvert.DeserializeObject<List<Square>>(boardString);
 
             //Act
@@ -57,7 +57,7 @@ namespace chess.Test
         {
             //Arrange
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var boardString = System.IO.File.ReadAllText(path + "./assets/Board-with-moves.json");
+            var boardString = System.IO.File.ReadAllText(path + "/assets/Board-with-moves.json");
             var boardFromString = JsonConvert.DeserializeObject<List<Square>>(boardString);
             //Act
             var board = boardService.ValidateMoves(boardFromString);
