@@ -25,4 +25,13 @@
     <ProjectReference Include="..\chess.Domain\chess.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="assets\Board-with-moves.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\Board-without-moves.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

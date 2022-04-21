@@ -9,6 +9,8 @@ using chess.Application.Services.SquareService;
 using Moq;
 using System.Linq;
 using chess.Application.Services.MoveService;
+using System.IO;
+using System.Reflection;
 
 namespace chess.Test
 {
@@ -31,7 +33,8 @@ namespace chess.Test
         public void BuildBoardTest()
         {
             //Arrange
-            var boardString = System.IO.File.ReadAllText(@"C:/personal/chess-2.0/chess-server/chess.Test/assets/Board-without-moves.json");
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var boardString = System.IO.File.ReadAllText(path + @"./assets/Board-without-moves.json");
             var boardFromString = JsonConvert.DeserializeObject<List<Square>>(boardString);
 
             //Act
@@ -53,7 +56,8 @@ namespace chess.Test
         public void ValidateBuiltBoardTest()
         {
             //Arrange
-            var boardString = System.IO.File.ReadAllText(@"C:/personal/chess-2.0/chess-server/chess.Test/assets/Board-with-moves.json");
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var boardString = System.IO.File.ReadAllText(path + "./assets/Board-with-moves.json");
             var boardFromString = JsonConvert.DeserializeObject<List<Square>>(boardString);
             //Act
             var board = boardService.ValidateMoves(boardFromString);
