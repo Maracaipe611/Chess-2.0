@@ -11,6 +11,7 @@ namespace chess.Application.Services.BoardService
         private readonly ISquareService squareService;
         private readonly IPieceService pieceService;
         private List<Square> board;
+
         public BoardService(ISquareService squareService, IPieceService pieceService)
         {
             this.squareService = squareService;

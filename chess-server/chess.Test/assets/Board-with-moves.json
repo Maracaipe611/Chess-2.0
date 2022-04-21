@@ -1,0 +1,1094 @@
+[
+    {
+      "Id": "11",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Tower11",
+        "Type": 1,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 1,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "12",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn12",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "13",
+            "Direction": 0
+          },
+          {
+            "Id": "14",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 1,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "13",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "14",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "15",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "16",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "17",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn17",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "16",
+            "Direction": 0
+          },
+          {
+            "Id": "15",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 1,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "18",
+      "Coordinate": {
+        "Alpha": 1,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Tower18",
+        "Type": 1,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 1,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "21",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Horse21",
+        "Type": 2,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "42",
+            "Direction": 4
+          },
+          {
+            "Id": "33",
+            "Direction": 4
+          },
+          {
+            "Id": "13",
+            "Direction": 6
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 2,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "22",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn22",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "23",
+            "Direction": 0
+          },
+          {
+            "Id": "24",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 2,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "23",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "24",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "25",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "26",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "27",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn27",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "26",
+            "Direction": 0
+          },
+          {
+            "Id": "25",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 2,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "28",
+      "Coordinate": {
+        "Alpha": 2,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Horse28",
+        "Type": 2,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "16",
+            "Direction": 4
+          },
+          {
+            "Id": "47",
+            "Direction": 6
+          },
+          {
+            "Id": "36",
+            "Direction": 6
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 2,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "31",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Bishop31",
+        "Type": 3,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 3,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "32",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn32",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "33",
+            "Direction": 0
+          },
+          {
+            "Id": "34",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 3,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "33",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "34",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "35",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "36",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "37",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn37",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "36",
+            "Direction": 0
+          },
+          {
+            "Id": "35",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 3,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "38",
+      "Coordinate": {
+        "Alpha": 3,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Bishop38",
+        "Type": 3,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 3,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "41",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "King41",
+        "Type": 5,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 4,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "42",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn42",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "43",
+            "Direction": 0
+          },
+          {
+            "Id": "44",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 4,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "43",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "44",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "45",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "46",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "47",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn47",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "46",
+            "Direction": 0
+          },
+          {
+            "Id": "45",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 4,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "48",
+      "Coordinate": {
+        "Alpha": 4,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "King48",
+        "Type": 5,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 4,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "51",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Queen51",
+        "Type": 4,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 5,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "52",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn52",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "53",
+            "Direction": 0
+          },
+          {
+            "Id": "54",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 5,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "53",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "54",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "55",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "56",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "57",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn57",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "56",
+            "Direction": 0
+          },
+          {
+            "Id": "55",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 5,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "58",
+      "Coordinate": {
+        "Alpha": 5,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Queen58",
+        "Type": 4,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 5,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "61",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Bishop61",
+        "Type": 3,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 6,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "62",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn62",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "63",
+            "Direction": 0
+          },
+          {
+            "Id": "64",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 6,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "63",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "64",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "65",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "66",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "67",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn67",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "66",
+            "Direction": 0
+          },
+          {
+            "Id": "65",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 6,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "68",
+      "Coordinate": {
+        "Alpha": 6,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Bishop68",
+        "Type": 3,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 6,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "71",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Horse71",
+        "Type": 2,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "83",
+            "Direction": 4
+          },
+          {
+            "Id": "52",
+            "Direction": 6
+          },
+          {
+            "Id": "63",
+            "Direction": 6
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 7,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "72",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn72",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "73",
+            "Direction": 0
+          },
+          {
+            "Id": "74",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 7,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "73",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "74",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "75",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "76",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "77",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn77",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "76",
+            "Direction": 0
+          },
+          {
+            "Id": "75",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 7,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "78",
+      "Coordinate": {
+        "Alpha": 7,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Horse78",
+        "Type": 2,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "57",
+            "Direction": 4
+          },
+          {
+            "Id": "66",
+            "Direction": 4
+          },
+          {
+            "Id": "86",
+            "Direction": 6
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 7,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "81",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 1
+      },
+      "Piece": {
+        "Id": "Tower81",
+        "Type": 1,
+        "Color": 0,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 8,
+          "Index": 1
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "82",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 2
+      },
+      "Piece": {
+        "Id": "Pawn82",
+        "Type": 0,
+        "Color": 0,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "83",
+            "Direction": 0
+          },
+          {
+            "Id": "84",
+            "Direction": 0
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 8,
+          "Index": 2
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    },
+    {
+      "Id": "83",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 3
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "84",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 4
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "85",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 5
+      },
+      "Piece": null,
+      "Color": 0
+    },
+    {
+      "Id": "86",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 6
+      },
+      "Piece": null,
+      "Color": 1
+    },
+    {
+      "Id": "87",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 7
+      },
+      "Piece": {
+        "Id": "Pawn87",
+        "Type": 0,
+        "Color": 1,
+        "PossiblesSquaresToMove": [
+          {
+            "Id": "86",
+            "Direction": 0
+          },
+          {
+            "Id": "85",
+            "Direction": 1
+          }
+        ],
+        "Coordinate": {
+          "Alpha": 8,
+          "Index": 7
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 0
+    },
+    {
+      "Id": "88",
+      "Coordinate": {
+        "Alpha": 8,
+        "Index": 8
+      },
+      "Piece": {
+        "Id": "Tower88",
+        "Type": 1,
+        "Color": 1,
+        "PossiblesSquaresToMove": [],
+        "Coordinate": {
+          "Alpha": 8,
+          "Index": 8
+        },
+        "HasMovedBefore": false
+      },
+      "Color": 1
+    }
+  ]
