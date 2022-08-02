@@ -17,7 +17,6 @@ namespace chess.Application.Services.MoveService
                     {
                         multiplier = 1;
                         moves.Add(new Move(0, 1, MovesDirections.up, multiplier));
-                        moves.Add(new Move(0, 2, MovesDirections.up, multiplier));
                         break;
                     }
 

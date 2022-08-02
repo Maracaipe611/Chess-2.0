@@ -1,1 +1,1 @@
-export { default } from "./UseMatchClient";
+export { default } from "./useMatchClient";

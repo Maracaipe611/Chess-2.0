@@ -3,11 +3,7 @@ using chess.Application.Services.MatchService;
 using chess.Application.Services.MoveService;
 using chess.Domain.Entities;
 using chess.Domain.Entities.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chess.Application.Facades.MatchFacade
 {
@@ -49,6 +45,12 @@ namespace chess.Application.Facades.MatchFacade
 
         public Match Update(Match match)
         {
+            return matchService.Update(match);
+        }
+
+        public Match AddPlayerToMatch(Match match, string playerName)
+        {
+            match.Players.Add(new Player(playerName, Colors.Black)); //The second player added is always black
             return matchService.Update(match);
         }
 

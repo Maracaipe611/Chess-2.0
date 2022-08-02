@@ -8,12 +8,11 @@ export enum direction {
 
 export enum Actions {
   "NoPiece",
-  "FriendlyPiece",
+  "SelectFriendlyPiece",
   "MovePiece",
-  "EnemyPiece",
-  "EnemyPieceAndEat",
+  "SelectEnemyPiece",
+  "EatEnemyPiece",
   "Unselect",
-  "UnselectEnemy",
 }
 
 export default class Player {

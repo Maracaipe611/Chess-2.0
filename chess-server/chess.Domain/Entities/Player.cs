@@ -12,6 +12,7 @@ namespace chess.Domain.Entities
         }
         public string Id { get; set; }
         public string Name { get; set; }
+        #nullable enable
         public Colors Color { get; set; }
     }
 }

@@ -7,7 +7,7 @@ export interface PossibleSquareToMoveDTO {
 }
 export interface PlayerDTO {
         id?: string;
-        color: Colors;
+        color: Colors | null;
         name: string;
 }
 
@@ -31,5 +31,6 @@ export interface MatchDTO {
         board: Array<SquareDTO> | null;
         reference: string;
         history?: Array<PieceDTO>;
+        turn: number;
 }
 

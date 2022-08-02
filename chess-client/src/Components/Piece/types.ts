@@ -1,5 +1,5 @@
 import House from "../House/types";
-import { Alphabet, Colors, ColorsVerbose, Coordinate } from "../../client/Board/types";
+import { Colors, ColorsVerbose, Coordinate } from "../../client/Board/types";
 import Player from "../Player/types";
 
 export enum Types {

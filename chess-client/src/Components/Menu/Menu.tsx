@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
-import "./Menu.css";
-import useMatchClient from "../../client/MatchClient/UseMatchClient";
+import { useCallback, useLayoutEffect, useState } from "react";
+import useMatchClient from "../../client/MatchClient";
 import { Match } from "../../client/Board/types";
-import { useGameContext } from "../GameLogic/context";
+import { useGameContext } from "../GameLogic/useGameContext";
 import { useNavigate } from "react-router-dom";
+import useBoardClient from "../../client/Board/useBoardClient";
+import "./Menu.css";
 
 enum MenuActions {
   Create,
@@ -12,38 +13,55 @@ enum MenuActions {
 }
 const Menu = () => {
   const [action, setAction] = useState<MenuActions | undefined>();
-  const [matchId, setMatchId] = useState<string>("");
+  const [reference, setReference] = useState<string>("");
   const [playerName, setPlayerName] = useState<string>("");
 
   const navigate = useNavigate();
   const matchClient = useMatchClient();
-  const { setMatch } = useGameContext();
+  const { setMatch, setPlayer, connected } = useGameContext();
+  const { connect, joinMatch: introducePlayerOnMatch, joinMatchGroup } = useBoardClient();
 
-  const matchExists = useCallback(() => {
-    matchClient().getMatch(matchId, playerName).then((match: Match) => {
+  useLayoutEffect(() => {
+    connect();
+  }, [connected, connect]);
+
+  const joinMatch = useCallback(() => {
+    console.log("joinning Match");
+    matchClient().joinMatch(reference, playerName).then((match: Match) => {
+      const player = match.players.find((player) => player.name === playerName);
+      if (!player) throw new Error("Não foi possível encontrar o jogador");
       setMatch(match);
+      setPlayer(player);
     }).then(() => {
+      joinMatchGroup(reference);
+      introducePlayerOnMatch(reference);
+    }).finally(() => {
       navigate("/play");
     });
-  }, [matchClient, matchId, playerName]);
+  }, [matchClient, reference, playerName, joinMatchGroup, introducePlayerOnMatch, setMatch, setPlayer, navigate]);
 
   const createMatch = useCallback(() => {
-    matchClient().createMatch(matchId, playerName).then((match: Match) => {
+    matchClient().createMatch(reference, playerName).then((match: Match) => {
+      const player = match.players.find((player) => player.name === playerName);
+      if (!player) throw new Error("Não foi possível encontrar o jogador");
       setMatch(match);
+      setPlayer(player);
     }).then(() => {
+      joinMatchGroup(reference);
+    }).finally(() => {
       navigate("/play");
     });
-  }, [matchClient, matchId, playerName]);
+  }, [matchClient, reference, playerName, joinMatchGroup, setMatch, setPlayer, navigate]);
 
   const insertMatchReference = useCallback(() => (
     <div className="match-reference-background">
       <span>Digite seu nome</span>
       <input onInput={(e) => setPlayerName(e.currentTarget.value)} />
       <span>Digite o ID da partida</span>
-      <input onInput={(e) => setMatchId(e.currentTarget.value)} />
-      <button onClick={() => action === MenuActions.Join ? matchExists() : createMatch()}>{action === MenuActions.Join ? "Entrar" : "Criar"}</button>
+      <input onInput={(e) => setReference(e.currentTarget.value)} />
+      <button onClick={() => action === MenuActions.Join ? joinMatch() : createMatch()}>{action === MenuActions.Join ? "Entrar" : "Criar"}</button>
     </div>
-  ), [action, matchExists, createMatch]);
+  ), [action, joinMatch, createMatch]);
 
   return (
     <div className="menu-background-main">
